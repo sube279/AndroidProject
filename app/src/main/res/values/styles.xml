@@ -1,7 +1,8 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="HomeTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- fond d'écran sur toute l'application -->
         <item name="android:windowBackground">@drawable/back</item>
     </style>
 
