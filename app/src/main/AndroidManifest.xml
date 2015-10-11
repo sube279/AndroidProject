@@ -6,6 +6,8 @@
         android:allowBackup="true"
         android:icon="@drawable/icone"
         android:label="@string/app_name" >
+
+        <!-- Home -->
         <activity
             android:name=".Home"
             android:theme="@style/Home" >
@@ -15,14 +17,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Donneur -->
         <activity
             android:name=".Donneur"
             android:label="@string/title_activity_donneur"
             android:theme="@style/Fonctionalite" >
         </activity>
+
+        <!-- Intervention -->
         <activity
             android:name=".Intervention"
-            android:label="@string/title_activity_intervention" >
+            android:label="@string/title_activity_intervention"
+            android:theme="@style/Fonctionalite" >
+        </activity>
+
+        <!-- Banque du sang -->
+        <activity
+            android:name=".Sang"
+            android:label="@string/title_activity_sang"
+            android:theme="@style/Fonctionalite">
+        </activity>
+
+        <!-- Parametre -->
+        <activity
+            android:name=".Parametre"
+            android:label="@string/title_activity_parametre"
+            android:theme="@style/Fonctionalite">
         </activity>
     </application>
 

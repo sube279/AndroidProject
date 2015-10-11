@@ -11,7 +11,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="61dp"
-        android:src="@drawable/logo" />
+        android:src="@drawable/logo"/>
 
         <!-- ImageButton Banque de sang -->
     <ImageButton
@@ -25,7 +25,8 @@
         android:layout_alignStart="@+id/Accueil"
         android:minHeight="140dip"
         android:minWidth="140dip"
-        android:layout_marginBottom="30px" />
+        android:layout_marginBottom="30px"
+        android:onClick="openSang"/>
 
     <!-- ImageButton Parametre -->
     <ImageButton
@@ -38,8 +39,10 @@
         android:minHeight="140dip"
         android:layout_alignTop="@+id/imageButton_sang"
         android:layout_alignRight="@+id/Accueil"
-        android:layout_alignEnd="@+id/Accueil" />
+        android:layout_alignEnd="@+id/Accueil"
+        android:onClick="openParametre"/>
 
+    <!-- ImageButton Donneur -->
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,8 +53,10 @@
         android:src="@drawable/button_donneur"
         android:layout_above="@+id/imageButton_sang"
         android:layout_alignLeft="@+id/imageButton_sang"
-        android:layout_alignStart="@+id/imageButton_sang" />
+        android:layout_alignStart="@+id/imageButton_sang"
+        android:onClick="openDonneur"/>
 
+    <!-- ImageButton Intervention -->
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,5 +67,6 @@
         android:backgroundTint="#FFFFFF"
         android:minHeight="140dip"
         android:minWidth="140dip"
-        android:src="@drawable/button_intervention" />
+        android:src="@drawable/button_intervention"
+        android:onClick="openIntervention"/>
 </RelativeLayout>
