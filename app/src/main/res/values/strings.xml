@@ -7,5 +7,16 @@
     <string name="title_activity_intervention">Intervention</string>
     <string name="title_activity_parametre">Parametre</string>
     <string name="title_activity_sang">Banque du sang</string>
+    <string name="title_activity_nouveau_donneur">NouveauDonneur</string>
+
+    <!-- Formulaire nouveau donneur -->
+    <string name="nom">Nom:</string>
+    <string name="prenom">Prénom:</string>
+    <string name="sexe">Sexe:</string>
+    <string name="feminin">Féminin</string>
+    <string name="masculin">Masculin</string>
+    <string name="dateNaissance">Date de naissance:</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

@@ -25,6 +25,17 @@
             android:theme="@style/Fonctionalite" >
         </activity>
 
+        <!-- NouveauDonneur -->
+        <activity
+            android:name=".NouveauDonneur"
+            android:label="@string/title_activity_nouveau_donneur"
+            android:parentActivityName=".Donneur"
+            android:theme="@style/Fonctionalite" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.betrisey.suzanne.androidproject.Donneur" />
+        </activity>
+
         <!-- Intervention -->
         <activity
             android:name=".Intervention"
@@ -36,15 +47,16 @@
         <activity
             android:name=".Sang"
             android:label="@string/title_activity_sang"
-            android:theme="@style/Fonctionalite">
+            android:theme="@style/Fonctionalite" >
         </activity>
 
         <!-- Parametre -->
         <activity
             android:name=".Parametre"
             android:label="@string/title_activity_parametre"
-            android:theme="@style/Fonctionalite">
+            android:theme="@style/Fonctionalite" >
         </activity>
+
     </application>
 
 </manifest>
