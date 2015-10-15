@@ -1,0 +1,224 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.betrisey.suzanne.androidproject.NouveauDonneur"
+    android:id="@+id/parentLayout"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textNom"
+        android:text="@string/nom"
+        android:paddingTop="15dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/editNom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textPrenom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/prenom"
+        android:layout_below="@+id/editNom"
+        android:paddingTop="15dp" />
+
+    <EditText
+        android:id="@+id/editPrenom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textPrenom"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sexe"
+        android:id="@+id/textSexe"
+        android:paddingTop="15dp"
+        android:layout_below="@+id/editPrenom"
+     />
+
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/radioGroup"
+        android:layout_alignBottom="@+id/textSexe">
+
+    </RadioGroup>
+
+    <RadioButton
+        android:id="@+id/radioFeminin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:text="@string/feminin"
+        android:layout_marginLeft="37dp"
+        android:layout_marginStart="37dp"
+        android:layout_alignBottom="@+id/radioGroup"
+        android:layout_toRightOf="@+id/textSexe"
+        android:layout_toEndOf="@+id/textSexe" />
+
+    <RadioButton
+        android:id="@+id/radioMasculin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/masculin"
+        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_alignBottom="@+id/radioGroup"
+        android:layout_toRightOf="@+id/radioFeminin"
+        android:layout_toEndOf="@+id/radioFeminin" />
+
+    <TextView
+        android:id="@+id/textDateNaissance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dateNaissance"
+        android:layout_below="@+id/radioGroup"
+        android:paddingTop="15dp"/>
+
+    <LinearLayout
+        android:id="@+id/dateLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/textDateNaissance"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/jour"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/jour"/>
+
+        <TextView
+            android:id="@+id/mois"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/mois"/>
+
+        <TextView
+            android:id="@+id/annee"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/annee"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/spinnerDateLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/dateLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp">
+
+        <Spinner
+            android:id="@+id/spinnerJour"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            android:entries="@array/jours"></Spinner>
+
+        <Spinner
+            android:id="@+id/spinnerMois"
+            android:layout_width="100dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            android:entries="@array/mois"
+            ></Spinner>
+
+        <Spinner
+            android:id="@+id/spinnerAnnee"
+            android:layout_width="100dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"></Spinner>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinnerDateLayout"
+        android:layout_toRightOf="@+id/radioGroup"
+        android:layout_toEndOf="@+id/radioGroup"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textAdresse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/adresse"/>
+
+        <EditText
+            android:id="@+id/editAdresse"
+            android:layout_width="fill_parent"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/textNpa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/npa"/>
+
+        <EditText
+            android:id="@+id/ediNpa"
+            android:layout_width="fill_parent"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/textRegion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/region"/>
+
+        <EditText
+            android:id="@+id/editRegion"
+            android:layout_width="fill_parent"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/textTelephone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/telephone"/>
+
+        <EditText
+            android:id="@+id/editTelephone"
+            android:layout_width="fill_parent"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/textGroupe"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/groupe"/>
+        <Spinner
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            android:id="@+id/spinnerGroupes"
+            android:entries="@array/groupes"></Spinner>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
