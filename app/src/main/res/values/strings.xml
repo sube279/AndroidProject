@@ -16,6 +16,75 @@
     <string name="feminin">Féminin</string>
     <string name="masculin">Masculin</string>
     <string name="dateNaissance">Date de naissance:</string>
+    <string name="jour">Jour</string>
+    <string name="mois">Mois</string>
+    <string name="annee">Année</string>
+    <string name="adresse">Adresse:</string>
+    <string name="npa">NPA:</string>
+    <string name="region">Région:</string>
+    <string name="telephone">Téléphone:</string>
+    <string name="groupe">Groupe:</string>
+
+    <string-array name="groupes">
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+        <item>O+</item>
+        <item>O-</item>
+    </string-array>
+
+    <!-- Spinner Date, à revoir pour une meilleure façon de faire -->
+    <integer-array name="jours">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+    </integer-array>
+
+    <string-array name="mois">
+        <item>Janvier</item>
+        <item>Février</item>
+        <item>Mars</item>
+        <item>Avril</item>
+        <item>Mai</item>
+        <item>Juin</item>
+        <item>Juillet</item>
+        <item>Août</item>
+        <item>Septembre</item>
+        <item>Octobre</item>
+        <item>Novembre</item>
+        <item>Décembre</item>
+    </string-array>
 
     <string name="hello_world">Hello world!</string>
 
