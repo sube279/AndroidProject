@@ -20,14 +20,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageButton_sang"
         android:src="@drawable/button_sang"
-        android:backgroundTint="#FFFFFF"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/Accueil"
         android:layout_alignStart="@+id/Accueil"
         android:minHeight="140dip"
         android:minWidth="140dip"
         android:layout_marginBottom="30px"
-        android:onClick="openSang"/>
+        android:onClick="openSang"
+        android:background="#ffffff" />
 
     <!-- ImageButton Parametre -->
     <ImageButton
@@ -35,27 +35,28 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageButton_parametre"
         android:src="@drawable/button_parametre"
-        android:backgroundTint="#FFFFFF"
         android:minWidth="140dip"
         android:minHeight="140dip"
         android:layout_alignTop="@+id/imageButton_sang"
         android:layout_alignRight="@+id/Accueil"
         android:layout_alignEnd="@+id/Accueil"
-        android:onClick="openParametre"/>
+        android:onClick="openParametre"
+        android:background="#ffffff" />
 
     <!-- ImageButton Donneur -->
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageButton_donneur"
-        android:backgroundTint="#FFFFFF"
         android:minHeight="140dip"
         android:minWidth="140dip"
         android:src="@drawable/button_donneur"
         android:layout_above="@+id/imageButton_sang"
         android:layout_alignLeft="@+id/imageButton_sang"
         android:layout_alignStart="@+id/imageButton_sang"
-        android:onClick="openDonneur"/>
+        android:onClick="openDonneur"
+        android:background="#ffffff"
+        android:layout_marginBottom="3dp" />
 
     <!-- ImageButton Intervention -->
     <ImageButton
@@ -65,9 +66,9 @@
         android:layout_alignBottom="@+id/imageButton_donneur"
         android:layout_alignLeft="@+id/imageButton_parametre"
         android:layout_alignStart="@+id/imageButton_parametre"
-        android:backgroundTint="#FFFFFF"
         android:minHeight="140dip"
         android:minWidth="140dip"
         android:src="@drawable/button_intervention"
-        android:onClick="openIntervention"/>
+        android:onClick="openIntervention"
+        android:background="#ffffff" />
 </RelativeLayout>

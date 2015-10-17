@@ -11,6 +11,10 @@ public class Intervention extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intervention);
+
+        //ajouter icone a la barre d'action
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.icone);
     }
 
     @Override

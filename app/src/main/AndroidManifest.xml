@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.betrisey.suzanne.androidproject" >
 
+    <uses-sdk
+        android:minSdkVersion="5"
+        android:targetSdkVersion="14"
+        android:maxSdkVersion="14"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/icone"

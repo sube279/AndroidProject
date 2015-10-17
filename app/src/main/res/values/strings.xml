@@ -3,11 +3,11 @@
     <string name="action_settings">Settings</string>
 
     <!-- Titre activites -->
-    <string name="title_activity_donneur">Donneur</string>
-    <string name="title_activity_intervention">Intervention</string>
-    <string name="title_activity_parametre">Parametre</string>
-    <string name="title_activity_sang">Banque du sang</string>
-    <string name="title_activity_nouveau_donneur">NouveauDonneur</string>
+    <string name="title_activity_donneur">DONNEUR</string>
+    <string name="title_activity_intervention">INTERVENTION</string>
+    <string name="title_activity_parametre">PARAMETRE</string>
+    <string name="title_activity_sang">BANQUE DU SANG</string>
+    <string name="title_activity_nouveau_donneur">NOUVEAU DONNEUR</string>
 
     <!-- Formulaire nouveau donneur -->
     <string name="nom">Nom:</string>

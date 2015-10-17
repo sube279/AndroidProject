@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Style pour fenetre home -->
     <style name="Home" parent="Theme.AppCompat.Light.NoActionBar">
@@ -6,8 +6,23 @@
     </style>
 
     <!-- Style pour fenetre fonctionalite -->
-    <style name="Fonctionalite" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Fonctionalite" parent="Theme.AppCompat.Light">
         <item name="android:windowBackground">@drawable/back</item>
+        <item name="android:actionBarStyle" tools:ignore="NewApi">@style/ActionBar</item>
+        <item name="actionBarStyle">@style/ActionBar</item>
+    </style>
+
+    <!-- Style pour action bar-->
+    <style name="ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/white</item>
+        <item name="background">@color/white</item>
+        <item name="titleTextStyle">@style/TitleTextStyle</item>
+    </style>
+
+    <!-- Style pour titre action bar-->
+    <style name="TitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/red</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>
