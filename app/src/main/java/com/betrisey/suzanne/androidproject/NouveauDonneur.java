@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 public class NouveauDonneur extends AppCompatActivity {
 
@@ -11,6 +13,31 @@ public class NouveauDonneur extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nouveau_donneur);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        //spinner jours
+        String[] jours={"1", "2", "3", "4","5","6","7","8","9","10","11","12","13","14","15"
+        ,"16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
+        ArrayAdapter<String> stringArrayAdapter=
+                new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,jours);
+        Spinner spinner =
+                (Spinner)  findViewById(R.id.spinnerJour);
+        spinner.setAdapter(stringArrayAdapter);
+
+        String[] mois={"janvier", "février", "mars", "avril","mai","juin","juillet","août","septembre",
+                "octobre","novembre","décembre"};
+        ArrayAdapter<String> stringArrayAdapter2=
+                new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,mois);
+        Spinner spinner2 =
+                (Spinner)  findViewById(R.id.spinnerMois);
+        spinner2.setAdapter(stringArrayAdapter2);
+
+        String[] groupe={"A+", "A-", "B+", "B-","AB+","AB-","O+","O-"};
+        ArrayAdapter<String> stringArrayAdapter3=
+                new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,groupe);
+        Spinner spinner3 =
+                (Spinner)  findViewById(R.id.spinnerGroupes);
+        spinner3.setAdapter(stringArrayAdapter3);
 
     }
 

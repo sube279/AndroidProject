@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewConfiguration;
+
+import java.lang.reflect.Field;
 
 public class Donneur extends AppCompatActivity {
 
@@ -14,8 +17,20 @@ public class Donneur extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donneur);
 
-        //ajouter icone a la barre d'action
+               //ajouter icone a la barre d'action
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        //pour le menu (marche pas sur toutes les versions d'android sinon)
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            if(menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(config, false);
+            }
+        } catch (Exception ex) {
+            // Ignore
+        }
 
     }
 
@@ -24,6 +39,7 @@ public class Donneur extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_donneur, menu);
+
         return true;
     }
 
@@ -34,12 +50,27 @@ public class Donneur extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
 
         switch (item.getItemId()) {
-            case android.R.id.home:
-                Intent intent = new Intent(this, Home.class);
+
+            case R.id.action_nouveau_donneur:
+                Intent intent = new Intent(this, NouveauDonneur.class);
                 startActivity(intent);
                 return true;
+            case R.id.action_filtre_disponibilite:
+                return true;
+            case R.id.action_filtre_nom:
+                return true;
+            case R.id.action_filtre_prenom:
+                return true;
+            case R.id.action_filtre_naissance:
+                return true;
+            case R.id.action_parametre:
+                Intent intent2 = new Intent(this, Parametre.class);
+                startActivity(intent2);
         }
         return (super.onOptionsItemSelected(item));
+
+
+
 
     }
 

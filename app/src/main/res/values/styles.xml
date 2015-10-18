@@ -12,6 +12,13 @@
         <item name="actionBarStyle">@style/ActionBar</item>
     </style>
 
+    <!-- Style pour fenetre options -->
+    <style name="Options" parent="Theme.AppCompat.Light">
+        <item name="android:windowBackground">@drawable/back</item>
+        <item name="android:actionBarStyle" tools:ignore="NewApi">@style/ActionBarSimple</item>
+        <item name="actionBarStyle">@style/ActionBarSimple</item>
+    </style>
+
     <!-- Style pour action bar-->
     <style name="ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@color/white</item>
@@ -19,6 +26,13 @@
         <item name="titleTextStyle">@style/TitleTextStyle</item>
         <item name="android:homeAsUpIndicator" tools:ignore="NewApi">@drawable/icon</item>
         <item name="homeAsUpIndicator">@drawable/icon</item>
+    </style>
+
+    <!-- Style pour action bar simple-->
+    <style name="ActionBarSimple" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/white</item>
+        <item name="background">@color/white</item>
+        <item name="titleTextStyle">@style/TitleTextStyle</item>
     </style>
 
     <!-- Style pour titre action bar-->

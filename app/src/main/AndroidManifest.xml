@@ -38,10 +38,8 @@
             android:name=".NouveauDonneur"
             android:label="@string/title_activity_nouveau_donneur"
             android:parentActivityName=".Donneur"
-            android:theme="@style/Fonctionalite" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.betrisey.suzanne.androidproject.Home" />
+            android:theme="@style/Options" >
+
         </activity>
 
         <!-- Intervention -->
@@ -49,6 +47,9 @@
             android:name=".Intervention"
             android:label="@string/title_activity_intervention"
             android:theme="@style/Fonctionalite" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.betrisey.suzanne.androidproject.Home" />
         </activity>
 
         <!-- Banque du sang -->
@@ -56,6 +57,9 @@
             android:name=".Sang"
             android:label="@string/title_activity_sang"
             android:theme="@style/Fonctionalite" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.betrisey.suzanne.androidproject.Home" />
         </activity>
 
         <!-- Parametre -->
@@ -63,6 +67,9 @@
             android:name=".Parametre"
             android:label="@string/title_activity_parametre"
             android:theme="@style/Fonctionalite" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.betrisey.suzanne.androidproject.Home" />
         </activity>
 
     </application>

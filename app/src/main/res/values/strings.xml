@@ -3,15 +3,32 @@
 
     <!-- Nom parametre -->
     <string name="action_search">Recherche</string>
-    <string name="action_settings">Paramètre</string>
+    <string name="action_settings">Paramètres</string>
     <string name="action_home">Home</string>
 
     <!-- Titre activites -->
-    <string name="title_activity_donneur">DONNEUR</string>
     <string name="title_activity_intervention">INTERVENTION</string>
-    <string name="title_activity_parametre">PARAMETRE</string>
+    <string name="title_activity_parametre">PARAMETRES</string>
     <string name="title_activity_sang">BANQUE DU SANG</string>
+    <string name="title_activity_donneur">DONNEUR</string>
     <string name="title_activity_nouveau_donneur">NOUVEAU DONNEUR</string>
+
+    <!-- Fenetre donneur -->
+    <string name="action_nouveau_donneur">Ajouter donneur</string>
+    <string name="action_filtre_disponibilite">Filtrer par disponibilité</string>
+    <string name="action_filtre_nom">Filtrer par nom</string>
+    <string name="action_filtre_prenom">Filtrer par prénom</string>
+    <string name="action_filtre_naissance">Filtrer par naissance</string>
+    <string name="action_parametre">Paramètres</string>
+
+    <!-- Fenetre banque du sang -->
+    <string name="action_filtre_groupe_sanguin">Filtrer par groupe sanguin</string>
+    <string name="action_filtre_statut">Filtrer par statut</string>
+    <string name="action_filtre_date">Filtrer par date de péremption</string>
+
+    <!-- Fenetre intervention -->
+    <string name="action_ajouter_intervention">Ajouter intervention</string>
+    <string name="action_supprimer_intervention">Supprimer intervention</string>
 
     <!-- Formulaire nouveau donneur -->
     <string name="nom">Nom:</string>

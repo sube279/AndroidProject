@@ -11,6 +11,8 @@ public class Parametre extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parametre);
+        //ajouter icone a la barre d'action
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     @Override

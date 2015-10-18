@@ -6,7 +6,7 @@
     android:id="@+id/parentLayout"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
-    android:backgroundTint="#FFFFFF">
+    android:background="#FFFFFF">
 
     <TextView
         android:layout_width="wrap_content"
@@ -134,8 +134,7 @@
             android:id="@+id/spinnerJour"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:spinnerMode="dropdown"
-            android:entries="@array/jours"></Spinner>
+            android:spinnerMode="dropdown"></Spinner>
 
         <Spinner
             android:id="@+id/spinnerMois"
@@ -143,7 +142,6 @@
             android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
             android:spinnerMode="dropdown"
-            android:entries="@array/mois"
             ></Spinner>
 
         <Spinner
@@ -151,7 +149,7 @@
             android:layout_width="100dp"
             android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
-            android:spinnerMode="dropdown"></Spinner>
+            android:spinnerMode="dropdown"></Spinner>-->
     </LinearLayout>
 
     <LinearLayout
@@ -216,8 +214,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:spinnerMode="dropdown"
-            android:id="@+id/spinnerGroupes"
-            android:entries="@array/groupes"></Spinner>
+            android:id="@+id/spinnerGroupes"></Spinner>
 
 
     </LinearLayout>
