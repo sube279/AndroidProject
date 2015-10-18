@@ -3,9 +3,13 @@
     package="com.betrisey.suzanne.androidproject" >
 
     <uses-sdk
+        android:maxSdkVersion="14"
         android:minSdkVersion="5"
-        android:targetSdkVersion="14"
-        android:maxSdkVersion="14"/>
+        android:targetSdkVersion="14" />
+
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -27,7 +31,7 @@
         <activity
             android:name=".Donneur"
             android:label="@string/title_activity_donneur"
-            android:theme="@style/Fonctionalite">
+            android:theme="@style/Fonctionalite" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.betrisey.suzanne.androidproject.Home" />
@@ -39,7 +43,6 @@
             android:label="@string/title_activity_nouveau_donneur"
             android:parentActivityName=".Donneur"
             android:theme="@style/Options" >
-
         </activity>
 
         <!-- Intervention -->
@@ -70,6 +73,73 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.betrisey.suzanne.androidproject.Home" />
+        </activity>
+
+        <!-- Afficher Donneur -->
+        <activity
+            android:name=".AfficherDonneur"
+            android:label="@string/title_activity_afficher_donneur"
+            android:parentActivityName=".Donneur"
+            android:theme="@style/Options" >
+        </activity>
+
+        <!-- Modifier Donneur -->
+        <activity
+            android:name=".ModifierDonneur"
+            android:label="@string/title_activity_modifier_donneur"
+            android:parentActivityName=".Donneur"
+            android:theme="@style/Options" >
+        </activity>
+
+        <!-- Don de Sang -->
+        <activity
+            android:name=".DonDeSang"
+            android:label="@string/title_activity_don_de_sang"
+            android:parentActivityName=".Donneur"
+            android:theme="@style/Options" >
+        </activity>
+
+        <!-- Ajouter Intervention -->
+        <activity
+            android:name=".AjouterIntervention"
+            android:label="@string/title_activity_ajouter_intervention"
+            android:parentActivityName=".Donneur"
+            android:theme="@style/Options" >
+        </activity>
+
+        <!-- Supprimer Intervention -->
+        <activity android:name=".SupprimerIntervention"
+            android:label="@string/title_activity_supprimer_intervention"
+            android:parentActivityName=".Intervention"
+            android:theme="@style/Options" >
+        </activity>
+
+        <!-- Afficher Intervention -->
+        <activity android:name=".AfficherIntervention"
+            android:label="@string/title_activity_afficher_intervention"
+            android:parentActivityName=".Intervention"
+            android:theme="@style/Options" >
+        </activity>
+
+        <!-- Afficher Pochette de Sang -->
+        <activity android:name=".AffichagePochetteSang"
+            android:label="@string/title_activity_afficher_pochette"
+            android:parentActivityName=".Sang"
+            android:theme="@style/Options" >
+        </activity>
+
+        <!-- Choix Statut -->
+        <activity android:name=".ChoixStatut"
+            android:label="@string/title_activity_choix_statut"
+            android:parentActivityName=".Sang"
+            android:theme="@style/Options" >
+        </activity>
+
+        <!-- Transfert -->
+        <activity android:name=".Transfert"
+            android:label="@string/title_activity_transfert"
+            android:parentActivityName=".Sang"
+            android:theme="@style/Options" >
         </activity>
 
     </application>

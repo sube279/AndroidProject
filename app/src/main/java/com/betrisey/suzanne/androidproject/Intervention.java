@@ -47,12 +47,14 @@ public class Intervention extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.action_ajouter_intervention:
+                Intent intent = new Intent(this, AjouterIntervention.class);
+                startActivity(intent);
                 return true;
             case R.id.action_supprimer_intervention:
                 return true;
             case R.id.action_parametre:
-                Intent intent = new Intent(this, Parametre.class);
-                startActivity(intent);
+                Intent intent2 = new Intent(this, Parametre.class);
+                startActivity(intent2);
         }
         return (super.onOptionsItemSelected(item));
     }

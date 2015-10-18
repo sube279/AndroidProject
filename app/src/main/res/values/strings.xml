@@ -12,6 +12,15 @@
     <string name="title_activity_sang">BANQUE DU SANG</string>
     <string name="title_activity_donneur">DONNEUR</string>
     <string name="title_activity_nouveau_donneur">NOUVEAU DONNEUR</string>
+    <string name="title_activity_afficher_donneur">AFFICHER DONNEUR</string>
+    <string name="title_activity_modifier_donneur">MODIFIER DONNEUR</string>
+    <string name="title_activity_don_de_sang">DON DE SANG</string>
+    <string name="title_activity_ajouter_intervention">AJOUTER INTERVENTION</string>
+    <string name="title_activity_supprimer_intervention">SUPPRIMER INTERVENTION</string>
+    <string name="title_activity_afficher_intervention">AFFICHER INTERVENTION</string>
+    <string name="title_activity_afficher_pochette">AFFICHER POCHETTE DE SANG</string>
+    <string name="title_activity_choix_statut">CHOIX STATUT</string>
+    <string name="title_activity_transfert">TRANSFERT POCHETTE</string>
 
     <!-- Fenetre donneur -->
     <string name="action_nouveau_donneur">Ajouter donneur</string>
