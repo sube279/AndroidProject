@@ -1,9 +1,11 @@
 package com.betrisey.suzanne.androidproject;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class Donneur extends AppCompatActivity {
 
@@ -13,10 +15,10 @@ public class Donneur extends AppCompatActivity {
         setContentView(R.layout.activity_donneur);
 
         //ajouter icone a la barre d'action
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.drawable.icone);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -30,13 +32,17 @@ public class Donneur extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(this, Home.class);
+                startActivity(intent);
+                return true;
         }
+        return (super.onOptionsItemSelected(item));
 
-        return super.onOptionsItemSelected(item);
     }
+
+
+
 }

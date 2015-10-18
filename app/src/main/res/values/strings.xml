@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Don de sang</string>
-    <string name="action_settings">Settings</string>
+
+    <!-- Nom parametre -->
+    <string name="action_search">Recherche</string>
+    <string name="action_settings">Paramètre</string>
+    <string name="action_home">Home</string>
 
     <!-- Titre activites -->
     <string name="title_activity_donneur">DONNEUR</string>
