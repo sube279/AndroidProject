@@ -16,6 +16,13 @@
     <style name="Options" parent="Theme.AppCompat.Light">
         <item name="android:windowBackground">@drawable/back</item>
         <item name="android:actionBarStyle" tools:ignore="NewApi">@style/ActionBarSimple</item>
+        <item name="actionBarStyle">@style/ActionBarSimple</item>
+    </style>
+
+    <!-- Style pour fenetre options avec flèche retour -->
+    <style name="OptionsRetour" parent="Theme.AppCompat.Light">
+        <item name="android:windowBackground">@drawable/back</item>
+        <item name="android:actionBarStyle" tools:ignore="NewApi">@style/ActionBarOptions</item>
         <item name="actionBarStyle">@style/ActionBarOptions</item>
     </style>
 
