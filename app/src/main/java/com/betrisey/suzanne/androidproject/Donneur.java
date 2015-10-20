@@ -1,12 +1,18 @@
 package com.betrisey.suzanne.androidproject;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.lang.reflect.Field;
 
@@ -19,6 +25,9 @@ public class Donneur extends AppCompatActivity {
 
                //ajouter icone a la barre d'action
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        
+
 
         //pour le menu (marche pas sur toutes les versions d'android sinon)
         try {
@@ -70,9 +79,8 @@ public class Donneur extends AppCompatActivity {
         return (super.onOptionsItemSelected(item));
 
 
-
-
     }
+
 
 
 

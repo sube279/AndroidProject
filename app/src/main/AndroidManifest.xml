@@ -86,6 +86,7 @@
             android:label="@string/title_activity_modifier_donneur"
             android:parentActivityName=".Donneur"
             android:theme="@style/Options" >
+
         </activity>
 
         <!-- Don de Sang -->
