@@ -116,6 +116,11 @@
         <item>Décembre</item>
     </string-array>
 
+    <!-- Fenêtre parametre-->
+    <string name="langue">Langue:</string>
+    <string name="francais">Français</string>
+    <string name="allemand">Allemand</string>
+
     <string name="hello_world">Hello world!</string>
 
 </resources>
