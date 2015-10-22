@@ -8,7 +8,44 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/white"
     tools:context="com.betrisey.suzanne.androidproject.AfficherDonneur">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/darkRed"
+        android:layout_margin="5dp"
+        android:id="@+id/frameLayout">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:text="Don de sang"
+            android:textStyle="bold"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            />
+
+        <ImageButton
+            android:paddingBottom="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/imageButton2"
+            android:layout_gravity="right|center_vertical"
+            android:src="@drawable/edit"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:background="@color/darkRed"
+            />
+
+    </FrameLayout>
 
     <TextView
         android:id="@+id/textPrenom"
@@ -16,8 +53,12 @@
         android:layout_height="wrap_content"
         android:text="Nancy"
         android:textSize="20dp"
+        android:paddingTop="20dp"
+        android:layout_marginLeft="15dp"
         android:textColor="@color/black"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_below="@+id/frameLayout"/>
+
     <TextView
         android:id="@+id/textNom"
         android:layout_width="wrap_content"
@@ -26,9 +67,11 @@
         android:textSize="20dp"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/layoutDonnees"
-        android:layout_toStartOf="@+id/layoutDonnees" />
+        android:paddingTop="20dp"
+        android:layout_below="@+id/frameLayout"
+        android:layout_toEndOf="@+id/textPrenom"
+        android:layout_toRightOf="@+id/textPrenom"
+        android:paddingLeft="15dp"/>
 
     <LinearLayout
         android:id="@+id/layoutInfo"
@@ -122,5 +165,6 @@
         android:layout_toRightOf="@+id/layoutInfo"
         android:layout_toEndOf="@+id/layoutInfo"
         android:layout_alignTop="@+id/layoutInfo"></ListView>
+
 
 </RelativeLayout>
