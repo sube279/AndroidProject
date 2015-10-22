@@ -45,12 +45,13 @@
     <string name="sexe">Sexe:</string>
     <string name="feminin">Féminin</string>
     <string name="masculin">Masculin</string>
-    <string name="dateNaissance">Date de naissance:</string>
+    <string name="dateNaissance">Naissance:</string>
     <string name="jour">Jour</string>
     <string name="mois">Mois</string>
     <string name="annee">Année</string>
     <string name="adresse">Adresse:</string>
     <string name="npa">NPA:</string>
+    <string name="lieu">Lieu:</string>
     <string name="region">Région:</string>
     <string name="telephone">Téléphone:</string>
     <string name="groupe">Groupe:</string>
@@ -120,6 +121,11 @@
     <string name="langue">Langue:</string>
     <string name="francais">Français</string>
     <string name="allemand">Allemand</string>
+
+    <!-- Fenêtre afficher donneur-->
+    <color name="black">#000000</color>
+    <string name="donsPossibles">Dons possibles:</string>
+    <string name="disponibilite">Disponibilité:</string>
 
     <string name="hello_world">Hello world!</string>
 

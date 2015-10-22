@@ -1,10 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/layoutParent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.betrisey.suzanne.androidproject.AfficherDonneur">
+
+    <TextView
+        android:id="@+id/textPrenom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nancy"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/textNom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Zappellaz"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/layoutDonnees"
+        android:layout_toStartOf="@+id/layoutDonnees" />
+
+    <LinearLayout
+        android:id="@+id/layoutInfo"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/textNom">
+
+
+        <ListView
+            android:id="@+id/listInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></ListView>
+<!--
+        <TextView
+            android:id="@+id/textSexe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sexe"/>
+
+        <TextView
+            android:id="@+id/textDateNaissance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dateNaissance"/>
+
+        <TextView
+            android:id="@+id/textAdresse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/adresse"/>
+
+        <TextView
+            android:id="@+id/textNpa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/npa"/>
+
+        <TextView
+            android:id="@+id/textLieu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lieu"/>
+
+        <TextView
+            android:id="@+id/textRegion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/region"/>
+
+        <TextView
+            android:id="@+id/textTelephone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/telephone"/>
+
+        <TextView
+            android:id="@+id/textGroupe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/groupe"/>
+
+        <TextView
+            android:id="@+id/textDons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/donsPossibles"/>
+
+        <TextView
+            android:id="@+id/textDispo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/disponibilite"/>
+            -->
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutDonnees"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignRight="@+id/layoutInfo">
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listDonneur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/layoutInfo"
+        android:layout_toEndOf="@+id/layoutInfo"
+        android:layout_alignTop="@+id/layoutInfo"></ListView>
 
 </RelativeLayout>

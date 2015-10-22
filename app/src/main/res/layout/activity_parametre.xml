@@ -17,7 +17,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="15dp">
 
-        <EditText
+        <TextView
             android:id="@id/editRegion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="15dp">
 
-        <EditText
+        <TextView
             android:id="@+id/editLangue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,27 +55,29 @@
             android:id="@+id/radioGroup"
             android:layout_alignBottom="@+id/textSexe">
 
+            <RadioButton
+                android:id="@+id/radioFrancais"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/francais"
+                android:layout_marginLeft="37dp"
+                android:layout_marginStart="37dp"
+                android:layout_alignBottom="@+id/radioGroup" />
+
+            <RadioButton
+                android:id="@+id/radioAllemand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/allemand"
+                android:layout_marginLeft="36dp"
+                android:layout_marginStart="36dp"
+                android:layout_alignBottom="@+id/radioGroup" />
+
         </RadioGroup>
 
-        <RadioButton
-            android:id="@+id/radioFrancais"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/francais"
-            android:layout_marginLeft="37dp"
-            android:layout_marginStart="37dp"
-            android:layout_alignBottom="@+id/radioGroup" />
 
-        <RadioButton
-            android:id="@+id/radioAllemand"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/allemand"
-            android:layout_marginLeft="36dp"
-            android:layout_marginStart="36dp"
-            android:layout_alignBottom="@+id/radioGroup" />
 
     </LinearLayout>
 
