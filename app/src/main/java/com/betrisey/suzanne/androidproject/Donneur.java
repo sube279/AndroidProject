@@ -81,9 +81,10 @@ public class Donneur extends AppCompatActivity {
 
     }
 
-
-
-
+    public void buttonAfficher(View view) {
+        Intent intent = new Intent(this, AfficherDonneur.class);
+        startActivity(intent);
+    }
 
 
 }

@@ -1,7 +1,10 @@
 package com.betrisey.suzanne.androidproject;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -9,6 +12,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class AfficherDonneur extends AppCompatActivity {
@@ -20,7 +24,22 @@ public class AfficherDonneur extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_afficher_donneur);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        //ajouter icone a la barre d'action
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+
+        //pour le menu (marche pas sur toutes les versions d'android sinon)
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            if(menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(config, false);
+            }
+        } catch (Exception ex) {
+            // Ignore
+        }
 /*
         ArrayAdapter<String> adapterInfo = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, info);
         vueInfo = (ListView) findViewById(R.id.listInfo);
@@ -69,5 +88,16 @@ public class AfficherDonneur extends AppCompatActivity {
         }
 
 
+    }
+
+
+    public void buttonDonDeSang(View view) {
+        Intent intent = new Intent(this, DonDeSang.class);
+        startActivity(intent);
+    }
+
+    public void buttonEdit(View view) {
+        Intent intent = new Intent(this, ModifierDonneur.class);
+        startActivity(intent);
     }
 }

@@ -1,9 +1,11 @@
 package com.betrisey.suzanne.androidproject;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -79,5 +81,15 @@ public class NouveauDonneur extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void buttonAnnuler(View view) {
+        Intent intent = new Intent(this, Donneur.class);
+        startActivity(intent);
+    }
+
+    public void buttonOk(View view) {
+        Intent intent = new Intent(this, Donneur.class);
+        startActivity(intent);
     }
 }

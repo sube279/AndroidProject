@@ -79,7 +79,7 @@
             android:name=".AfficherDonneur"
             android:label="@string/title_activity_afficher_donneur"
             android:parentActivityName=".Donneur"
-            android:theme="@style/Options" >
+            android:theme="@style/OptionsRetour" >
         </activity>
 
         <!-- Modifier Donneur -->
