@@ -26,7 +26,7 @@ public class Donneur extends AppCompatActivity {
                //ajouter icone a la barre d'action
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        
+
 
 
         //pour le menu (marche pas sur toutes les versions d'android sinon)
