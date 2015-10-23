@@ -19,7 +19,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/search"
             android:layout_gravity="right|center_vertical"
-
             android:baselineAligned="true" />
     </FrameLayout>
 

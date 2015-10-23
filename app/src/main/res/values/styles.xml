@@ -40,7 +40,7 @@
         <item name="android:background">@color/white</item>
         <item name="background">@color/white</item>
         <item name="titleTextStyle">@style/TitleTextStyle</item>
-        <item name="android:homeAsUpIndicator" tools:ignore="NewApi">@drawable/icon</item>
+        <item name="android:homeAsUpIndicator" tools:ignore="NewApi">@drawable/icon_retour</item>
         <item name="homeAsUpIndicator">@drawable/icon_retour</item>
     </style>
 

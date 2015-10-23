@@ -1,5 +1,7 @@
 package com.betrisey.suzanne.androidproject;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -25,8 +27,6 @@ public class Donneur extends AppCompatActivity {
 
                //ajouter icone a la barre d'action
         getSupportActionBar().setHomeButtonEnabled(true);
-
-
 
 
         //pour le menu (marche pas sur toutes les versions d'android sinon)
@@ -80,6 +80,8 @@ public class Donneur extends AppCompatActivity {
 
 
     }
+
+
 
 
 

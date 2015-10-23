@@ -4,8 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewConfiguration;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import java.lang.reflect.Field;
 
 public class NouveauDonneur extends AppCompatActivity {
 
@@ -13,7 +16,22 @@ public class NouveauDonneur extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nouveau_donneur);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        //ajouter icone a la barre d'action
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+
+        //pour le menu (marche pas sur toutes les versions d'android sinon)
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            if(menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(config, false);
+            }
+        } catch (Exception ex) {
+            // Ignore
+        }
 
         //spinner jours
         String[] jours={"1", "2", "3", "4","5","6","7","8","9","10","11","12","13","14","15"

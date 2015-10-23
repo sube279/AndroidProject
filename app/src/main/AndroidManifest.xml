@@ -32,6 +32,7 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.betrisey.suzanne.androidproject.Home" />
+
         </activity>
 
         <!-- NouveauDonneur -->
@@ -39,7 +40,8 @@
             android:name=".NouveauDonneur"
             android:label="@string/title_activity_nouveau_donneur"
             android:parentActivityName=".Donneur"
-            android:theme="@style/Options" >
+            android:theme="@style/OptionsRetour" >
+
         </activity>
 
         <!-- Intervention -->
