@@ -11,7 +11,7 @@ public class Home extends AppCompatActivity {
 
     // Ouvre la fenetre donneur
     public void openDonneur(View view) {
-        Intent intent = new Intent(this, Donneur.class);
+        Intent intent = new Intent(this, AfficherDonneur.class);
         startActivity(intent);
     }
 

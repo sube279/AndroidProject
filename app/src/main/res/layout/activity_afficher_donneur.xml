@@ -71,8 +71,25 @@
         android:layout_below="@+id/frameLayout"
         android:layout_toEndOf="@+id/textPrenom"
         android:layout_toRightOf="@+id/textPrenom"
-        android:paddingLeft="15dp"/>
+        android:paddingLeft="15dp"
+        android:layout_marginBottom="15dp"/>
 
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textNom"
+        android:layout_marginLeft="15dp">
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TableLayout>
+
+    </ScrollView>
+
+<!--
     <LinearLayout
         android:id="@+id/layoutInfo"
         android:layout_width="150dp"
@@ -85,67 +102,7 @@
             android:id="@+id/listInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></ListView>
-<!--
-        <TextView
-            android:id="@+id/textSexe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sexe"/>
 
-        <TextView
-            android:id="@+id/textDateNaissance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dateNaissance"/>
-
-        <TextView
-            android:id="@+id/textAdresse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/adresse"/>
-
-        <TextView
-            android:id="@+id/textNpa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/npa"/>
-
-        <TextView
-            android:id="@+id/textLieu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lieu"/>
-
-        <TextView
-            android:id="@+id/textRegion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/region"/>
-
-        <TextView
-            android:id="@+id/textTelephone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/telephone"/>
-
-        <TextView
-            android:id="@+id/textGroupe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/groupe"/>
-
-        <TextView
-            android:id="@+id/textDons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/donsPossibles"/>
-
-        <TextView
-            android:id="@+id/textDispo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/disponibilite"/>
-            -->
     </LinearLayout>
 
     <LinearLayout
@@ -164,7 +121,7 @@
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/layoutInfo"
         android:layout_toEndOf="@+id/layoutInfo"
-        android:layout_alignTop="@+id/layoutInfo"></ListView>
+        android:layout_alignTop="@+id/layoutInfo"></ListView>-->
 
 
 </RelativeLayout>
