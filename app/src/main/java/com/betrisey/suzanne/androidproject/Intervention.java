@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewConfiguration;
 
 import java.lang.reflect.Field;
@@ -51,11 +52,18 @@ public class Intervention extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.action_supprimer_intervention:
+                Intent intent3 = new Intent(this, SupprimerIntervention.class);
+                startActivity(intent3);
                 return true;
             case R.id.action_parametre:
                 Intent intent2 = new Intent(this, Parametre.class);
                 startActivity(intent2);
         }
         return (super.onOptionsItemSelected(item));
+    }
+
+    public void buttonAfficher(View view) {
+        Intent intent = new Intent(this, AfficherIntervention.class);
+        startActivity(intent);
     }
 }

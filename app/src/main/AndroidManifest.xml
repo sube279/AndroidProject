@@ -111,7 +111,7 @@
         <activity android:name=".SupprimerIntervention"
             android:label="@string/title_activity_supprimer_intervention"
             android:parentActivityName=".Intervention"
-            android:theme="@style/Options" >
+            android:theme="@style/OptionsRetour" >
         </activity>
 
         <!-- Afficher Intervention -->
