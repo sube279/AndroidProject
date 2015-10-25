@@ -118,7 +118,7 @@
         <activity android:name=".AfficherIntervention"
             android:label="@string/title_activity_afficher_intervention"
             android:parentActivityName=".Intervention"
-            android:theme="@style/Options" >
+            android:theme="@style/OptionsRetour" >
         </activity>
 
         <!-- Afficher Pochette de Sang -->
