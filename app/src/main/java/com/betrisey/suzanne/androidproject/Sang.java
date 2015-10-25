@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewConfiguration;
 
 import java.lang.reflect.Field;
@@ -57,5 +58,10 @@ public class Sang extends AppCompatActivity {
                 startActivity(intent);
         }
         return (super.onOptionsItemSelected(item));
+    }
+
+    public void buttonAfficher(View view) {
+        Intent intent = new Intent(this, AffichagePochetteSang.class);
+        startActivity(intent);
     }
 }
