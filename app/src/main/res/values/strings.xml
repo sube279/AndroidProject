@@ -21,6 +21,7 @@
     <string name="title_activity_afficher_pochette">AFFICHER POCHETTE DE SANG</string>
     <string name="title_activity_choix_statut">CHOIX STATUT</string>
     <string name="title_activity_transfert">TRANSFERT POCHETTE</string>
+    <string name="title_activity_modifier_intervention">MODIFIER INTERVENTION</string>
 
     <!-- Fenetre donneur -->
     <string name="action_nouveau_donneur">Ajouter donneur</string>

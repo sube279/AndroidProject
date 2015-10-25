@@ -7,6 +7,9 @@
         android:minSdkVersion="5"
         android:targetSdkVersion="14" />
 
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -32,7 +35,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.betrisey.suzanne.androidproject.Home" />
-
         </activity>
 
         <!-- NouveauDonneur -->
@@ -41,7 +43,6 @@
             android:label="@string/title_activity_nouveau_donneur"
             android:parentActivityName=".Donneur"
             android:theme="@style/OptionsRetour" >
-
         </activity>
 
         <!-- Intervention -->
@@ -88,7 +89,6 @@
             android:label="@string/title_activity_modifier_donneur"
             android:parentActivityName=".Donneur"
             android:theme="@style/Options" >
-
         </activity>
 
         <!-- Don de Sang -->
@@ -108,40 +108,51 @@
         </activity>
 
         <!-- Supprimer Intervention -->
-        <activity android:name=".SupprimerIntervention"
+        <activity
+            android:name=".SupprimerIntervention"
             android:label="@string/title_activity_supprimer_intervention"
             android:parentActivityName=".Intervention"
             android:theme="@style/OptionsRetour" >
         </activity>
 
         <!-- Afficher Intervention -->
-        <activity android:name=".AfficherIntervention"
+        <activity
+            android:name=".AfficherIntervention"
             android:label="@string/title_activity_afficher_intervention"
             android:parentActivityName=".Intervention"
             android:theme="@style/OptionsRetour" >
         </activity>
 
         <!-- Afficher Pochette de Sang -->
-        <activity android:name=".AffichagePochetteSang"
+        <activity
+            android:name=".AffichagePochetteSang"
             android:label="@string/title_activity_afficher_pochette"
             android:parentActivityName=".Sang"
             android:theme="@style/Options" >
         </activity>
 
         <!-- Choix Statut -->
-        <activity android:name=".ChoixStatut"
+        <activity
+            android:name=".ChoixStatut"
             android:label="@string/title_activity_choix_statut"
             android:parentActivityName=".Sang"
             android:theme="@style/Options" >
         </activity>
 
         <!-- Transfert -->
-        <activity android:name=".Transfert"
+        <activity
+            android:name=".Transfert"
             android:label="@string/title_activity_transfert"
             android:parentActivityName=".Sang"
             android:theme="@style/Options" >
         </activity>
 
+        <!-- Modifier intervention -->
+        <activity android:name=".ModifierIntervention"
+            android:label="@string/title_activity_modifier_intervention"
+            android:parentActivityName=".AfficherIntervention"
+            android:theme="@style/Options">
+        </activity>
     </application>
 
 </manifest>

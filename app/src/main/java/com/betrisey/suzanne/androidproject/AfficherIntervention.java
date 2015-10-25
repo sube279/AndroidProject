@@ -39,7 +39,7 @@ public class AfficherIntervention extends AppCompatActivity {
     }
 
     public void buttonEdit(View view) {
-        Intent intent = new Intent(this, Intervention.class);
+        Intent intent = new Intent(this, ModifierIntervention.class);
         startActivity(intent);
     }
 }
