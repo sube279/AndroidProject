@@ -40,6 +40,10 @@
     <string name="action_ajouter_intervention">Ajouter intervention</string>
     <string name="action_supprimer_intervention">Supprimer intervention</string>
 
+    <!-- Fenetre pochette -->
+    <string name="action_transfert">Transfert</string>
+    <string name="action_statut">Changer statut</string>
+
     <!-- Formulaire nouveau donneur -->
     <string name="nom">Nom:</string>
     <string name="prenom">Prénom:</string>

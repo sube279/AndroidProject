@@ -7,9 +7,6 @@
         android:minSdkVersion="5"
         android:targetSdkVersion="14" />
 
-    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -128,23 +125,23 @@
             android:name=".AffichagePochetteSang"
             android:label="@string/title_activity_afficher_pochette"
             android:parentActivityName=".Sang"
-            android:theme="@style/Options" >
+            android:theme="@style/OptionsRetour" >
         </activity>
 
         <!-- Choix Statut -->
         <activity
             android:name=".ChoixStatut"
             android:label="@string/title_activity_choix_statut"
-            android:parentActivityName=".Sang"
-            android:theme="@style/Options" >
+            android:parentActivityName=".AffichagePochetteSang"
+            android:theme="@style/OptionsRetour" >
         </activity>
 
         <!-- Transfert -->
         <activity
             android:name=".Transfert"
             android:label="@string/title_activity_transfert"
-            android:parentActivityName=".Sang"
-            android:theme="@style/Options" >
+            android:parentActivityName=".AffichagePochetteSang"
+            android:theme="@style/OptionsRetour" >
         </activity>
 
         <!-- Modifier intervention -->
