@@ -39,6 +39,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="58dp"
             android:onClick="buttonAfficher" />
+
     </RelativeLayout>
 
 
