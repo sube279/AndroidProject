@@ -50,6 +50,97 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="5dp"
-        android:layout_below="@+id/frameLayout2"></RelativeLayout>
+        android:layout_below="@+id/frameLayout2"
+        android:clickable="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date:"
+            android:id="@+id/textView"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="20dp"
+            android:layout_alignBottom="@+id/textViewDate"
+            android:layout_alignTop="@+id/textViewDate"
+            android:gravity="center_vertical" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewDate"
+            android:textColor="@color/greyLight"
+            android:textSize="18dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignLeft="@+id/textViewQuantite" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantité:"
+            android:id="@+id/textView2"
+            android:layout_alignBottom="@+id/textViewQuantite"
+            android:layout_alignTop="@+id/textViewQuantite"
+            android:gravity="center_vertical"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:layout_alignLeft="@+id/textView" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewQuantite"
+            android:layout_below="@+id/textViewDate"
+            android:layout_marginTop="15dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/greyLight"
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Groupe:"
+            android:id="@+id/textView3"
+            android:layout_below="@+id/textView2"
+            android:layout_alignLeft="@+id/textView2"
+            android:layout_alignBottom="@+id/textViewGroupe"
+            android:layout_alignTop="@+id/textViewGroupe"
+            android:gravity="center_vertical"
+            android:textSize="18dp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewGroupe"
+            android:layout_below="@+id/textViewQuantite"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/greyLight"
+            android:textSize="18dp"
+            android:layout_alignLeft="@+id/textViewQuantite" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description:"
+            android:id="@+id/textView4"
+            android:layout_below="@+id/textView3"
+            android:layout_alignLeft="@+id/textView"
+            android:layout_alignStart="@+id/textView"
+            android:layout_marginTop="25dp"
+            android:textSize="18dp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewDescription"
+            android:layout_below="@+id/textView4"
+            android:layout_alignLeft="@+id/textView"
+            android:layout_alignStart="@+id/textView"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/greyLight"
+            android:textSize="18dp" />
+    </RelativeLayout>
 
 </RelativeLayout>
