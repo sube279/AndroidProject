@@ -40,27 +40,6 @@ public class AfficherDonneur extends AppCompatActivity {
         } catch (Exception ex) {
             // Ignore
         }
-/*
-        ArrayAdapter<String> adapterInfo = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, info);
-        vueInfo = (ListView) findViewById(R.id.listInfo);
-        vueInfo.setAdapter(adapterInfo);
-
-
-        donneur.add("féminin");
-        donneur.add("12.04.1989");
-        donneur.add("Rue de la Forge 15");
-        donneur.add("3966");
-        donneur.add("Chalais");
-        donneur.add("Sierre");
-        donneur.add("+4179561235");
-        donneur.add("A+");
-        donneur.add("1");
-        donneur.add("15.06.2016");
-
-
-        ArrayAdapter<String> adapterData = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, donneur);
-        vueData = (ListView) findViewById(R.id.listDonneur);
-        vueData.setAdapter(adapterData);*/
 
         TableLayout table=(TableLayout) findViewById(R.id.tableLayout);
         TableRow row;

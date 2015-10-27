@@ -1,24 +1,35 @@
 package com.betrisey.suzanne.androidproject;
 
+import android.app.ActionBar;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Donneur extends AppCompatActivity {
+
+    DonneurAdapter liste;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +52,37 @@ public class Donneur extends AppCompatActivity {
             // Ignore
         }
 
+
+        afficherParRegion("Sierre");
+
+    }
+
+    public void afficherParRegion(String region){
+
+        //listview
+        liste = new DonneurAdapter();
+
+        LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(25, 25, 25, 25);
+
+        //Crée texteView Region
+        TextView tv = new TextView(this);
+        tv.setLayoutParams(params);
+        tv.setPadding(15, 0, 0, 0);
+        tv.setTextSize(20);
+        tv.setTextColor(getResources().getColor(R.color.white));
+        tv.setBackgroundColor(getResources().getColor(R.color.darkRed));
+
+        tv.setTypeface(null, Typeface.BOLD);
+        tv.setText(region);
+
+        ll.addView(tv);
+        ListView lv = new ListView(this);
+        lv.setAdapter(liste);
+
+        ll.addView(lv);
     }
 
 
@@ -84,6 +126,74 @@ public class Donneur extends AppCompatActivity {
     public void buttonAfficher(View view) {
         Intent intent = new Intent(this, AfficherDonneur.class);
         startActivity(intent);
+    }
+
+    public class DonneurAdapter extends BaseAdapter {
+
+        List<CDonneur> liste = getDataForListView();
+
+        public List<CDonneur> getDataForListView() {
+            List<CDonneur> listDonneur = new ArrayList<CDonneur>();
+
+            CDonneur d1 = new CDonneur("Michel", "Bulot", "Masculin", "15.02.1975", "Rue du chapito 8", "3966", "Chalais", "Sierre", "0797512365", "O+", 2, true);
+            CDonneur d2 = new CDonneur("Myriame", "Zola", "Féminin", "28.05.1988", "Rue du Mimo 15", "3960", "Sierre", "Sierre", "0797512365", "A+", 3, false);
+            CDonneur d3 = new CDonneur("Julio", "Delapo", "Masculin", "04.02.1942", "Route de Bubu 20", "3960", "Sierre", "Sierre", "0782165425", "B-", 1, true);
+            CDonneur d4 = new CDonneur("Julia", "Delapo", "Féminin", "12.06.1940", "Route de Bubu 20", "3960", "Sierre", "Sierre", "0786425129", "O-", 0, false);
+            CDonneur d5 = new CDonneur("Chapipo", "Bloubi", "Masculin", "03.03.1938", "Rue du Poulpe 6", "3966", "Réchy", "Sierre", "0775162308", "A-", 2, true);
+
+            listDonneur.add(d1);
+            listDonneur.add(d2);
+            listDonneur.add(d3);
+            listDonneur.add(d4);
+            listDonneur.add(d5);
+
+
+            return listDonneur;
+
+        }
+
+        @Override
+        public int getCount() {
+            return liste.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return liste.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if(convertView == null) {
+                LayoutInflater inflater = (LayoutInflater) Donneur.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.liste_donneur, parent,false);
+            }
+
+            ImageView dispo = (ImageView) convertView.findViewById(R.id.imageViewDispo);
+            TextView nom = (TextView)convertView.findViewById(R.id.textViewNom);
+            TextView prenom = (TextView)convertView.findViewById(R.id.textViewPrenom);
+            TextView naissance = (TextView)convertView.findViewById(R.id.textViewNaissance);
+
+            CDonneur i = liste.get(position);
+
+            //Test si le donneur est dispo pour l'affichage de l'image
+            if(i.getDisponibilite() == true){
+                dispo.setImageDrawable(getResources().getDrawable(R.drawable.dispo_true));
+            }else{
+                dispo.setImageDrawable(getResources().getDrawable(R.drawable.dispo_false));
+            }
+
+            nom.setText(i.getNom());
+            prenom.setText(i.getPrenom());
+            naissance.setText(i.getNaissance());
+
+            return convertView;
+        }
     }
 
 

@@ -28,6 +28,7 @@
             android:id="@+id/spinnerRegions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:entries="@array/regions"
             android:layout_marginLeft="37dp">
         </Spinner>
 
@@ -47,14 +48,14 @@
             android:id="@+id/editLangue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/langue"/>
 
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/radioGroup"
-            android:layout_alignBottom="@+id/textSexe">
+            android:id="@+id/radioGroup">
 
             <RadioButton
                 android:id="@+id/radioFrancais"
@@ -62,9 +63,7 @@
                 android:layout_height="wrap_content"
                 android:checked="false"
                 android:text="@string/francais"
-                android:layout_marginLeft="37dp"
-                android:layout_marginStart="37dp"
-                android:layout_alignBottom="@+id/radioGroup" />
+                android:layout_marginLeft="37dp"/>
 
             <RadioButton
                 android:id="@+id/radioAllemand"
@@ -72,9 +71,7 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/allemand"
-                android:layout_marginLeft="36dp"
-                android:layout_marginStart="36dp"
-                android:layout_alignBottom="@+id/radioGroup" />
+                android:layout_marginLeft="37dp"/>
 
         </RadioGroup>
 

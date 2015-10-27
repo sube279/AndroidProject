@@ -122,6 +122,17 @@
         <item>Décembre</item>
     </string-array>
 
+    <!-- Régions -->
+    <string-array name="regions">
+        <item>Sion</item>
+        <item>Sierre</item>
+        <item>Montana</item>
+        <item>Brigue</item>
+        <item>Viège</item>
+        <item>Monthey</item>
+        <item>Martigny</item>
+    </string-array>
+
     <!-- Fenêtre parametre-->
     <string name="langue">Langue:</string>
     <string name="francais">Français</string>
