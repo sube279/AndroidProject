@@ -46,37 +46,37 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/frameLayout_NouveauDonneur"
         android:layout_margin="5dp"
+        android:padding="10dp"
         android:background="@color/white" >
 
         <TextView
+            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textNom"
             android:text="@string/nom"
-            android:paddingTop="15dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_marginBottom="15dp"/>
 
         <EditText
             android:id="@+id/editNom"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/textNom"
+            android:layout_alignBottom="@+id/textNom"/>
 
         <TextView
             android:id="@+id/textPrenom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/prenom"
-            android:layout_below="@+id/editNom"
-            android:paddingTop="15dp" />
+            android:layout_below="@+id/textNom" />
 
         <EditText
             android:id="@+id/editPrenom"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/textPrenom"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_toEndOf="@+id/textPrenom"
+            android:layout_alignBottom="@+id/textPrenom"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -191,72 +191,91 @@
                 android:spinnerMode="dropdown"></Spinner>-->
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/spinnerDateLayout"
             android:layout_toRightOf="@+id/radioGroup"
             android:layout_toEndOf="@+id/radioGroup"
-            android:layout_marginTop="15dp"
-            android:orientation="vertical">
+            android:layout_marginTop="15dp">
 
             <TextView
+                android:layout_marginTop="20dp"
                 android:id="@+id/textAdresse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/adresse"/>
+                android:text="@string/adresse"
+                android:layout_marginBottom="20dp"/>
 
             <EditText
                 android:id="@+id/editAdresse"
                 android:layout_width="fill_parent"
-                android:layout_height="20dp" />
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/textAdresse"
+                android:layout_alignBottom="@+id/textAdresse"/>
 
             <TextView
                 android:id="@+id/textNpa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/npa"/>
+                android:text="@string/npa"
+                android:layout_below="@+id/textAdresse"
+                android:layout_marginBottom="20dp"/>
 
             <EditText
                 android:id="@+id/ediNpa"
                 android:layout_width="fill_parent"
-                android:layout_height="20dp" />
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/textNpa"
+                android:layout_alignBottom="@+id/textNpa"/>
 
             <TextView
                 android:id="@+id/textRegion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/region"/>
+                android:text="@string/region"
+                android:layout_below="@+id/textNpa"
+                android:layout_marginBottom="20dp"/>
 
             <EditText
                 android:id="@+id/editRegion"
                 android:layout_width="fill_parent"
-                android:layout_height="20dp" />
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/textRegion"
+                android:layout_alignBottom="@+id/textRegion"/>
 
             <TextView
                 android:id="@+id/textTelephone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/telephone"/>
+                android:text="@string/telephone"
+                android:layout_below="@+id/textRegion"
+                android:layout_marginBottom="20dp"/>
 
             <EditText
                 android:id="@+id/editTelephone"
                 android:layout_width="fill_parent"
-                android:layout_height="20dp" />
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/textTelephone"
+               android:layout_alignBottom="@+id/textTelephone"/>
 
             <TextView
                 android:id="@+id/textGroupe"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/groupe"/>
+                android:text="@string/groupe"
+                android:layout_below="@+id/textTelephone"
+                android:layout_marginBottom="20dp"/>
             <Spinner
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:spinnerMode="dropdown"
-                android:id="@+id/spinnerGroupes"></Spinner>
+                android:id="@+id/spinnerGroupes"
+                android:layout_alignTop="@+id/textGroupe"
+                android:layout_toEndOf="@+id/textGroupe"></Spinner>
 
 
-        </LinearLayout>
+        </RelativeLayout>
     </RelativeLayout>
 
 
