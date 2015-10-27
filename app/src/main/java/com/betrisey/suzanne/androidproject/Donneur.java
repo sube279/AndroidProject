@@ -16,12 +16,14 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -38,6 +40,7 @@ public class Donneur extends AppCompatActivity {
 
                //ajouter icone a la barre d'action
         getSupportActionBar().setHomeButtonEnabled(true);
+
 
 
         //pour le menu (marche pas sur toutes les versions d'android sinon)
@@ -57,6 +60,7 @@ public class Donneur extends AppCompatActivity {
 
     }
 
+
     public void afficherParRegion(String region){
 
         //listview
@@ -72,8 +76,7 @@ public class Donneur extends AppCompatActivity {
         tv.setLayoutParams(params);
         tv.setPadding(15, 0, 0, 0);
         tv.setTextSize(20);
-        tv.setTextColor(getResources().getColor(R.color.white));
-        tv.setBackgroundColor(getResources().getColor(R.color.darkRed));
+        tv.setTextColor(getResources().getColor(R.color.black));
 
         tv.setTypeface(null, Typeface.BOLD);
         tv.setText(region);
@@ -83,6 +86,16 @@ public class Donneur extends AppCompatActivity {
         lv.setAdapter(liste);
 
         ll.addView(lv);
+
+        //Click sur la listView
+        lv.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(getApplicationContext(), AfficherDonneur.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
