@@ -142,6 +142,14 @@
     <string name="donsPossibles">Dons possibles:</string>
     <string name="disponibilite">Disponibilité:</string>
 
+    <!-- Fenêtre choix_Statut -->
+    <string name="statut">Statut</string>
+    <string name="enStock">En stock</string>
+    <string name="inutilisable">Inutilisable</string>
+    <string name="commande">Commandé</string>
+    <string name="transfert">Transfert</string>
+    <string name="utilise">Utilisé</string>
+
     <string name="hello_world">Hello world!</string>
 
 </resources>
