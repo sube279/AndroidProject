@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import java.lang.reflect.Field;
+import java.util.Calendar;
 
 public class NouveauDonneur extends AppCompatActivity {
 
@@ -52,12 +53,27 @@ public class NouveauDonneur extends AppCompatActivity {
                 (Spinner)  findViewById(R.id.spinnerMois);
         spinner2.setAdapter(stringArrayAdapter2);
 
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        Integer[] annees = new Integer[101];
+        for(int i = 0; i<=100; i++){
+            annees[i] = year-i;
+        }
+
+        ArrayAdapter<Integer> stringArrayAdapter4=
+                new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_dropdown_item,annees);
+        Spinner spinner4 =
+                (Spinner)  findViewById(R.id.spinnerAnnee);
+        spinner4.setAdapter(stringArrayAdapter4);
+
+
         String[] groupe={"A+", "A-", "B+", "B-","AB+","AB-","O+","O-"};
         ArrayAdapter<String> stringArrayAdapter3=
                 new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,groupe);
         Spinner spinner3 =
                 (Spinner)  findViewById(R.id.spinnerGroupes);
         spinner3.setAdapter(stringArrayAdapter3);
+
 
     }
 
