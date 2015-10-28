@@ -50,6 +50,20 @@
         android:layout_marginBottom="5dp"
         android:layout_below="@+id/frameLayout2">
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textNom"
+            android:layout_marginLeft="15dp">
+
+            <TableLayout
+                android:id="@+id/tableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TableLayout>
+
+        </ScrollView>
+
     </RelativeLayout>
 
 
