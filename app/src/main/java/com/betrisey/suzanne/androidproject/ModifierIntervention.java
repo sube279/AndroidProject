@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class ModifierIntervention extends AppCompatActivity {
@@ -28,23 +29,31 @@ public class ModifierIntervention extends AppCompatActivity {
         }
 
         // Create the text view
-        TextView tw = (TextView) findViewById(R.id.textViewDate);
+        EditText tw = (EditText) findViewById(R.id.textViewDate);
         tw.setText(date);
-        tw = (TextView) findViewById(R.id.textViewQuantite);
+        tw = (EditText) findViewById(R.id.textViewQuantite);
         tw.setText(quantite);
-        tw = (TextView) findViewById(R.id.textViewGroupe);
+        tw = (EditText) findViewById(R.id.textViewGroupe);
         tw.setText(groupe);
-        tw = (TextView) findViewById(R.id.textViewDescription);
+        tw = (EditText) findViewById(R.id.textViewDescription);
         tw.setText(description);
     }
 
     public void buttonAnnuler(View view) {
         Intent intent = new Intent(this, AfficherIntervention.class);
+        intent.putExtra("date", date);
+        intent.putExtra("quantite", quantite);
+        intent.putExtra("groupe", groupe);
+        intent.putExtra("description", description);
         startActivity(intent);
     }
 
     public void buttonOk(View view) {
         Intent intent = new Intent(this, AfficherIntervention.class);
+        intent.putExtra("date", date);
+        intent.putExtra("quantite", quantite);
+        intent.putExtra("groupe", groupe);
+        intent.putExtra("description", description);
         startActivity(intent);
     }
 }

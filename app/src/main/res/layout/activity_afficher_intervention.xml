@@ -57,7 +57,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="5dp">
+        android:layout_margin="5dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -137,12 +139,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewDescription"
-            android:layout_below="@+id/textView4"
-            android:layout_alignLeft="@+id/textView"
+            android:layout_alignTop="@+id/textView4"
+            android:layout_alignLeft="@+id/textViewQuantite"
             android:layout_alignStart="@+id/textView"
             android:layout_centerHorizontal="true"
             android:textColor="@color/grey"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:maxWidth="180dp" />
 
 
 
