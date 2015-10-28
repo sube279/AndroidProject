@@ -23,7 +23,7 @@ public class Home extends AppCompatActivity {
 
     // Ouvre la fenetre banque du sang
     public void openSang(View view) {
-        Intent intent = new Intent(this, Sang.class);
+        Intent intent = new Intent(this, DonDeSang.class);
         startActivity(intent);
     }
 

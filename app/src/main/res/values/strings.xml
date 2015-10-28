@@ -150,6 +150,10 @@
     <string name="transfert">Transfert</string>
     <string name="utilise">Utilisé</string>
 
+    <!-- Fenêtre don de sang -->
+    <string name="utilisable">La pochette est-elle utilisable?</string>
+    <string name="malaise">Le donneur a-t-il eu un malaise?</string>
+
     <string name="hello_world">Hello world!</string>
 
 </resources>

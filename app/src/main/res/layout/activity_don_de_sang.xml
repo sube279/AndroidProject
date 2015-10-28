@@ -5,6 +5,93 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.betrisey.suzanne.androidproject.DonDeSang">
+    tools:context="com.betrisey.suzanne.androidproject.DonDeSang"
+    android:background="@color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/relativeLayout">
+
+
+            <TableLayout
+                android:id="@+id/tableLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TableLayout>
+
+            <TextView
+                android:id="@+id/textUtilisable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tableLayout"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="@string/utilisable"
+                android:layout_marginBottom="20dp"/>
+
+            <ImageButton
+                android:id="@+id/btnUtilOui"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textUtilisable"
+                android:src="@drawable/btn_oui_act"
+                android:adjustViewBounds="true"
+                android:onClick="buttonUtilOui"
+                android:background="@color/white"/>
+
+            <ImageButton
+                android:id="@+id/btnUtilNon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/btnUtilOui"
+                android:layout_toEndOf="@+id/btnUtilOui"
+                android:src="@drawable/btn_non_des"
+                android:onClick="buttonUtilNon"
+                android:adjustViewBounds="true"
+                android:background="@color/white"
+                android:layout_marginLeft="20dp"/>
+
+            <TextView
+                android:id="@+id/textMalaise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnUtilOui"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="@string/malaise"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"/>
+
+            <ImageButton
+                android:id="@+id/btnMalOui"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textMalaise"
+                android:src="@drawable/btn_oui_des"
+                android:adjustViewBounds="true"
+                android:onClick="buttonMalOui"
+                android:background="@color/white"/>
+
+            <ImageButton
+                android:id="@+id/btnMalNon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/btnMalOui"
+                android:layout_toEndOf="@+id/btnMalOui"
+                android:src="@drawable/btn_non_act"
+                android:onClick="buttonMalNon"
+                android:adjustViewBounds="true"
+                android:background="@color/white"
+                android:layout_marginLeft="20dp"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
 
 </RelativeLayout>

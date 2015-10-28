@@ -16,10 +16,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class AfficherDonneur extends AppCompatActivity {
-    ListView vueData;
-    ListView vueInfo;
-    private String[] donneur = {"féminin", "12.04.1989", "Rue de la Forge 15", "3966", "Chalais", "Sierre","+41795436584", "A+", "1", "15.06.2016"};
-    private String[] info = {"Sexe:", "Naissance:", "Adresse:", "Npa:", "Lieu:", "Région:", "Téléphone:", "Groupe:", "Dons possibles:", "Disponible:"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +37,12 @@ public class AfficherDonneur extends AppCompatActivity {
             // Ignore
         }
 
+        ListView vueData;
+        ListView vueInfo;
+        String[] donneur = {"féminin", "12.04.1989", "Rue de la Forge 15", "3966", "Chalais", "Sierre","+41795436584", "A+", "1", "15.06.2016"};
+        String[] info = {"Sexe:", "Naissance:", "Adresse:", "Npa:", "Lieu:", "Région:", "Téléphone:", "Groupe:", "Dons possibles:", "Disponible:"};
+
+        //Tableau
         TableLayout table=(TableLayout) findViewById(R.id.tableLayout);
         TableRow row;
         TextView tv1,tv2;
