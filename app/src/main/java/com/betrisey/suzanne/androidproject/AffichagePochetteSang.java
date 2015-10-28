@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
+import android.widget.ListView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import java.lang.reflect.Field;
 
@@ -29,6 +33,43 @@ public class AffichagePochetteSang extends AppCompatActivity {
             }
         } catch (Exception ex) {
             // Ignore
+        }
+
+        TextView textView = (TextView)findViewById(R.id.textNum);
+        textView.setText("N° 1445623");
+        remplirTableau();
+    }
+
+    public void remplirTableau(){
+        ListView vueData;
+        ListView vueInfo;
+        String[] data = {"0054893", "01.10.2015", "09.11.2015", "Sion", "O-", "Commandé", "12.10.2015"};
+        String[] info = {"ID Donneur:", "Date don:", "Péremption:", "Région:", "Groupe:", "Statut:", "Intervention:"};
+
+        //Tableau
+        TableLayout table=(TableLayout) findViewById(R.id.tableLayout);
+        TableRow row;
+        TextView tv1,tv2;
+
+        for(int i = 0;i<info.length;i++){
+            row = new TableRow(this); //Création d'une nouvelle ligne
+
+            tv1 = new TextView(this); // création cellule
+            tv1.setText(info[i]); // ajout du texte
+            tv1.setWidth(380);
+            tv1.setHeight(100);
+
+            tv2 = new TextView(this); // création cellule
+            tv2.setText(data[i]); // ajout du texte;
+            tv1.setHeight(100);
+
+            //ajout des cellules à la ligne
+            row.addView(tv1);
+            row.addView(tv2);
+
+            //ajout de la ligne au tableau
+            table.addView(row);
+
         }
     }
 
