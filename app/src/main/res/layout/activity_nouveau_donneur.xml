@@ -101,31 +101,32 @@
             android:id="@+id/radioGroup"
             android:layout_alignBottom="@+id/textSexe">
 
+            <RadioButton
+                android:id="@+id/radioFeminin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/feminin"
+                android:layout_marginLeft="37dp"
+                android:layout_marginStart="37dp"
+                android:layout_alignBottom="@+id/radioGroup"
+                android:layout_toRightOf="@+id/textSexe"
+                android:layout_toEndOf="@+id/textSexe" />
+
+            <RadioButton
+                android:id="@+id/radioMasculin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/masculin"
+                android:layout_marginLeft="36dp"
+                android:layout_marginStart="36dp"
+                android:layout_alignBottom="@+id/radioGroup"
+                android:layout_toRightOf="@+id/radioFeminin"
+                android:layout_toEndOf="@+id/radioFeminin" />
+
         </RadioGroup>
 
-        <RadioButton
-            android:id="@+id/radioFeminin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/feminin"
-            android:layout_marginLeft="37dp"
-            android:layout_marginStart="37dp"
-            android:layout_alignBottom="@+id/radioGroup"
-            android:layout_toRightOf="@+id/textSexe"
-            android:layout_toEndOf="@+id/textSexe" />
-
-        <RadioButton
-            android:id="@+id/radioMasculin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/masculin"
-            android:layout_marginLeft="36dp"
-            android:layout_marginStart="36dp"
-            android:layout_alignBottom="@+id/radioGroup"
-            android:layout_toRightOf="@+id/radioFeminin"
-            android:layout_toEndOf="@+id/radioFeminin" />
 
         <TextView
             android:id="@+id/textDateNaissance"

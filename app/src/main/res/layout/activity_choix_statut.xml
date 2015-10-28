@@ -73,32 +73,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="15dp"
-                android:text="@string/enStock"
-                android:checked="true"/>
+                android:text="@string/enStock" />
 
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="15dp"
-                android:text="@string/inutilisable"/>
+                android:text="@string/inutilisable" />
 
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="15dp"
-                android:text="@string/transfert"/>
+                android:text="@string/transfert" />
 
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="15dp"
-                android:text="@string/commande"/>
+                android:text="@string/commande" />
 
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="15dp"
-                android:text="@string/utilise"/>
+                android:text="@string/utilise" />
 
 
         </RadioGroup>
