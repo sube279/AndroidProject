@@ -41,7 +41,7 @@
             android:clickable="true" />
     </FrameLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
@@ -49,8 +49,28 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="5dp"
+        android:padding="10dp"
+        android:orientation="vertical"
         android:layout_below="@+id/frameLayout2">
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/textTransfert"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="@string/transfert" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/regions"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30dp">
+        </Spinner>
+
+    </LinearLayout>
 
 </RelativeLayout>
