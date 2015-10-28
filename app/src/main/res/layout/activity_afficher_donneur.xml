@@ -75,19 +75,20 @@
             android:paddingLeft="15dp"
             android:layout_marginBottom="15dp"/>
 
-        <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textNom"
-            android:layout_marginLeft="15dp">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textNom"
+                android:layout_marginLeft="15dp">
 
-            <TableLayout
-                android:id="@+id/tableLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </TableLayout>
+                <TableLayout
+                    android:id="@+id/tableLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </TableLayout>
 
-        </ScrollView>
+            </ScrollView>
+
     </RelativeLayout>
 
 

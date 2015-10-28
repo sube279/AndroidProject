@@ -3,6 +3,7 @@ package com.betrisey.suzanne.androidproject;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
@@ -47,17 +48,22 @@ public class AfficherDonneur extends AppCompatActivity {
         TableRow row;
         TextView tv1,tv2;
 
+        TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+        params.width=0;
+        params.weight = 0.5f;
+
         for(int i = 0;i<info.length;i++){
             row = new TableRow(this); //Création d'une nouvelle ligne
+            row.setWeightSum(1f);
 
             tv1 = new TextView(this); // création cellule
             tv1.setText(info[i]); // ajout du texte
-            tv1.setWidth(380);
-            tv1.setHeight(100);
+            tv1.setLayoutParams(params);
 
             tv2 = new TextView(this); // création cellule
             tv2.setText(donneur[i]); // ajout du texte;
-            tv1.setHeight(100);
+            tv2.setLayoutParams(params);
+
 
             //ajout des cellules à la ligne
             row.addView(tv1);

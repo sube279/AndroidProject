@@ -3,6 +3,7 @@ package com.betrisey.suzanne.androidproject;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -34,20 +35,22 @@ public class ModifierDonneur extends AppCompatActivity {
         TableRow row;
         TextView tv1,tv2;
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+        params.width=0;
+        params.weight = 0.5f;
 
 
         for(int i = 0;i<info.length;i++){
             row = new TableRow(this); //Création d'une nouvelle ligne
+            row.setWeightSum(1f);
 
             tv1 = new TextView(this); // création cellule
             tv1.setText(info[i]); // ajout du texte
-            tv1.setWidth(380);
-            tv1.setHeight(120);
+            tv1.setLayoutParams(params);
 
             tv2 = new EditText(this); // création cellule
             tv2.setText(donneur[i]); // ajout du texte;
-            tv2.setHeight(120);
+            tv2.setLayoutParams(params);
 
             //ajout des cellules à la ligne
             row.addView(tv1);
