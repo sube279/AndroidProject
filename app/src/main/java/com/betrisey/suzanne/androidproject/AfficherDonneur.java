@@ -50,6 +50,7 @@ public class AfficherDonneur extends AppCompatActivity {
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         params.width=0;
+        params.bottomMargin = 20;
         params.weight = 0.5f;
 
         for(int i = 0;i<info.length;i++){

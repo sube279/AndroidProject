@@ -51,17 +51,22 @@ public class AffichagePochetteSang extends AppCompatActivity {
         TableRow row;
         TextView tv1,tv2;
 
+        TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+        params.width=0;
+        params.bottomMargin = 20;
+        params.weight = 0.5f;
+
         for(int i = 0;i<info.length;i++){
             row = new TableRow(this); //Création d'une nouvelle ligne
+            row.setWeightSum(1f);
 
             tv1 = new TextView(this); // création cellule
             tv1.setText(info[i]); // ajout du texte
-            tv1.setWidth(380);
-            tv1.setHeight(100);
+            tv1.setLayoutParams(params);
 
             tv2 = new TextView(this); // création cellule
             tv2.setText(data[i]); // ajout du texte;
-            tv1.setHeight(100);
+            tv2.setLayoutParams(params);
 
             //ajout des cellules à la ligne
             row.addView(tv1);
