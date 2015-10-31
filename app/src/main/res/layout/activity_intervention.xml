@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Filtre: par date"
+            android:text="Filtre: date"
             android:id="@+id/textView_filtre"
             android:layout_gravity="left|center_vertical"
             android:textColor="@color/white"

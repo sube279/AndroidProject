@@ -15,6 +15,15 @@ import java.lang.reflect.Field;
 
 public class AffichagePochetteSang extends AppCompatActivity {
 
+    private String id;
+    private String donneur;
+    private String dateDon;
+    private String peremption;
+    private String region;
+    private String groupe;
+    private String statut;
+    private String dateIntervention;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,15 +44,27 @@ public class AffichagePochetteSang extends AppCompatActivity {
             // Ignore
         }
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            id = extras.getString("id");
+            donneur = extras.getString ("donneur");
+            dateDon = extras.getString("dateDon");
+            peremption = extras.getString("peremption");
+            region = extras.getString("region");
+            groupe = extras.getString("groupe");
+            statut = extras.getString("statut");
+            dateIntervention = extras.getString("dateIntervention");
+        }
+
         TextView textView = (TextView)findViewById(R.id.textNum);
-        textView.setText("N° 1445623");
+        textView.setText("N° " + id);
         remplirTableau();
     }
 
     public void remplirTableau(){
         ListView vueData;
         ListView vueInfo;
-        String[] data = {"0054893", "01.10.2015", "09.11.2015", "Sion", "O-", "Commandé", "12.10.2015"};
+        String[] data = {donneur, dateDon, peremption, region, groupe, statut, dateIntervention};
         String[] info = {"ID Donneur:", "Date don:", "Péremption:", "Région:", "Groupe:", "Statut:", "Intervention:"};
 
         //Tableau
