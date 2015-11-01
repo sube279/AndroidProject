@@ -120,12 +120,20 @@ public class Donneur extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.action_filtre_disponibilite:
+                TextView text1 = (TextView) findViewById(R.id.textView_filtre);
+                text1.setText("Filtre: disponibilité");
                 return true;
             case R.id.action_filtre_nom:
+                TextView text2 = (TextView) findViewById(R.id.textView_filtre);
+                text2.setText("Filtre: nom");
                 return true;
             case R.id.action_filtre_prenom:
+                TextView text3 = (TextView) findViewById(R.id.textView_filtre);
+                text3.setText("Filtre: prénom");
                 return true;
             case R.id.action_filtre_naissance:
+                TextView text4 = (TextView) findViewById(R.id.textView_filtre);
+                text4.setText("Filtre: naissance");
                 return true;
             case R.id.action_parametre:
                 Intent intent2 = new Intent(this, Parametre.class);
@@ -189,7 +197,6 @@ public class Donneur extends AppCompatActivity {
 
             ImageView dispo = (ImageView) convertView.findViewById(R.id.imageViewDispo);
             TextView nom = (TextView)convertView.findViewById(R.id.textViewNom);
-            TextView prenom = (TextView)convertView.findViewById(R.id.textViewPrenom);
             TextView naissance = (TextView)convertView.findViewById(R.id.textViewNaissance);
 
             CDonneur i = liste.get(position);
@@ -201,8 +208,7 @@ public class Donneur extends AppCompatActivity {
                 dispo.setImageDrawable(getResources().getDrawable(R.drawable.dispo_false));
             }
 
-            nom.setText(i.getNom());
-            prenom.setText(i.getPrenom());
+            nom.setText(i.getNom() + " " +i.getPrenom());
             naissance.setText(i.getNaissance());
 
             return convertView;

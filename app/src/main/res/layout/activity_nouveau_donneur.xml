@@ -10,8 +10,10 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="@color/darkRed"
-        android:layout_margin="5dp"
-        android:id="@+id/frameLayout_NouveauDonneur" >
+        android:id="@+id/frameLayout_NouveauDonneur"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -60,14 +62,19 @@
             android:layout_height="wrap_content"
             android:id="@+id/textNom"
             android:text="@string/nom"
-            android:layout_marginBottom="25dp"/>
+            android:layout_marginBottom="25dp"
+            android:textSize="18dp"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/editNom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/textNom"
-            android:layout_alignBaseline="@+id/textNom"/>
+            android:layout_alignBaseline="@+id/textNom"
+            android:textColor="@color/greyLight"
+            android:textSize="18dp"
+            android:layout_alignLeft="@+id/editPrenom"
+            android:layout_alignStart="@+id/editPrenom" />
 
         <TextView
             android:id="@+id/textPrenom"
@@ -75,14 +82,19 @@
             android:layout_height="wrap_content"
             android:text="@string/prenom"
             android:layout_below="@+id/textNom"
-            android:layout_marginBottom="25dp"/>
+            android:layout_marginBottom="25dp"
+            android:textSize="18dp"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/editPrenom"
+            android:layout_marginLeft="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/textPrenom"
-            android:layout_alignBaseline="@+id/textPrenom"/>
+            android:layout_alignBaseline="@+id/textPrenom"
+            android:textColor="@color/greyLight"
+            android:textSize="18dp"/>
 
         <TextView
             android:layout_marginTop="20dp"
@@ -92,6 +104,8 @@
             android:id="@+id/textSexe"
             android:layout_below="@+id/textPrenom"
             android:layout_marginBottom="25dp"
+            android:textSize="18dp"
+            android:textColor="@color/black"
          />
 
         <RadioGroup
@@ -99,7 +113,9 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:id="@+id/radioGroup"
-            android:layout_alignBottom="@+id/textSexe">
+            android:layout_alignTop="@+id/textSexe"
+            android:layout_alignLeft="@+id/editPrenom"
+            android:layout_alignEnd="@+id/editPrenom">
 
             <RadioButton
                 android:id="@+id/radioFeminin"
@@ -107,8 +123,7 @@
                 android:layout_height="wrap_content"
                 android:checked="false"
                 android:text="@string/feminin"
-                android:layout_marginLeft="37dp"
-                android:layout_marginStart="37dp"
+                android:textSize="18dp"
                 android:layout_alignBottom="@+id/radioGroup"
                 android:layout_toRightOf="@+id/textSexe"
                 android:layout_toEndOf="@+id/textSexe" />
@@ -119,8 +134,8 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/masculin"
-                android:layout_marginLeft="36dp"
-                android:layout_marginStart="36dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="18dp"
                 android:layout_alignBottom="@+id/radioGroup"
                 android:layout_toRightOf="@+id/radioFeminin"
                 android:layout_toEndOf="@+id/radioFeminin" />
@@ -134,7 +149,9 @@
             android:layout_height="wrap_content"
             android:text="@string/dateNaissance"
             android:layout_below="@+id/radioGroup"
-            android:paddingTop="15dp"/>
+            android:paddingTop="15dp"
+            android:textSize="18dp"
+            android:textColor="@color/black"/>
 
         <LinearLayout
             android:id="@+id/dateLayout"
@@ -150,21 +167,27 @@
                 android:id="@+id/jour"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/jour"/>
+                android:text="@string/jour"
+                android:textSize="18dp"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/mois"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="@string/mois"/>
+                android:text="@string/mois"
+                android:textSize="18dp"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/annee"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="@string/annee"/>
+                android:text="@string/annee"
+                android:textSize="18dp"
+                android:textColor="@color/black"/>
         </LinearLayout>
 
         <LinearLayout
@@ -212,14 +235,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/adresse"
-                android:layout_marginBottom="25dp"/>
+                android:layout_marginBottom="25dp"
+                android:textSize="18dp"
+                android:textColor="@color/black"/>
 
             <EditText
                 android:id="@+id/editAdresse"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/textAdresse"
-                android:layout_alignBaseline="@+id/textAdresse"/>
+                android:layout_alignBaseline="@+id/textAdresse"
+                android:textColor="@color/greyLight"
+                android:textSize="18dp"/>
 
             <TextView
                 android:id="@+id/textNpa"
@@ -227,14 +254,18 @@
                 android:layout_height="wrap_content"
                 android:text="@string/npa"
                 android:layout_below="@+id/textAdresse"
-                android:layout_marginBottom="25dp"/>
+                android:layout_marginBottom="25dp"
+                android:textSize="18dp"
+                android:textColor="@color/black"/>
 
             <EditText
                 android:id="@+id/ediNpa"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/textNpa"
-                android:layout_alignBaseline="@+id/textNpa"/>
+                android:layout_alignBaseline="@+id/textNpa"
+                android:textColor="@color/greyLight"
+                android:textSize="18dp"/>
 
             <TextView
                 android:id="@+id/textRegion"
@@ -242,14 +273,18 @@
                 android:layout_height="wrap_content"
                 android:text="@string/region"
                 android:layout_below="@+id/textNpa"
-                android:layout_marginBottom="25dp"/>
+                android:layout_marginBottom="25dp"
+                android:textSize="18dp"
+                android:textColor="@color/black"/>
 
             <EditText
                 android:id="@+id/editRegion"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/textRegion"
-                android:layout_alignBaseline="@+id/textRegion"/>
+                android:layout_alignBaseline="@+id/textRegion"
+                android:textColor="@color/greyLight"
+                android:textSize="18dp"/>
 
             <TextView
                 android:id="@+id/textTelephone"
@@ -257,14 +292,18 @@
                 android:layout_height="wrap_content"
                 android:text="@string/telephone"
                 android:layout_below="@+id/textRegion"
-                android:layout_marginBottom="25dp"/>
+                android:layout_marginBottom="25dp"
+                android:textSize="18dp"
+                android:textColor="@color/black"/>
 
             <EditText
                 android:id="@+id/editTelephone"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/textTelephone"
-               android:layout_alignBaseline="@+id/textTelephone"/>
+               android:layout_alignBaseline="@+id/textTelephone"
+                android:textColor="@color/greyLight"
+                android:textSize="18dp"/>
 
             <TextView
                 android:id="@+id/textGroupe"
@@ -272,7 +311,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/groupe"
                 android:layout_below="@+id/textTelephone"
-                android:layout_marginBottom="25dp"/>
+                android:layout_marginBottom="25dp"
+                android:textSize="18dp"
+                android:textColor="@color/black"/>
             <Spinner
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
