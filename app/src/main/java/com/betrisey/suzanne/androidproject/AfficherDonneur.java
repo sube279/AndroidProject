@@ -1,6 +1,7 @@
 package com.betrisey.suzanne.androidproject;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -58,11 +59,15 @@ public class AfficherDonneur extends AppCompatActivity {
             row.setWeightSum(1f);
 
             tv1 = new TextView(this); // création cellule
-            tv1.setText(info[i]); // ajout du texte
+            tv1.setText(info[i]);// ajout du texte
+            tv1.setTextSize(18);
+            tv1.setTextColor(Color.parseColor("#000000"));
             tv1.setLayoutParams(params);
 
             tv2 = new TextView(this); // création cellule
-            tv2.setText(donneur[i]); // ajout du texte;
+            tv2.setText(donneur[i]);
+            tv2.setTextSize(18);// ajout du texte;
+            tv2.setTextColor(Color.parseColor("#515151"));
             tv2.setLayoutParams(params);
 
 

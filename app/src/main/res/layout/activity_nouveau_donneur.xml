@@ -19,27 +19,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Annuler"
+            android:text=" Annuler "
             android:id="@+id/textView_Delete"
+            android:layout_marginLeft="10dp"
+            android:onClick="buttonAnnuler"
             android:layout_gravity="left|center_vertical"
             android:textColor="@color/white"
             android:textSize="18dp"
-            android:layout_marginLeft="10dp"
-            android:onClick="buttonAnnuler"
-            android:clickable="true" />
+            android:clickable="true"
+            android:background="@drawable/border"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="OK"
+            android:text=" OK "
             android:id="@+id/textView_Ok"
             android:layout_gravity="right|center_vertical"
             android:textColor="@color/white"
             android:textSize="18dp"
             android:onClick="buttonOk"
             android:clickable="true"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:background="@drawable/border"/>
     </FrameLayout>
 
     <ScrollView
@@ -94,7 +96,7 @@
             android:layout_toEndOf="@+id/textPrenom"
             android:layout_alignBaseline="@+id/textPrenom"
             android:textColor="@color/greyLight"
-            android:textSize="18dp"/>
+            android:textSize="18dp" />
 
         <TextView
             android:layout_marginTop="20dp"
@@ -152,6 +154,7 @@
             android:paddingTop="15dp"
             android:textSize="18dp"
             android:textColor="@color/black"/>
+
 
         <LinearLayout
             android:id="@+id/dateLayout"
@@ -226,9 +229,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/spinnerDateLayout"
-            android:layout_toRightOf="@+id/radioGroup"
-            android:layout_toEndOf="@+id/radioGroup"
-            android:layout_marginTop="25dp">
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
             <TextView
                 android:id="@+id/textAdresse"
@@ -237,7 +239,8 @@
                 android:text="@string/adresse"
                 android:layout_marginBottom="25dp"
                 android:textSize="18dp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                />
 
             <EditText
                 android:id="@+id/editAdresse"
@@ -246,7 +249,8 @@
                 android:layout_toEndOf="@+id/textAdresse"
                 android:layout_alignBaseline="@+id/textAdresse"
                 android:textColor="@color/greyLight"
-                android:textSize="18dp"/>
+                android:textSize="18dp"
+                android:layout_alignLeft="@+id/editTelephone"/>
 
             <TextView
                 android:id="@+id/textNpa"
@@ -265,7 +269,8 @@
                 android:layout_toEndOf="@+id/textNpa"
                 android:layout_alignBaseline="@+id/textNpa"
                 android:textColor="@color/greyLight"
-                android:textSize="18dp"/>
+                android:textSize="18dp"
+                android:layout_alignLeft="@+id/editTelephone"/>
 
             <TextView
                 android:id="@+id/textRegion"
@@ -284,7 +289,8 @@
                 android:layout_toEndOf="@+id/textRegion"
                 android:layout_alignBaseline="@+id/textRegion"
                 android:textColor="@color/greyLight"
-                android:textSize="18dp"/>
+                android:textSize="18dp"
+                android:layout_alignLeft="@+id/editTelephone"/>
 
             <TextView
                 android:id="@+id/textTelephone"
@@ -303,7 +309,8 @@
                 android:layout_toEndOf="@+id/textTelephone"
                android:layout_alignBaseline="@+id/textTelephone"
                 android:textColor="@color/greyLight"
-                android:textSize="18dp"/>
+                android:textSize="18dp"
+                android:layout_marginLeft="5dp"/>
 
             <TextView
                 android:id="@+id/textGroupe"
@@ -320,8 +327,8 @@
                 android:spinnerMode="dropdown"
                 android:id="@+id/spinnerGroupes"
                 android:layout_toEndOf="@+id/textGroupe"
-                android:layout_alignBaseline="@+id/textGroupe"></Spinner>
-
+                android:layout_alignBaseline="@+id/textGroupe"
+                ></Spinner>
 
         </RelativeLayout>
     </RelativeLayout>

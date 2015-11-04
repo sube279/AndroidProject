@@ -10,20 +10,23 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="@color/darkRed"
-        android:layout_margin="5dp"
-        android:id="@+id/frameLayout">
+        android:id="@+id/frameLayout"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:text="Don de sang"
+            android:text=" Don de sang "
             android:clickable="true"
             android:layout_gravity="left|center_vertical"
             android:layout_marginLeft="10dp"
             android:id="@+id/textView_DonDeSang"
             android:onClick="buttonDonDeSang"
-            android:textSize="18dp" />
+            android:textSize="18dp"
+            android:background="@drawable/border"/>
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -54,31 +57,19 @@
             android:id="@+id/textPrenom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nancy"
-            android:textSize="20dp"
+            android:text="Nancy Zappellaz"
+            android:textSize="22dp"
             android:paddingTop="20dp"
             android:layout_marginLeft="15dp"
             android:textColor="@color/black"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textNom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Zappellaz"
-            android:textSize="20dp"
-            android:textColor="@color/black"
             android:textStyle="bold"
-            android:paddingTop="20dp"
-            android:layout_toEndOf="@+id/textPrenom"
-            android:layout_toRightOf="@+id/textPrenom"
-            android:paddingLeft="15dp"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="10dp" />
+
 
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textNom"
+                android:layout_below="@id/textPrenom"
                 android:layout_marginLeft="15dp">
 
                 <TableLayout
