@@ -50,15 +50,24 @@ public class ModifierDonneur extends AppCompatActivity {
             remplirTableau(currentData);
 
         }
+
     }
 
     public void onSaveInstanceState(Bundle outState){
         ArrayList<String> donnees = new ArrayList<String>();
         TableLayout table = (TableLayout) findViewById(R.id.tableLayout);
+        String text= "test";
 
         for(int i= 0; i<12;i++){
-            TextView textView = (TextView)findViewById(i);
-            donnees.add(textView.getText().toString());
+            Object obj = findViewById(1000+i);
+            if (obj instanceof RadioButton){
+                text="Féminin";
+            }else if(obj instanceof Spinner){
+                text= ((Spinner) obj).getSelectedItem().toString();
+            }else if(obj instanceof EditText){
+                text = ((EditText) obj).getText().toString();
+            }
+            donnees.add(text);
         }
 
         outState.putStringArrayList("liste", donnees);
@@ -74,11 +83,12 @@ public class ModifierDonneur extends AppCompatActivity {
         String[] info = {"Prénom:", "Nom:", "Sexe:", "Naissance:", "Adresse:", "Npa:", "Lieu:", "Région:", "Téléphone:", "Groupe:", "Dons possibles:", "Disponible:"};
 
         //Tableau
-        TableLayout table=(TableLayout) findViewById(R.id.tableLayout);
+        TableLayout table=(TableLayout) findViewById(R.id.tableLayoutDonnees);
         TableRow row;
         TextView tv1,tv2;
         Spinner spinner;
         String[] regions = { "Sion", "Sierre", "Montana", "Brigue", "Viège", "Monthey", "Martigny"};
+        String[] groupes = {"A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"};
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         params.width=0;
@@ -103,6 +113,8 @@ public class ModifierDonneur extends AppCompatActivity {
                 RadioButton masc = new RadioButton(this);
                 masc.setText("Masculin");
 
+                fem.setId(1000+i);
+
                 //Rajouter le test pour cocher la bonne sélection par défaut
 
                 radioGroup.addView(fem);
@@ -116,16 +128,32 @@ public class ModifierDonneur extends AppCompatActivity {
                         new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, regions);
                 spinner.setAdapter(stringArrayAdapter);
 
+
+                spinner.setId(1000+i);
+
                 //Rajouter le test pour sélectionner la bonne région par défaut
 
                 spinner.setLayoutParams(params);
                 row.addView(spinner);
+            }else if(i == 9){
+                spinner = new Spinner(this);
+                ArrayAdapter<Integer> stringArrayAdapter=
+                        new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, groupes);
+                spinner.setAdapter(stringArrayAdapter);
+
+                spinner.setId(1000+i);
+
+                //Rajouter le test pour sélectionner le bon groupe par défaut
+
+                spinner.setLayoutParams(params);
+                row.addView(spinner);
+
             }else{
                 tv2 = new EditText(this); // création cellule
-                tv2.setId(i);
                 tv2.setText(donneur.get(i)); // ajout du texte;
                 tv2.setLayoutParams(params);
 
+                tv2.setId(1000+i);
                 row.addView(tv2);
             }
             //ajout de la ligne au tableau
