@@ -31,7 +31,6 @@ public class InterventionDataSource {
     public long createIntervention(CIntervention intervention){
         long id;
         ContentValues values = new ContentValues();
-        values.put(InterventionEntry.KEY_ID, 5);
         values.put(InterventionEntry.KEY_QUANTITE, intervention.getQuantite());
         values.put(InterventionEntry.KEY_DATE, intervention.getDate());
         values.put(InterventionEntry.KEY_DESCRIPTION, intervention.getDescription());

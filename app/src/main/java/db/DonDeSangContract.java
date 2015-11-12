@@ -65,11 +65,11 @@ public final class DonDeSangContract {
             //Table person create statement
             public static final String CREATE_TABLE_INTERVENTION = "CREATE TABLE "
                     + TABLE_INTERVENTION + "("
-                    + InterventionEntry.KEY_ID + " INTEGER PRIMARY KEY, "
+                    + InterventionEntry.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + InterventionEntry.KEY_QUANTITE + " INTEGER, "
-                    + InterventionEntry.KEY_DATE + " TEXT "
+                    + InterventionEntry.KEY_DATE + " TEXT, "
                     + InterventionEntry.KEY_DESCRIPTION + " TEXT, "
-                    + InterventionEntry.KEY_GROUPE + " TEXT"
+                    + InterventionEntry.KEY_GROUPE + " TEXT "
                     + ");";
         }
 /*
