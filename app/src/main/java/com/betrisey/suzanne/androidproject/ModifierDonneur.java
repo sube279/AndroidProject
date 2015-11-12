@@ -58,6 +58,7 @@ public class ModifierDonneur extends AppCompatActivity {
         TableLayout table = (TableLayout) findViewById(R.id.tableLayout);
         String text= "test";
 
+        //Modifier -> rajouter une contante pour la boucle
         for(int i= 0; i<12;i++){
             Object obj = findViewById(1000+i);
             if (obj instanceof RadioButton){
