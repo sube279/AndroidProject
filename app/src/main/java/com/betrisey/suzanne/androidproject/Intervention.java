@@ -10,17 +10,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+
+import db.adapter.InterventionDataSource;
+import db.object.CIntervention;
 
 public class Intervention extends AppCompatActivity {
 
@@ -47,30 +47,12 @@ public class Intervention extends AppCompatActivity {
         }
 
         //listview
-        liste = new InterventionAdapter();
+        liste = new InterventionAdapter(this.getApplicationContext());
 
         ListView lv = (ListView)findViewById(R.id.listView);
         lv.setAdapter(liste);
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CIntervention i = liste.getIntervention(position);
-                sendIntervention(i);
-            }
-        });
-
-
-    }
-
-    public void sendIntervention(CIntervention i){
-        Intent intent = new Intent(this, AfficherIntervention.class);
-        intent.putExtra("date", i.getDate());
-        intent.putExtra("quantite", i.getQuantite());
-        intent.putExtra("groupe", i.getGroupe());
-        intent.putExtra("description", i.getDescription());
-        startActivity(intent);
     }
 
     @Override
@@ -103,38 +85,24 @@ public class Intervention extends AppCompatActivity {
     }
 
 
-        public void buttonAfficher(View view) {
+    public void buttonAfficher(View view) {
         Intent intent = new Intent(this, AfficherIntervention.class);
         startActivity(intent);
     }
 
     public class InterventionAdapter extends BaseAdapter {
 
-        List<CIntervention> liste = getDataForListView();
+        InterventionDataSource ia;
+        List<CIntervention> liste;
+
+        public InterventionAdapter (Context context){
+            ia = new InterventionDataSource(context);
+            liste = getDataForListView();
+        }
 
         public List<CIntervention> getDataForListView() {
-            List<CIntervention> listIntervention = new ArrayList<CIntervention>();
-
-            CIntervention i1 = new CIntervention("02.10.2015", "Chimiothérapie", "1", "A +", false);
-            CIntervention i2 = new CIntervention("12.10.2015", "Opération cardiaque", "2", "A +", false);
-            CIntervention i3 = new CIntervention("12.10.2015", "Anémie", "2", "0-", false);
-            CIntervention i4 = new CIntervention("16.10.2015", "Chimiothérapie", "1", "0 -", false);
-            CIntervention i5 = new CIntervention("16.10.2015", "Chimiothérapie", "1", "B -", false);
-            CIntervention i6 = new CIntervention("19.10.2015", "Prothèse de hanche", "3", "B +", false);
-            CIntervention i7 = new CIntervention("19.10.2015", "Chimiothérapie", "1", "A +", false);
-            CIntervention i8 = new CIntervention("20.10.2015", "Accouchement", "2", "AB +", false);
-            CIntervention i9 = new CIntervention("20.10.2015", "Anémie", "1", "0 -", false);
-
-            listIntervention.add(i1);
-            listIntervention.add(i2);
-            listIntervention.add(i3);
-            listIntervention.add(i4);
-            listIntervention.add(i5);
-            listIntervention.add(i6);
-            listIntervention.add(i7);
-            listIntervention.add(i8);
-            listIntervention.add(i9);
-
+            List<CIntervention> listIntervention;
+            listIntervention = ia.getAllInterventions();
 
             return listIntervention;
 
@@ -171,11 +139,6 @@ public class Intervention extends AppCompatActivity {
             description.setText(i.getDescription());
 
             return convertView;
-        }
-
-        public CIntervention getIntervention(int position)
-        {
-            return liste.get(position);
         }
     }
 }

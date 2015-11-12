@@ -1,4 +1,4 @@
-package com.betrisey.suzanne.androidproject;
+package db.object;
 
 /**
  * Created by Suzanne on 30.10.2015.

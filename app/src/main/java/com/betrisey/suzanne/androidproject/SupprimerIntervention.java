@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -20,6 +18,8 @@ import android.widget.TextView;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+
+import db.object.CIntervention;
 
 public class SupprimerIntervention extends AppCompatActivity {
 
@@ -67,15 +67,15 @@ public class SupprimerIntervention extends AppCompatActivity {
         public List<CIntervention> getDataForListView() {
             List<CIntervention> listIntervention = new ArrayList<CIntervention>();
 
-            CIntervention i1 = new CIntervention("02.10.2015", "Chimiothérapie", "1", "A +", false);
-            CIntervention i2 = new CIntervention("12.10.2015", "Opération cardiaque", "2", "A +", false);
-            CIntervention i3 = new CIntervention("12.10.2015", "Anémie", "2", "0-", false);
-            CIntervention i4 = new CIntervention("16.10.2015", "Chimiothérapie", "1", "0 -", false);
-            CIntervention i5 = new CIntervention("16.10.2015", "Chimiothérapie", "1", "B -", false);
-            CIntervention i6 = new CIntervention("19.10.2015", "Prothèse de hanche", "3", "B +", false);
-            CIntervention i7 = new CIntervention("19.10.2015", "Chimiothérapie", "1", "A +", false);
-            CIntervention i8 = new CIntervention("20.10.2015", "Accouchement", "2", "AB +", false);
-            CIntervention i9 = new CIntervention("20.10.2015", "Anémie", "1", "0 -", false);
+            CIntervention i1 = new CIntervention("02.10.2015", "Chimiothérapie", 1, "A +", false);
+            CIntervention i2 = new CIntervention("12.10.2015", "Opération cardiaque", 2, "A +", false);
+            CIntervention i3 = new CIntervention("12.10.2015", "Anémie", 2, "0-", false);
+            CIntervention i4 = new CIntervention("16.10.2015", "Chimiothérapie", 1, "0 -", false);
+            CIntervention i5 = new CIntervention("16.10.2015", "Chimiothérapie", 1, "B -", false);
+            CIntervention i6 = new CIntervention("19.10.2015", "Prothèse de hanche", 3, "B +", false);
+            CIntervention i7 = new CIntervention("19.10.2015", "Chimiothérapie", 1, "A +", false);
+            CIntervention i8 = new CIntervention("20.10.2015", "Accouchement", 2, "AB +", false);
+            CIntervention i9 = new CIntervention("20.10.2015", "Anémie", 1, "0 -", false);
 
             listIntervention.add(i1);
             listIntervention.add(i2);

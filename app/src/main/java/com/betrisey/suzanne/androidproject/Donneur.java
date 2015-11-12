@@ -1,24 +1,18 @@
 package com.betrisey.suzanne.androidproject;
 
-import android.app.ActionBar;
-import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -28,6 +22,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+
+import db.object.CDonneur;
 
 public class Donneur extends AppCompatActivity {
 

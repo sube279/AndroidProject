@@ -1,4 +1,4 @@
-package com.betrisey.suzanne.androidproject;
+package db.object;
 
 import java.util.Date;
 
@@ -18,9 +18,9 @@ public class CDonneur {
     private String telephone;
     private String groupe;
     private Integer donsPossibles;
-    private Boolean disponibilite;
+    private boolean disponibilite;
 
-    public CDonneur(String nom, String prenom, String sexe, String naissance, String adresse, String NPA, String lieu, String region, String telephone, String groupe, Integer donsPossibles, Boolean disponibilite){
+    public CDonneur(String nom, String prenom, String sexe, String naissance, String adresse, String NPA, String lieu, String region, String telephone, String groupe, Integer donsPossibles, boolean disponibilite){
         this.nom = nom;
         this.prenom = prenom;
         this.sexe = sexe;
@@ -123,11 +123,11 @@ public class CDonneur {
         this.donsPossibles = donsPossibles;
     }
 
-    public Boolean getDisponibilite() {
+    public boolean getDisponibilite() {
         return disponibilite;
     }
 
-    public void setDisponibilite(Boolean disponibilite) {
+    public void setDisponibilite(boolean disponibilite) {
         this.disponibilite = disponibilite;
     }
 }

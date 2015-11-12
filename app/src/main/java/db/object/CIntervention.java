@@ -1,4 +1,4 @@
-package com.betrisey.suzanne.androidproject;
+package db.object;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,9 +17,10 @@ import java.util.List;
  */
 public class CIntervention extends Activity {
 
+    private int id;
     private String date;
     private String description;
-    private String quantite;
+    private int quantite;
     private String groupe;
     boolean selected;
 
@@ -29,7 +30,7 @@ public class CIntervention extends Activity {
 
     }
 
-    public CIntervention(String date, String description, String quantite, String groupe, boolean selected) {
+    public CIntervention(String date, String description, int quantite, String groupe, boolean selected) {
         this.date = date;
         this.description = description;
         this.quantite = quantite;
@@ -46,6 +47,8 @@ public class CIntervention extends Activity {
         this.selected = selected;
     }
 
+    public void setId(int id) {this.id = id; }
+
     public void setDate(String date) {
         this.date = date;
     }
@@ -54,7 +57,7 @@ public class CIntervention extends Activity {
         this.description = description;
     }
 
-    public void setQuantite(String quantite) {
+    public void setQuantite(int quantite) {
         this.quantite = quantite;
     }
 
@@ -70,7 +73,7 @@ public class CIntervention extends Activity {
         return description;
     }
 
-    public String getQuantite() {
+    public int getQuantite() {
         return quantite;
     }
 
