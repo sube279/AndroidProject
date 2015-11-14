@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -21,6 +22,7 @@ import java.util.List;
 
 import db.adapter.InterventionDataSource;
 import db.object.CIntervention;
+import db.object.CSang;
 
 public class Intervention extends AppCompatActivity {
 
@@ -52,7 +54,22 @@ public class Intervention extends AppCompatActivity {
         ListView lv = (ListView)findViewById(R.id.listView);
         lv.setAdapter(liste);
 
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                CIntervention i = liste.getIntervention(position);
+                sendIntervention(i.getId());
+            }
+        });
+
+
+    }
+
+    public void sendIntervention(int id){
+        Intent intent = new Intent(this, AfficherIntervention.class);
+        intent.putExtra("id", id);
+        startActivity(intent);
     }
 
     @Override
@@ -85,10 +102,6 @@ public class Intervention extends AppCompatActivity {
     }
 
 
-    public void buttonAfficher(View view) {
-        Intent intent = new Intent(this, AfficherIntervention.class);
-        startActivity(intent);
-    }
 
     public class InterventionAdapter extends BaseAdapter {
 
@@ -140,5 +153,12 @@ public class Intervention extends AppCompatActivity {
 
             return convertView;
         }
+
+        public CIntervention getIntervention(int position)
+        {
+            return liste.get(position);
+        }
     }
+
+
 }

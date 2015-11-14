@@ -81,6 +81,10 @@ public class CIntervention extends Activity {
         return groupe;
     }
 
+    public int getId() {
+        return id;
+    }
+
 
 
 }

@@ -9,12 +9,12 @@ import android.widget.TextView;
 
 import java.lang.reflect.Field;
 
+import db.adapter.InterventionDataSource;
+import db.object.CIntervention;
+
 public class AfficherIntervention extends AppCompatActivity {
 
-    private String date;
-    private String quantite;
-    private String groupe;
-    private String description;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +40,21 @@ public class AfficherIntervention extends AppCompatActivity {
         // Get the message from the intent
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            date = extras.getString("date");
-            quantite = extras.getString("quantite");
-            groupe = extras.getString("groupe");
-            description = extras.getString("description");
+            id = extras.getInt("id");
         }
+
+        InterventionDataSource ia = new InterventionDataSource(getApplicationContext());
+        CIntervention i = ia.getInterventiononById(id);
 
         // Create the text view
         TextView tw = (TextView) findViewById(R.id.textViewDate);
-        tw.setText(date);
+        tw.setText(i.getDate());
         tw = (TextView) findViewById(R.id.textViewQuantite);
-        tw.setText(quantite);
+        tw.setText(String.valueOf(i.getQuantite()));
         tw = (TextView) findViewById(R.id.textViewGroupe);
-        tw.setText(groupe);
+        tw.setText(i.getGroupe());
         tw = (TextView) findViewById(R.id.textViewDescription);
-        tw.setText(description);
+        tw.setText(i.getDescription());
 
 
 
@@ -67,10 +67,10 @@ public class AfficherIntervention extends AppCompatActivity {
 
     public void buttonEdit(View view) {
         Intent intent = new Intent(this, ModifierIntervention.class);
-        intent.putExtra("date", date);
-        intent.putExtra("quantite", quantite);
-        intent.putExtra("groupe", groupe);
-        intent.putExtra("description", description);
+        //intent.putExtra("date", date);
+        //intent.putExtra("quantite", quantite);
+        //intent.putExtra("groupe", groupe);
+        //intent.putExtra("description", description);
         startActivity(intent);
     }
 }

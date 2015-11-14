@@ -67,6 +67,29 @@ public class InterventionDataSource {
         return interventions;
     }
 
+    /**
+     * Find one Person by Id
+     */
+    public CIntervention getInterventiononById(int id){
+        String sql = "SELECT * FROM " + InterventionEntry.TABLE_INTERVENTION +
+                " WHERE " + InterventionEntry.KEY_ID + " = " + id;
+
+        Cursor cursor = this.db.rawQuery(sql, null);
+
+        if(cursor != null){
+            cursor.moveToFirst();
+        }
+
+        CIntervention i = new CIntervention();
+        i.setId(cursor.getInt(cursor.getColumnIndex(InterventionEntry.KEY_ID)));
+        i.setDate(cursor.getString(cursor.getColumnIndex(InterventionEntry.KEY_DATE)));
+        i.setDescription(cursor.getString(cursor.getColumnIndex(InterventionEntry.KEY_DESCRIPTION)));
+        i.setQuantite(cursor.getInt(cursor.getColumnIndex(InterventionEntry.KEY_QUANTITE)));
+        i.setGroupe(cursor.getString(cursor.getColumnIndex(InterventionEntry.KEY_GROUPE)));
+
+        return i;
+    }
+
 
 
 }
