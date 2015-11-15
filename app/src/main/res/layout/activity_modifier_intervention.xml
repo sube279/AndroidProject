@@ -110,8 +110,8 @@
             android:text="Groupe:"
             android:id="@+id/textView3"
             android:layout_alignLeft="@+id/textView2"
-            android:layout_alignBottom="@+id/textViewGroupe"
             android:layout_alignTop="@+id/spinnerGroupe"
+            android:layout_alignBottom="@+id/spinnerGroupe"
             android:gravity="center_vertical"
             android:textSize="18dp"
             android:textColor="@color/black" />
