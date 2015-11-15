@@ -15,6 +15,7 @@ import db.object.CIntervention;
 public class AfficherIntervention extends AppCompatActivity {
 
     private int id;
+    InterventionDataSource ia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class AfficherIntervention extends AppCompatActivity {
             id = extras.getInt("id");
         }
 
-        InterventionDataSource ia = new InterventionDataSource(getApplicationContext());
+        ia = new InterventionDataSource(getApplicationContext());
         CIntervention i = ia.getInterventiononById(id);
 
         // Create the text view
@@ -62,15 +63,13 @@ public class AfficherIntervention extends AppCompatActivity {
 
     public void buttonDelete(View view) {
         Intent intent = new Intent(this, Intervention.class);
+        ia.deleteIntervention(id);
         startActivity(intent);
     }
 
     public void buttonEdit(View view) {
         Intent intent = new Intent(this, ModifierIntervention.class);
-        //intent.putExtra("date", date);
-        //intent.putExtra("quantite", quantite);
-        //intent.putExtra("groupe", groupe);
-        //intent.putExtra("description", description);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 }

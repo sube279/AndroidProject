@@ -41,6 +41,20 @@ public class InterventionDataSource {
         return id;
     }
 
+    /**
+     *  Update a Intervention
+     */
+    public int updateIntervention(CIntervention intervention){
+        ContentValues values = new ContentValues();
+        values.put(InterventionEntry.KEY_QUANTITE, intervention.getQuantite());
+        values.put(InterventionEntry.KEY_DATE, intervention.getDate());
+        values.put(InterventionEntry.KEY_DESCRIPTION, intervention.getDescription());
+        values.put(InterventionEntry.KEY_GROUPE, intervention.getGroupe());
+
+        return this.db.update(InterventionEntry.TABLE_INTERVENTION, values, InterventionEntry.KEY_ID + " = ?",
+                new String[] { String.valueOf(intervention.getId()) });
+    }
+
 
     /**
      * Get all Interventions

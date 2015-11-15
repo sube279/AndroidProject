@@ -73,7 +73,7 @@
             android:textColor="@color/greyLight"
             android:textSize="18dp"
             android:layout_marginTop="15dp"
-            android:layout_alignLeft="@+id/textViewQuantite"
+            android:layout_alignLeft="@+id/textViewDescription"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
@@ -92,14 +92,14 @@
             android:layout_alignEnd="@+id/textView4" />
 
         <EditText
-            android:layout_width="180dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:id="@+id/textViewQuantite"
             android:textColor="@color/greyLight"
             android:textSize="18dp"
+            android:layout_alignLeft="@+id/textViewDate"
+            android:layout_alignRight="@+id/spinnerGroupe"
             android:layout_below="@+id/textViewDate"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
             android:layout_marginTop="15dp" />
 
         <TextView
@@ -107,48 +107,47 @@
             android:layout_height="wrap_content"
             android:text="Groupe:"
             android:id="@+id/textView3"
-            android:layout_below="@+id/textView2"
             android:layout_alignLeft="@+id/textView2"
             android:layout_alignBottom="@+id/textViewGroupe"
-            android:layout_alignTop="@+id/textViewGroupe"
+            android:layout_alignTop="@+id/spinnerGroupe"
             android:gravity="center_vertical"
             android:textSize="18dp"
             android:textColor="@color/black" />
 
-        <EditText
-            android:layout_width="wrap_content"
+        <Spinner
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
-            android:id="@+id/textViewGroupe"
+            android:id="@+id/spinnerGroupe"
             android:layout_below="@+id/textViewQuantite"
             android:textColor="@color/greyLight"
             android:textSize="18dp"
-            android:layout_alignLeft="@+id/textViewQuantite"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignLeft="@+id/textViewDescription"
+            android:layout_marginTop="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Description:"
             android:id="@+id/textView4"
-            android:layout_below="@+id/textView3"
-            android:layout_alignLeft="@+id/textView"
-            android:layout_alignStart="@+id/textView"
-            android:layout_marginTop="25dp"
             android:textSize="18dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:layout_alignTop="@+id/textViewDescription"
+            android:layout_alignLeft="@+id/textView"
+            android:layout_alignStart="@+id/textView" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewDescription"
-            android:layout_below="@+id/textViewGroupe"
+            android:layout_below="@+id/spinnerGroupe"
             android:layout_marginTop="15dp"
-            android:layout_alignLeft="@+id/textViewDate"
             android:textColor="@color/greyLight"
             android:textSize="18dp"
+            android:layout_toRightOf="@+id/textView4"
+            android:layout_marginLeft="10dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
+
 
     </RelativeLayout>
 </RelativeLayout>

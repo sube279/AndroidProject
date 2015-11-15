@@ -7,11 +7,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import db.adapter.InterventionDataSource;
+import db.object.CIntervention;
+
 public class ModifierIntervention extends AppCompatActivity {
-    private String date;
-    private String quantite;
-    private String groupe;
-    private String description;
+    private int id;
+    public CIntervention i;
+    public InterventionDataSource ia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,38 +24,44 @@ public class ModifierIntervention extends AppCompatActivity {
         // Get the message from the intent
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            date = extras.getString("date");
-            quantite = extras.getString("quantite");
-            groupe = extras.getString("groupe");
-            description = extras.getString("description");
+            id = extras.getInt("id");
         }
+
+        ia = new InterventionDataSource(getApplicationContext());
+        i = ia.getInterventiononById(id);
 
         // Create the text view
         EditText tw = (EditText) findViewById(R.id.textViewDate);
-        tw.setText(date);
+        tw.setText(i.getDate());
         tw = (EditText) findViewById(R.id.textViewQuantite);
-        tw.setText(quantite);
+        tw.setText(String.valueOf(i.getQuantite()));
         tw = (EditText) findViewById(R.id.textViewGroupe);
-        tw.setText(groupe);
+        tw.setText(i.getGroupe());
         tw = (EditText) findViewById(R.id.textViewDescription);
-        tw.setText(description);
+        tw.setText(i.getDescription());
     }
 
     public void buttonAnnuler(View view) {
         Intent intent = new Intent(this, AfficherIntervention.class);
-        intent.putExtra("date", date);
-        intent.putExtra("quantite", quantite);
-        intent.putExtra("groupe", groupe);
-        intent.putExtra("description", description);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 
     public void buttonOk(View view) {
+
+        EditText et = (EditText) findViewById (R.id.textViewDate);
+        i.setDate(et.getText().toString());
+        et = (EditText) findViewById (R.id.textViewDescription);
+        i.setDescription(et.getText().toString());
+        et = (EditText) findViewById (R.id.textViewQuantite);
+        i.setQuantite(Integer.parseInt(et.getText().toString()));
+        et = (EditText) findViewById (R.id.textViewGroupe);
+        i.setGroupe(et.getText().toString());
+
+        ia.updateIntervention(i);
+
         Intent intent = new Intent(this, AfficherIntervention.class);
-        intent.putExtra("date", date);
-        intent.putExtra("quantite", quantite);
-        intent.putExtra("groupe", groupe);
-        intent.putExtra("description", description);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 }
