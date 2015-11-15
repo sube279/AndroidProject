@@ -19,12 +19,14 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import db.adapter.InterventionDataSource;
 import db.object.CIntervention;
 
 public class SupprimerIntervention extends AppCompatActivity {
 
     InterventionAdapter liste;
     int counter=0;
+    int size = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,7 @@ public class SupprimerIntervention extends AppCompatActivity {
         }
 
         //listview
-        liste = new InterventionAdapter();
+        liste = new InterventionAdapter(this.getApplicationContext());
 
         ListView lv = (ListView)findViewById(R.id.listView);
         lv.setAdapter(liste);
@@ -57,36 +59,32 @@ public class SupprimerIntervention extends AppCompatActivity {
 
     public void buttonDelete(View view) {
         Intent intent = new Intent(this, Intervention.class);
+        InterventionDataSource ia = new InterventionDataSource(getApplicationContext());
+        for(int j = 0; j < size; j++){
+            CIntervention intervention = (CIntervention)liste.getItem(j);
+            if(intervention.isSelected()){
+                ia.deleteIntervention(intervention.getId());
+            }
+        }
+
         startActivity(intent);
     }
 
     public class InterventionAdapter extends BaseAdapter {
 
-        List<CIntervention> liste = getDataForListView();
+        InterventionDataSource ia;
+        List<CIntervention> liste;
+
+        public InterventionAdapter (Context context){
+            ia = new InterventionDataSource(context);
+            liste = getDataForListView();
+        }
 
         public List<CIntervention> getDataForListView() {
-            List<CIntervention> listIntervention = new ArrayList<CIntervention>();
+            List<CIntervention> listIntervention;
+            listIntervention = ia.getAllInterventions();
 
-            CIntervention i1 = new CIntervention("02.10.2015", "Chimiothérapie", 1, "A +", false);
-            CIntervention i2 = new CIntervention("12.10.2015", "Opération cardiaque", 2, "A +", false);
-            CIntervention i3 = new CIntervention("12.10.2015", "Anémie", 2, "0-", false);
-            CIntervention i4 = new CIntervention("16.10.2015", "Chimiothérapie", 1, "0 -", false);
-            CIntervention i5 = new CIntervention("16.10.2015", "Chimiothérapie", 1, "B -", false);
-            CIntervention i6 = new CIntervention("19.10.2015", "Prothèse de hanche", 3, "B +", false);
-            CIntervention i7 = new CIntervention("19.10.2015", "Chimiothérapie", 1, "A +", false);
-            CIntervention i8 = new CIntervention("20.10.2015", "Accouchement", 2, "AB +", false);
-            CIntervention i9 = new CIntervention("20.10.2015", "Anémie", 1, "0 -", false);
-
-            listIntervention.add(i1);
-            listIntervention.add(i2);
-            listIntervention.add(i3);
-            listIntervention.add(i4);
-            listIntervention.add(i5);
-            listIntervention.add(i6);
-            listIntervention.add(i7);
-            listIntervention.add(i8);
-            listIntervention.add(i9);
-
+            size=listIntervention.size();
 
             return listIntervention;
 
@@ -109,45 +107,55 @@ public class SupprimerIntervention extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+
+            final int pos;
+
             if(convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) SupprimerIntervention.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = inflater.inflate(R.layout.liste_intervention_supp, parent,false);
+
+                // On récupère notre checkBox
+                final CheckBox cb = (CheckBox) convertView.findViewById (R.id.CheckBoxSelected);
+                // On lui affecte un tag comportant la position de l'item afin de
+                // pouvoir le récupérer au clic de la checkbox
+                cb.setTag(position);
+
+
+                cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        CIntervention icb = liste.get((Integer)cb.getTag());
+
+                        if(isChecked){
+                            counter++;
+                            icb.setSelected(true);
+                        }
+                        else{
+                            counter--;
+                            icb.setSelected(false);
+                        }
+                        if(counter>1){
+                            TextView tv = (TextView)findViewById(R.id.textView_Selection);
+                            tv.setText(String.valueOf(counter)+" sélectionnés");
+                        }
+                        else{
+                            TextView tv = (TextView)findViewById(R.id.textView_Selection);
+                            tv.setText(String.valueOf(counter)+" sélectionné");
+                        }
+                    }
+                });
+
             }
 
             TextView date = (TextView)convertView.findViewById(R.id.textViewDate);
             TextView description = (TextView)convertView.findViewById(R.id.textViewDescription);
-            CheckBox selected = (CheckBox) convertView.findViewById(R.id.CheckBoxSelected);
+            final CheckBox selected = (CheckBox) convertView.findViewById(R.id.CheckBoxSelected);
 
 
             CIntervention i = liste.get(position);
 
             date.setText(i.getDate());
             description.setText(i.getDescription());
-            if(i.isSelected()== true) {
-                selected.setChecked(true);
-            }
-
-            selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked){
-                        counter++;
-                    }
-                    else{
-                        counter--;
-                    }
-                    if(counter>1){
-                        TextView tv = (TextView)findViewById(R.id.textView_Selection);
-                        tv.setText(String.valueOf(counter)+" sélectionnés");
-                    }
-                    else{
-                        TextView tv = (TextView)findViewById(R.id.textView_Selection);
-                        tv.setText(String.valueOf(counter)+" sélectionné");
-                    }
-                }
-            });
-
-
 
             return convertView;
         }

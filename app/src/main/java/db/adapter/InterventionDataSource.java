@@ -68,7 +68,7 @@ public class InterventionDataSource {
     }
 
     /**
-     * Find one Person by Id
+     * Find one Intervention by Id
      */
     public CIntervention getInterventiononById(int id){
         String sql = "SELECT * FROM " + InterventionEntry.TABLE_INTERVENTION +
@@ -90,6 +90,17 @@ public class InterventionDataSource {
         return i;
     }
 
+    /**
+     * Delete a Intervention - this will also delete all records
+     * for the intervention
+     */
+    public void deleteIntervention(long id){
+
+        //delete the intervention
+        this.db.delete(InterventionEntry.TABLE_INTERVENTION, InterventionEntry.KEY_ID + " = ?",
+                new String[]{String.valueOf(id)});
+
+    }
 
 
 }
