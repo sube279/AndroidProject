@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import db.adapter.InterventionDataSource;
@@ -27,6 +30,17 @@ public class ModifierIntervention extends AppCompatActivity {
             id = extras.getInt("id");
         }
 
+        //spinner
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerGroupe);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.groupe_sanguin, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
+
         ia = new InterventionDataSource(getApplicationContext());
         i = ia.getInterventiononById(id);
 
@@ -35,10 +49,17 @@ public class ModifierIntervention extends AppCompatActivity {
         tw.setText(i.getDate());
         tw = (EditText) findViewById(R.id.textViewQuantite);
         tw.setText(String.valueOf(i.getQuantite()));
-        tw = (EditText) findViewById(R.id.textViewGroupe);
-        tw.setText(i.getGroupe());
+        final Spinner spin = (Spinner) findViewById (R.id.spinnerGroupe);
+        String[] groupe = getResources().getStringArray(R.array.groupe_sanguin);
+        ArrayAdapter<String> ad = new ArrayAdapter<String>(ModifierIntervention.this, android.R.layout.simple_spinner_dropdown_item,groupe);
+        spin.setAdapter(ad);
+        spin.setSelection(ad.getPosition(i.getGroupe()));
+
         tw = (EditText) findViewById(R.id.textViewDescription);
         tw.setText(i.getDescription());
+
+
+
     }
 
     public void buttonAnnuler(View view) {
@@ -55,8 +76,8 @@ public class ModifierIntervention extends AppCompatActivity {
         i.setDescription(et.getText().toString());
         et = (EditText) findViewById (R.id.textViewQuantite);
         i.setQuantite(Integer.parseInt(et.getText().toString()));
-        et = (EditText) findViewById (R.id.textViewGroupe);
-        i.setGroupe(et.getText().toString());
+        Spinner spin = (Spinner) findViewById (R.id.spinnerGroupe);
+        i.setGroupe((String) spin.getSelectedItem().toString());
 
         ia.updateIntervention(i);
 
