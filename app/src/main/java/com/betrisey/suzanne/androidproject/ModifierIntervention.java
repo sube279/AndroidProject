@@ -1,5 +1,7 @@
 package com.betrisey.suzanne.androidproject;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -70,6 +72,8 @@ public class ModifierIntervention extends AppCompatActivity {
 
     public void buttonOk(View view) {
 
+        if(testQuantite() == true)
+        {
         EditText et = (EditText) findViewById (R.id.textViewDate);
         i.setDate(et.getText().toString());
         et = (EditText) findViewById (R.id.textViewDescription);
@@ -77,12 +81,39 @@ public class ModifierIntervention extends AppCompatActivity {
         et = (EditText) findViewById (R.id.textViewQuantite);
         i.setQuantite(Integer.parseInt(et.getText().toString()));
         Spinner spin = (Spinner) findViewById (R.id.spinnerGroupe);
-        i.setGroupe((String) spin.getSelectedItem().toString());
+        i.setGroupe(spin.getSelectedItem().toString());
 
         ia.updateIntervention(i);
 
         Intent intent = new Intent(this, AfficherIntervention.class);
         intent.putExtra("id", id);
         startActivity(intent);
+        }
+        else
+        {
+            AlertDialog alertDialog = new AlertDialog.Builder(ModifierIntervention.this).create();
+            alertDialog.setTitle("Erreur");
+            alertDialog.setMessage("La quantité de pochette doit être un nombre.");
+
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }
+    }
+
+    public boolean testQuantite(){
+        try {
+            EditText text = (EditText) findViewById (R.id.textViewQuantite);
+            Integer.parseInt(text.getText().toString());
+        } catch(NumberFormatException e) {
+            return false;
+        } catch(NullPointerException e) {
+            return false;
+        }
+        return true;
     }
 }
