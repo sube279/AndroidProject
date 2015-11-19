@@ -1,7 +1,11 @@
 package com.betrisey.suzanne.androidproject;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +13,8 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -16,6 +22,7 @@ import android.widget.TextView;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -25,12 +32,17 @@ import db.object.CIntervention;
 public class AjouterIntervention extends AppCompatActivity {
 
     InterventionDataSource ia;
+    TextView mDateDisplay;
+    Activity activity;
 
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajouter_intervention);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+       activity = this;
+
 
        ia = new InterventionDataSource(this);
 
@@ -43,6 +55,16 @@ public class AjouterIntervention extends AppCompatActivity {
        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
        spinner.setAdapter(adapter);
+
+       mDateDisplay = (TextView) findViewById(R.id.textViewDate);
+       mDateDisplay.setOnClickListener(new View.OnClickListener() {
+           @SuppressLint("NewApi")
+           public void onClick(View v) {
+               // showDialog(DATE_DIALOG_ID);
+               DialogFragment newFragment = new DateDialog();
+               newFragment.show(getFragmentManager(), "datePicker");
+           }
+       });
     }
 
     public void buttonAnnuler(View view) {
@@ -65,10 +87,12 @@ public class AjouterIntervention extends AppCompatActivity {
             Spinner spin = (Spinner) findViewById (R.id.spinnerGroupe);
             i.setGroupe((String) spin.getSelectedItem().toString());
 
-            ia.createIntervention(i);
+                ia.createIntervention(i);
 
-            Intent intent = new Intent(this, Intervention.class);
-            startActivity(intent);
+                Intent intent = new Intent(this, Intervention.class);
+                startActivity(intent);
+
+
         }
         else
         {
@@ -89,10 +113,17 @@ public class AjouterIntervention extends AppCompatActivity {
 
     }
 
-    public Date changeIntoDate(String s) throws ParseException {
+    public Date changeIntoDate(String s) {
         DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
-        Date date = format.parse(s);
-        return date;
+        Date date = null;
+        try {
+            date = format.parse(s);
+            return date;
+        } catch (ParseException e) {
+
+            return null;
+        }
+
     }
 
     public boolean testQuantite(){
@@ -106,4 +137,28 @@ public class AjouterIntervention extends AppCompatActivity {
             }
             return true;
             }
+
+    @SuppressLint({"NewApi", "ValidFragment"})
+    public class DateDialog extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+            DatePickerDialog dpd = new DatePickerDialog(activity, this, year, month, day);;
+            dpd.setTitle("Date d'intervention:");
+            return dpd;
+        }
+
+
+        @Override
+        public void onDateSet(android.widget.DatePicker view, int year, int month, int day) {
+            mDateDisplay.setText(String.valueOf(day) + "."
+                    + String.valueOf(month + 1) + "." + String.valueOf(year));
+        }
+    }
 }
