@@ -13,6 +13,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import db.adapter.InterventionDataSource;
 import db.object.CIntervention;
 
@@ -44,14 +50,14 @@ public class AjouterIntervention extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void buttonOk(View view) {
+    public void buttonOk(View view) throws ParseException {
 
         if(testQuantite() == true)
         {
             CIntervention i = new CIntervention();
 
             EditText et = (EditText) findViewById (R.id.textViewDate);
-            i.setDate(et.getText().toString());
+            i.setDate(changeIntoDate(et.getText().toString()));
             et = (EditText) findViewById (R.id.textViewDescription);
             i.setDescription(et.getText().toString());
             et = (EditText) findViewById (R.id.textViewQuantite);
@@ -81,6 +87,12 @@ public class AjouterIntervention extends AppCompatActivity {
 
 
 
+    }
+
+    public Date changeIntoDate(String s) throws ParseException {
+        DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
+        Date date = format.parse(s);
+        return date;
     }
 
     public boolean testQuantite(){

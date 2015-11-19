@@ -17,8 +17,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import db.adapter.InterventionDataSource;
 import db.object.CIntervention;
@@ -49,7 +54,11 @@ public class Intervention extends AppCompatActivity {
         }
 
         //listview
-        liste = new InterventionAdapter(this.getApplicationContext());
+        try {
+            liste = new InterventionAdapter(this.getApplicationContext());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         ListView lv = (ListView)findViewById(R.id.listView);
         lv.setAdapter(liste);
@@ -108,12 +117,12 @@ public class Intervention extends AppCompatActivity {
         InterventionDataSource ia;
         List<CIntervention> liste;
 
-        public InterventionAdapter (Context context){
+        public InterventionAdapter (Context context) throws ParseException {
             ia = new InterventionDataSource(context);
             liste = getDataForListView();
         }
 
-        public List<CIntervention> getDataForListView() {
+        public List<CIntervention> getDataForListView() throws ParseException {
             List<CIntervention> listIntervention;
             listIntervention = ia.getAllInterventions();
 
@@ -148,7 +157,11 @@ public class Intervention extends AppCompatActivity {
 
             CIntervention i = liste.get(position);
 
-            date.setText(i.getDate());
+            try {
+                date.setText(changeIntoString(i.getDate()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             description.setText(i.getDescription());
 
             return convertView;
@@ -160,5 +173,9 @@ public class Intervention extends AppCompatActivity {
         }
     }
 
-
+    public String changeIntoString(Date d) throws ParseException {
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
+        String s = df.format(d);
+        return s;
+    }
 }

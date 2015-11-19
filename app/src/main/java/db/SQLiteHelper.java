@@ -57,17 +57,4 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-
-
-//
-//	/**
-//	 * get datetime as a string
-//	 * */
-//	private String getDateTime() {
-//		SimpleDateFormat dateFormat = new SimpleDateFormat(
-//				"yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-//		Date date = new Date();
-//		return dateFormat.format(date);
-//	}
-
 }

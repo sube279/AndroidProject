@@ -8,6 +8,7 @@ import android.view.ViewConfiguration;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
+import java.text.ParseException;
 
 import db.adapter.InterventionDataSource;
 import db.object.CIntervention;
@@ -45,11 +46,16 @@ public class AfficherIntervention extends AppCompatActivity {
         }
 
         ia = new InterventionDataSource(getApplicationContext());
-        CIntervention i = ia.getInterventiononById(id);
+        CIntervention i = null;
+        try {
+            i = ia.getInterventiononById(id);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         // Create the text view
         TextView tw = (TextView) findViewById(R.id.textViewDate);
-        tw.setText(i.getDate());
+        tw.setText(String.valueOf(i.getDate()));
         tw = (TextView) findViewById(R.id.textViewQuantite);
         tw.setText(String.valueOf(i.getQuantite()));
         tw = (TextView) findViewById(R.id.textViewGroupe);

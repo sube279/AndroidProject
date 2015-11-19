@@ -18,7 +18,7 @@ import java.util.List;
 public class CIntervention extends Activity {
 
     private int id;
-    private String date;
+    private Date date;
     private String description;
     private int quantite;
     private String groupe;
@@ -30,7 +30,7 @@ public class CIntervention extends Activity {
 
     }
 
-    public CIntervention(String date, String description, int quantite, String groupe, boolean selected) {
+    public CIntervention(Date date, String description, int quantite, String groupe, boolean selected) {
         this.date = date;
         this.description = description;
         this.quantite = quantite;
@@ -49,7 +49,7 @@ public class CIntervention extends Activity {
 
     public void setId(int id) {this.id = id; }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -65,7 +65,7 @@ public class CIntervention extends Activity {
         this.groupe = groupe;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 

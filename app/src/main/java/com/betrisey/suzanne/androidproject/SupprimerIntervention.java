@@ -16,6 +16,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +50,11 @@ public class SupprimerIntervention extends AppCompatActivity {
         }
 
         //listview
-        liste = new InterventionAdapter(this.getApplicationContext());
+        try {
+            liste = new InterventionAdapter(this.getApplicationContext());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         ListView lv = (ListView)findViewById(R.id.listView);
         lv.setAdapter(liste);
@@ -75,12 +80,12 @@ public class SupprimerIntervention extends AppCompatActivity {
         InterventionDataSource ia;
         List<CIntervention> liste;
 
-        public InterventionAdapter (Context context){
+        public InterventionAdapter (Context context) throws ParseException {
             ia = new InterventionDataSource(context);
             liste = getDataForListView();
         }
 
-        public List<CIntervention> getDataForListView() {
+        public List<CIntervention> getDataForListView() throws ParseException {
             List<CIntervention> listIntervention;
             listIntervention = ia.getAllInterventions();
 
@@ -154,7 +159,7 @@ public class SupprimerIntervention extends AppCompatActivity {
 
             CIntervention i = liste.get(position);
 
-            date.setText(i.getDate());
+            date.setText(String.valueOf(i.getDate()));
             description.setText(i.getDescription());
 
             return convertView;

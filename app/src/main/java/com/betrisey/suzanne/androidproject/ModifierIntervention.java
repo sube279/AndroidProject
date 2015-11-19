@@ -12,6 +12,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import db.adapter.InterventionDataSource;
 import db.object.CIntervention;
 
@@ -44,11 +50,15 @@ public class ModifierIntervention extends AppCompatActivity {
 
 
         ia = new InterventionDataSource(getApplicationContext());
-        i = ia.getInterventiononById(id);
+        try {
+            i = ia.getInterventiononById(id);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         // Create the text view
         EditText tw = (EditText) findViewById(R.id.textViewDate);
-        tw.setText(i.getDate());
+        tw.setText(String.valueOf(i.getDate()));
         tw = (EditText) findViewById(R.id.textViewQuantite);
         tw.setText(String.valueOf(i.getQuantite()));
         final Spinner spin = (Spinner) findViewById (R.id.spinnerGroupe);
@@ -70,12 +80,12 @@ public class ModifierIntervention extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void buttonOk(View view) {
+    public void buttonOk(View view) throws ParseException {
 
         if(testQuantite() == true)
         {
         EditText et = (EditText) findViewById (R.id.textViewDate);
-        i.setDate(et.getText().toString());
+        i.setDate(changeIntoDate(et.getText().toString()));
         et = (EditText) findViewById (R.id.textViewDescription);
         i.setDescription(et.getText().toString());
         et = (EditText) findViewById (R.id.textViewQuantite);
@@ -115,5 +125,11 @@ public class ModifierIntervention extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    public Date changeIntoDate(String s) throws ParseException {
+        DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
+        Date date = format.parse(s);
+        return date;
     }
 }
