@@ -58,7 +58,11 @@ public class ModifierIntervention extends AppCompatActivity {
 
         // Create the text view
         EditText tw = (EditText) findViewById(R.id.textViewDate);
-        tw.setText(String.valueOf(i.getDate()));
+        try {
+            tw.setText(changeIntoString(i.getDate()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         tw = (EditText) findViewById(R.id.textViewQuantite);
         tw.setText(String.valueOf(i.getQuantite()));
         final Spinner spin = (Spinner) findViewById (R.id.spinnerGroupe);
@@ -131,5 +135,11 @@ public class ModifierIntervention extends AppCompatActivity {
         DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
         Date date = format.parse(s);
         return date;
+    }
+
+    public String changeIntoString(Date d) throws ParseException {
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
+        String s = df.format(d);
+        return s;
     }
 }

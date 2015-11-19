@@ -8,7 +8,11 @@ import android.view.ViewConfiguration;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import db.adapter.InterventionDataSource;
 import db.object.CIntervention;
@@ -55,7 +59,11 @@ public class AfficherIntervention extends AppCompatActivity {
 
         // Create the text view
         TextView tw = (TextView) findViewById(R.id.textViewDate);
-        tw.setText(String.valueOf(i.getDate()));
+        try {
+            tw.setText(changeIntoString(i.getDate()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         tw = (TextView) findViewById(R.id.textViewQuantite);
         tw.setText(String.valueOf(i.getQuantite()));
         tw = (TextView) findViewById(R.id.textViewGroupe);
@@ -77,5 +85,11 @@ public class AfficherIntervention extends AppCompatActivity {
         Intent intent = new Intent(this, ModifierIntervention.class);
         intent.putExtra("id", id);
         startActivity(intent);
+    }
+
+    public String changeIntoString(Date d) throws ParseException {
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
+        String s = df.format(d);
+        return s;
     }
 }
