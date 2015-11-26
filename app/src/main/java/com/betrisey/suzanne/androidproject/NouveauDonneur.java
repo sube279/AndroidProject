@@ -35,6 +35,7 @@ public class NouveauDonneur extends AppCompatActivity {
 
     DonneurDataSource da;
     TextView mDateDisplay;
+    TextView mDateDisplay2;
     Activity activity;
     boolean stop = false;
 
@@ -54,7 +55,7 @@ public class NouveauDonneur extends AppCompatActivity {
         try {
             ViewConfiguration config = ViewConfiguration.get(this);
             Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
-            if(menuKeyField != null) {
+            if (menuKeyField != null) {
                 menuKeyField.setAccessible(true);
                 menuKeyField.setBoolean(config, false);
             }
@@ -131,7 +132,7 @@ public class NouveauDonneur extends AppCompatActivity {
         et = (EditText) findViewById(R.id.editTelephone);
         d.setTelephone(et.getText().toString());
 
-        if (d.getNom().equals("")==false && d.getPrenom().equals("")==false) {
+        if (d.getNom().equals("") == false && d.getPrenom().equals("") == false) {
 
             TextView tv = (TextView) findViewById(R.id.textViewDate);
             d.setNaissance(changeIntoDate(et.getText().toString()));
@@ -174,7 +175,7 @@ public class NouveauDonneur extends AppCompatActivity {
             return date;
         } catch (ParseException e) {
             ContextThemeWrapper themedContext;
-            themedContext = new ContextThemeWrapper( this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+            themedContext = new ContextThemeWrapper(this, android.R.style.Theme_DeviceDefault_Light_Dialog);
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
             alertDialog.setMessage("Aucune date n'a été saisie");
             alertDialog.show();
@@ -197,15 +198,36 @@ public class NouveauDonneur extends AppCompatActivity {
             return dpd;
         }
 
+
         @Override
         public void onDateSet(android.widget.DatePicker view, int year, int month, int day) {
             mDateDisplay.setText(String.valueOf(day) + "."
                     + String.valueOf(month + 1) + "." + String.valueOf(year));
         }
+    }
 
+    @SuppressLint({"NewApi", "ValidFragment"})
+    public class DateDialog2 extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+            DatePickerDialog dpd = new DatePickerDialog(activity, this, year, month, day);
+            return dpd;
+        }
+
+        @Override
+        public void onDateSet(android.widget.DatePicker view, int year, int month, int day) {
+            mDateDisplay2.setText(String.valueOf(day) + "."
+                    + String.valueOf(month + 1) + "." + String.valueOf(year));
+        }
 
     }
-    }
+}
 
 
 
