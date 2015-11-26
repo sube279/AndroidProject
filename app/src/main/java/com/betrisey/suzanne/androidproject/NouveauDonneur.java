@@ -1,24 +1,50 @@
 package com.betrisey.suzanne.androidproject;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+import db.adapter.DonneurDataSource;
+import db.object.CDonneur;
 
 public class NouveauDonneur extends AppCompatActivity {
+
+    DonneurDataSource da;
+    TextView mDateDisplay;
+    Activity activity;
+    boolean stop = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nouveau_donneur);
+
+        activity = this;
+        da = new DonneurDataSource(this);
 
         //ajouter icone a la barre d'action
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -36,76 +62,150 @@ public class NouveauDonneur extends AppCompatActivity {
             // Ignore
         }
 
-        //spinner jours
-        String[] jours={"1", "2", "3", "4","5","6","7","8","9","10","11","12","13","14","15"
-        ,"16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
-        ArrayAdapter<String> stringArrayAdapter=
-                new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,jours);
-        Spinner spinner =
-                (Spinner)  findViewById(R.id.spinnerJour);
-        spinner.setAdapter(stringArrayAdapter);
+        //spinner
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerRegion);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.region, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
 
-        String[] mois={"janvier", "février", "mars", "avril","mai","juin","juillet","août","septembre",
-                "octobre","novembre","décembre"};
-        ArrayAdapter<String> stringArrayAdapter2=
-                new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,mois);
-        Spinner spinner2 =
-                (Spinner)  findViewById(R.id.spinnerMois);
-        spinner2.setAdapter(stringArrayAdapter2);
+        //spinner
+        Spinner spinner2 = (Spinner) findViewById(R.id.spinnerGroupes);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
+                R.array.groupe_sanguin, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinner2.setAdapter(adapter2);
 
-        Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        Integer[] annees = new Integer[101];
-        for(int i = 0; i<=100; i++){
-            annees[i] = year-i;
-        }
+        //DatePicker
+        mDateDisplay = (TextView) findViewById(R.id.textViewDate);
+        mDateDisplay.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NewApi")
+            public void onClick(View v) {
+                // showDialog(DATE_DIALOG_ID);
+                DialogFragment newFragment = new DateDialog();
+                newFragment.show(getFragmentManager(), "datePicker");
+            }
+        });
 
-        ArrayAdapter<Integer> stringArrayAdapter4=
-                new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_dropdown_item,annees);
-        Spinner spinner4 =
-                (Spinner)  findViewById(R.id.spinnerAnnee);
-        spinner4.setAdapter(stringArrayAdapter4);
-
-
-        String[] groupe={"A+", "A-", "B+", "B-","AB+","AB-","O+","O-"};
-        ArrayAdapter<String> stringArrayAdapter3=
-                new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,groupe);
-        Spinner spinner3 =
-                (Spinner)  findViewById(R.id.spinnerGroupes);
-        spinner3.setAdapter(stringArrayAdapter3);
-
+        mDateDisplay2 = (TextView) findViewById(R.id.textViewDateDispo);
+        mDateDisplay2.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NewApi")
+            public void onClick(View v) {
+                // showDialog(DATE_DIALOG_ID);
+                DialogFragment newFragment = new DateDialog();
+                newFragment.show(getFragmentManager(), "datePicker");
+            }
+        });
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_nouveau_donneur, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     public void buttonAnnuler(View view) {
         Intent intent = new Intent(this, Donneur.class);
         startActivity(intent);
     }
 
-    public void buttonOk(View view) {
-        Intent intent = new Intent(this, Donneur.class);
-        startActivity(intent);
+    public void buttonOk(View view) throws ParseException {
+
+        CDonneur d = new CDonneur();
+
+        TextView et = (EditText) findViewById(R.id.editNom);
+        d.setNom(et.getText().toString());
+        et = (EditText) findViewById(R.id.editPrenom);
+        d.setPrenom(et.getText().toString());
+        RadioButton rb = (RadioButton) findViewById(R.id.radioFeminin);
+        if (rb.isChecked()) {
+            d.setSexe("f");
+            d.setDonsPossibles(3);
+        } else {
+            d.setSexe("m");
+            d.setDonsPossibles(4);
+        }
+
+        et = (EditText) findViewById(R.id.editTelephone);
+        d.setTelephone(et.getText().toString());
+
+        if (d.getNom().equals("")==false && d.getPrenom().equals("")==false) {
+
+            TextView tv = (TextView) findViewById(R.id.textViewDate);
+            d.setNaissance(changeIntoDate(et.getText().toString()));
+            tv = (TextView) findViewById(R.id.textViewDateDispo);
+            d.setDisponibilite(changeIntoDate(et.getText().toString()));
+
+
+            TextView etfacultatif = (EditText) findViewById(R.id.editAdresse);
+            d.setAdresse(etfacultatif.getText().toString());
+            etfacultatif = (EditText) findViewById(R.id.ediNpa);
+            d.setNPA(Integer.parseInt(etfacultatif.getText().toString()));
+            etfacultatif = (EditText) findViewById(R.id.editAdresse);
+            d.setAdresse(etfacultatif.getText().toString());
+            etfacultatif = (EditText) findViewById(R.id.editLieu);
+            d.setLieu(etfacultatif.getText().toString());
+            Spinner spin = (Spinner) findViewById(R.id.spinnerRegion);
+            d.setRegion(spin.getSelectedItem().toString());
+            Spinner spin2 = (Spinner) findViewById(R.id.spinnerGroupes);
+            d.setGroupe(spin2.getSelectedItem().toString());
+
+
+            da.createDonneur(d);
+
+            Intent intent = new Intent(this, Donneur.class);
+            startActivity(intent);
+        } else {
+            ContextThemeWrapper themedContext;
+            themedContext = new ContextThemeWrapper(this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
+            alertDialog.setMessage("Le nom et le prénom du donneur sont requis.");
+            alertDialog.show();
+        }
     }
-}
+
+    public Date changeIntoDate(String s) {
+        DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
+        Date date = null;
+        try {
+            date = format.parse(s);
+            return date;
+        } catch (ParseException e) {
+            ContextThemeWrapper themedContext;
+            themedContext = new ContextThemeWrapper( this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
+            alertDialog.setMessage("Aucune date n'a été saisie");
+            alertDialog.show();
+            return null;
+        }
+
+    }
+
+    @SuppressLint({"NewApi", "ValidFragment"})
+    public class DateDialog extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+            DatePickerDialog dpd = new DatePickerDialog(activity, this, year, month, day);
+            return dpd;
+        }
+
+        @Override
+        public void onDateSet(android.widget.DatePicker view, int year, int month, int day) {
+            mDateDisplay.setText(String.valueOf(day) + "."
+                    + String.valueOf(month + 1) + "." + String.valueOf(year));
+        }
+
+
+    }
+    }
+
+
+

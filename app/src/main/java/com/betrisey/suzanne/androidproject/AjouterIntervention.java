@@ -8,13 +8,12 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -28,6 +27,8 @@ import java.util.Locale;
 
 import db.adapter.InterventionDataSource;
 import db.object.CIntervention;
+
+import static android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT;
 
 public class AjouterIntervention extends AppCompatActivity {
 
@@ -78,34 +79,29 @@ public class AjouterIntervention extends AppCompatActivity {
         {
             CIntervention i = new CIntervention();
 
-            EditText et = (EditText) findViewById (R.id.textViewDate);
+            TextView et = (TextView) findViewById (R.id.textViewDate);
             i.setDate(changeIntoDate(et.getText().toString()));
-            et = (EditText) findViewById (R.id.textViewDescription);
-            i.setDescription(et.getText().toString());
-            et = (EditText) findViewById (R.id.textViewQuantite);
-            i.setQuantite(Integer.parseInt(et.getText().toString()));
-            Spinner spin = (Spinner) findViewById (R.id.spinnerGroupe);
-            i.setGroupe((String) spin.getSelectedItem().toString());
+            if(i.getDate()!= null)
+            {
+                et = (EditText) findViewById (R.id.textViewDescription);
+                i.setDescription(et.getText().toString());
+                et = (EditText) findViewById (R.id.textViewQuantite);
+                i.setQuantite(Integer.parseInt(et.getText().toString()));
+                Spinner spin = (Spinner) findViewById (R.id.spinnerGroupe);
+                i.setGroupe((String) spin.getSelectedItem().toString());
 
                 ia.createIntervention(i);
 
                 Intent intent = new Intent(this, Intervention.class);
                 startActivity(intent);
-
-
+            }
         }
         else
         {
-            AlertDialog alertDialog = new AlertDialog.Builder(AjouterIntervention.this).create();
-            alertDialog.setTitle("Erreur");
+            ContextThemeWrapper themedContext;
+            themedContext = new ContextThemeWrapper( this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
             alertDialog.setMessage("La quantité de pochette doit être un nombre.");
-
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
             alertDialog.show();
         }
 
@@ -120,7 +116,11 @@ public class AjouterIntervention extends AppCompatActivity {
             date = format.parse(s);
             return date;
         } catch (ParseException e) {
-
+            ContextThemeWrapper themedContext;
+            themedContext = new ContextThemeWrapper( this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
+            alertDialog.setMessage("Aucune date n'a été saisie");
+            alertDialog.show();
             return null;
         }
 
@@ -142,23 +142,23 @@ public class AjouterIntervention extends AppCompatActivity {
     public class DateDialog extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
 
-
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the current date as the default date in the picker
             final Calendar c = Calendar.getInstance();
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
-            DatePickerDialog dpd = new DatePickerDialog(activity, this, year, month, day);;
-            dpd.setTitle("Date d'intervention:");
+            DatePickerDialog dpd = new DatePickerDialog(activity, this, year, month, day);
             return dpd;
         }
-
 
         @Override
         public void onDateSet(android.widget.DatePicker view, int year, int month, int day) {
             mDateDisplay.setText(String.valueOf(day) + "."
                     + String.valueOf(month + 1) + "." + String.valueOf(year));
         }
+
+
     }
+
 }

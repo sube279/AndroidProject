@@ -12,4 +12,13 @@
         <item>O-</item>
     </string-array>
 
+    <string-array name="region">
+        <item>Brig</item>
+        <item>Martigny</item>
+        <item>Monthey</item>
+        <item>Sierre</item>
+        <item>Sion</item>
+        <item>Visp</item>
+    </string-array>
+
 </resources>

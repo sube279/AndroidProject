@@ -20,10 +20,18 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
+import db.adapter.DonneurDataSource;
 import db.object.CDonneur;
+import db.object.CIntervention;
 
 public class Donneur extends AppCompatActivity {
 
@@ -52,15 +60,19 @@ public class Donneur extends AppCompatActivity {
         }
 
 
-        afficherParRegion("Sierre");
+        try {
+            afficherParRegion("Sierre");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
     }
 
 
-    public void afficherParRegion(String region){
+    public void afficherParRegion(String region) throws ParseException {
 
         //listview
-        liste = new DonneurAdapter();
+        liste = new DonneurAdapter(this.getApplicationContext());
 
         LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout);
 
@@ -87,13 +99,17 @@ public class Donneur extends AppCompatActivity {
         lv.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Intent intent = new Intent(getApplicationContext(), AfficherDonneur.class);
-                startActivity(intent);
+                CDonneur d = liste.getDonneur(position);
+                sendDonneur(d.getId());
             }
         });
     }
 
+    public void sendDonneur(int id){
+        Intent intent = new Intent(this, AfficherDonneur.class);
+        intent.putExtra("id", id);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -147,23 +163,17 @@ public class Donneur extends AppCompatActivity {
 
     public class DonneurAdapter extends BaseAdapter {
 
-        List<CDonneur> liste = getDataForListView();
+        DonneurDataSource da;
+        List<CDonneur> liste;
 
-        public List<CDonneur> getDataForListView() {
-            List<CDonneur> listDonneur = new ArrayList<CDonneur>();
+        public DonneurAdapter (Context context) throws ParseException {
+            da = new DonneurDataSource(context);
+            liste = getDataForListView();
+        }
 
-            CDonneur d1 = new CDonneur("Michel", "Bulot", "Masculin", "15.02.1975", "Rue du chapito 8", "3966", "Chalais", "Sierre", "0797512365", "O+", 2, true);
-            CDonneur d2 = new CDonneur("Myriame", "Zola", "Féminin", "28.05.1988", "Rue du Mimo 15", "3960", "Sierre", "Sierre", "0797512365", "A+", 3, false);
-            CDonneur d3 = new CDonneur("Julio", "Delapo", "Masculin", "04.02.1942", "Route de Bubu 20", "3960", "Sierre", "Sierre", "0782165425", "B-", 1, true);
-            CDonneur d4 = new CDonneur("Julia", "Delapo", "Féminin", "12.06.1940", "Route de Bubu 20", "3960", "Sierre", "Sierre", "0786425129", "O-", 0, false);
-            CDonneur d5 = new CDonneur("Chapipo", "Bloubi", "Masculin", "03.03.1938", "Rue du Poulpe 6", "3966", "Réchy", "Sierre", "0775162308", "A-", 2, true);
-
-            listDonneur.add(d1);
-            listDonneur.add(d2);
-            listDonneur.add(d3);
-            listDonneur.add(d4);
-            listDonneur.add(d5);
-
+        public List<CDonneur> getDataForListView() throws ParseException {
+            List<CDonneur> listDonneur;
+            listDonneur = da.getAllDonneur();
 
             return listDonneur;
 
@@ -197,19 +207,51 @@ public class Donneur extends AppCompatActivity {
 
             CDonneur i = liste.get(position);
 
+            Date now = new Date();
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+            try {
+                now = changeIntoDate(day + "." + month + "." + year);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             //Test si le donneur est dispo pour l'affichage de l'image
-            if(i.getDisponibilite() == true){
+            if(i.getDisponibilite().after(now)){
                 dispo.setImageDrawable(getResources().getDrawable(R.drawable.dispo_true));
             }else{
                 dispo.setImageDrawable(getResources().getDrawable(R.drawable.dispo_false));
             }
 
             nom.setText(i.getNom() + " " +i.getPrenom());
-            naissance.setText(i.getNaissance());
+            try {
+                naissance.setText(changeIntoString(i.getNaissance()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
             return convertView;
         }
+
+        public CDonneur getDonneur(int position)
+        {
+            return liste.get(position);
+        }
+
+    }
+    public Date changeIntoDate(String s) throws ParseException {
+
+        DateFormat format = new SimpleDateFormat("yyyy.MM.dd", Locale.FRENCH);
+        Date date = format.parse(s);
+        return date;
     }
 
+    public String changeIntoString(Date d) throws ParseException {
+
+        DateFormat format = new SimpleDateFormat("yyyy.MM.dd", Locale.FRENCH);
+        String str = format.format(d);
+        return str;
+    }
 
 }

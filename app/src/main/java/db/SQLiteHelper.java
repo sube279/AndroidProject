@@ -1,6 +1,7 @@
 package db;
 
 
+import db.DonDeSangContract.DonneurEntry;
 import db.DonDeSangContract.InterventionEntry;
 
 
@@ -37,21 +38,17 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        //db.execSQL(DonneurEntry.CREATE_TABLE_PERSONNE);
+        db.execSQL(DonneurEntry.CREATE_TABLE_PERSONNE);
         db.execSQL(InterventionEntry.CREATE_TABLE_INTERVENTION);
-        //db.execSQL(LieuEntry.CREATE_TABLE_LIEU);
         //db.execSQL(SangEntry.CREATE_TABLE_SANG);
-        //db.execSQL(RegionEntry.CREATE_TABLE_REGION);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //drop old tables
-        //db.execSQL("DROP TABLE IF EXISTS " + DonneurEntry.TABLE_DONNEUR);
+        db.execSQL("DROP TABLE IF EXISTS " + DonneurEntry.TABLE_DONNEUR);
         db.execSQL("DROP TABLE IF EXISTS " + InterventionEntry.TABLE_INTERVENTION);
-        //db.execSQL("DROP TABLE IF EXISTS " + LieuEntry.TABLE_LIEU);
         //db.execSQL("DROP TABLE IF EXISTS " + SangEntry.TABLE_SANG);
-        //db.execSQL("DROP TABLE IF EXISTS " + RegionEntry.TABLE_REGION);
 
         //create new tables
         onCreate(db);

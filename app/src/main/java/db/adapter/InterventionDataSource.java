@@ -124,14 +124,14 @@ public class InterventionDataSource {
 
     public Date changeIntoDate(String s) throws ParseException {
 
-        DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
+        DateFormat format = new SimpleDateFormat("yyyy.MM.dd", Locale.FRENCH);
         Date date = format.parse(s);
         return date;
     }
 
     public String changeIntoString(Date d) throws ParseException {
 
-        DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
+        DateFormat format = new SimpleDateFormat("yyyy.MM.dd", Locale.FRENCH);
         String str = format.format(d);
         return str;
     }

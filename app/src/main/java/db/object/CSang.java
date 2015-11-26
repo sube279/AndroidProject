@@ -1,5 +1,7 @@
 package db.object;
 
+import java.util.Date;
+
 /**
  * Created by Suzanne on 30.10.2015.
  */

@@ -64,7 +64,7 @@
             android:layout_marginLeft="20dp"
             android:layout_alignBottom="@+id/textViewDate"
             android:layout_alignTop="@+id/textViewDate"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -77,7 +77,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:clickable="true"
-            android:onClick="showTimePickerDialog" />
+            android:onClick="showTimePickerDialog"
+            android:text="ajouter une date" />
 
         <TextView
             android:layout_width="wrap_content"

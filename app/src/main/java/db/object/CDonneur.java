@@ -7,20 +7,26 @@ import java.util.Date;
  */
 public class CDonneur {
 
+    private int id;
     private String nom;
     private String prenom;
     private String sexe;
-    private String naissance;
+    private Date naissance;
     private String adresse;
-    private String NPA;
+    private int NPA;
     private String lieu;
     private String region;
     private String telephone;
     private String groupe;
     private Integer donsPossibles;
-    private boolean disponibilite;
+    private Date disponibilite;
 
-    public CDonneur(String nom, String prenom, String sexe, String naissance, String adresse, String NPA, String lieu, String region, String telephone, String groupe, Integer donsPossibles, boolean disponibilite){
+    public CDonneur(){
+
+    }
+
+    public CDonneur(int id, String nom, String prenom, String sexe, Date naissance, String adresse, int NPA, String lieu, String region, String telephone, String groupe, Integer donsPossibles, Date disponibilite){
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.sexe = sexe;
@@ -33,6 +39,15 @@ public class CDonneur {
         this.groupe = groupe;
         this.donsPossibles = donsPossibles;
         this.disponibilite = disponibilite;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNom() {
@@ -59,11 +74,11 @@ public class CDonneur {
         this.sexe = sexe;
     }
 
-    public String getNaissance() {
+    public Date getNaissance() {
         return naissance;
     }
 
-    public void setNaissance(String naissance) {
+    public void setNaissance(Date naissance) {
         this.naissance = naissance;
     }
 
@@ -75,11 +90,11 @@ public class CDonneur {
         this.adresse = adresse;
     }
 
-    public String getNPA() {
+    public int getNPA() {
         return NPA;
     }
 
-    public void setNPA(String NPA) {
+    public void setNPA(int NPA) {
         this.NPA = NPA;
     }
 
@@ -123,11 +138,11 @@ public class CDonneur {
         this.donsPossibles = donsPossibles;
     }
 
-    public boolean getDisponibilite() {
+    public Date getDisponibilite() {
         return disponibilite;
     }
 
-    public void setDisponibilite(boolean disponibilite) {
+    public void setDisponibilite(Date disponibilite) {
         this.disponibilite = disponibilite;
     }
 }
