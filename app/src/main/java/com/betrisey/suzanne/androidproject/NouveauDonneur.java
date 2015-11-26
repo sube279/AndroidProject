@@ -99,7 +99,7 @@ public class NouveauDonneur extends AppCompatActivity {
             @SuppressLint("NewApi")
             public void onClick(View v) {
                 // showDialog(DATE_DIALOG_ID);
-                DialogFragment newFragment = new DateDialog();
+                DialogFragment newFragment = new DateDialog2();
                 newFragment.show(getFragmentManager(), "datePicker");
             }
         });
@@ -135,9 +135,9 @@ public class NouveauDonneur extends AppCompatActivity {
         if (d.getNom().equals("") == false && d.getPrenom().equals("") == false) {
 
             TextView tv = (TextView) findViewById(R.id.textViewDate);
-            d.setNaissance(changeIntoDate(et.getText().toString()));
+            d.setNaissance(changeIntoDate(tv.getText().toString()));
             tv = (TextView) findViewById(R.id.textViewDateDispo);
-            d.setDisponibilite(changeIntoDate(et.getText().toString()));
+            d.setDisponibilite(changeIntoDate(tv.getText().toString()));
 
 
             TextView etfacultatif = (EditText) findViewById(R.id.editAdresse);
