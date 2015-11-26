@@ -213,7 +213,7 @@ public class Donneur extends AppCompatActivity {
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
             try {
-                now = changeIntoDate(day + "." + month + "." + year);
+                now = changeIntoDate(year + "." + month + "." + day);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -248,10 +248,9 @@ public class Donneur extends AppCompatActivity {
     }
 
     public String changeIntoString(Date d) throws ParseException {
-
-        DateFormat format = new SimpleDateFormat("yyyy.MM.dd", Locale.FRENCH);
-        String str = format.format(d);
-        return str;
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
+        String s = df.format(d);
+        return s;
     }
 
 }
