@@ -15,9 +15,21 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+
+import db.adapter.DonneurDataSource;
+import db.object.CDonneur;
 
 public class AfficherDonneur extends AppCompatActivity {
+
+    private int id;
+    DonneurDataSource da;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +51,38 @@ public class AfficherDonneur extends AppCompatActivity {
             // Ignore
         }
 
+        // Get the message from the intent
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            id = extras.getInt("id");
+        }
+
+        da = new DonneurDataSource(getApplicationContext());
+        CDonneur d = null;
+        try {
+            d = da.getDonneurById(id);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String genre;
+
+        if(d.getSexe().equals("f"))
+            genre="féminin";
+        else
+        genre="masculin";
+
+        TextView tv = (TextView) findViewById(R.id.textPrenom);
+        tv.setText(d.getPrenom() + " " + d.getNom());
+
         ListView vueData;
         ListView vueInfo;
-        String[] donneur = {"féminin", "12.04.1989", "Rue de la Forge 15", "3966", "Chalais", "Sierre","+41795436584", "A+", "1", "15.06.2016"};
+        String[] donneur = new String[0];
+        try {
+            donneur = new String[]{genre, changeIntoString(d.getNaissance()), d.getAdresse(), String.valueOf(d.getNPA()), d.getLieu(), d.getRegion(),d.getTelephone(), d.getGroupe(), String.valueOf(d.getDonsPossibles()), changeIntoString(d.getDisponibilite())};
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         String[] info = {"Sexe:", "Naissance:", "Adresse:", "Npa:", "Lieu:", "Région:", "Téléphone:", "Groupe:", "Dons possibles:", "Disponible:"};
 
         //Tableau
@@ -92,5 +133,11 @@ public class AfficherDonneur extends AppCompatActivity {
     public void buttonEdit(View view) {
         Intent intent = new Intent(this, ModifierDonneur.class);
         startActivity(intent);
+    }
+
+    public String changeIntoString(Date d) throws ParseException {
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
+        String s = df.format(d);
+        return s;
     }
 }

@@ -17,6 +17,8 @@ import db.DonDeSangContract;
 import db.SQLiteHelper;
 import db.object.CDonneur;
 
+import db.DonDeSangContract.DonneurEntry;
+
 /**
  * Created by Suzanne on 25.11.2015.
  */
@@ -86,6 +88,37 @@ public class DonneurDataSource {
         }
 
         return donneurs;
+    }
+
+    /**
+     * Find one Donneur by Id
+     */
+    public CDonneur getDonneurById(int id) throws ParseException {
+        String sql = "SELECT * FROM " + DonneurEntry.TABLE_DONNEUR +
+                " WHERE " + DonneurEntry.KEY_ID + " = " + id;
+
+        Cursor cursor = this.db.rawQuery(sql, null);
+
+        if(cursor != null){
+            cursor.moveToFirst();
+        }
+
+        CDonneur d = new CDonneur();
+        d.setId(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.DonneurEntry.KEY_ID)));
+        d.setNom(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_NOM))));
+        d.setPrenom(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_PRENOM))));
+        d.setSexe(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_GENRE))));
+        d.setNaissance(changeIntoDate(cursor.getString(cursor.getColumnIndex(DonDeSangContract.DonneurEntry.KEY_NAISSANCE))));
+        d.setAdresse(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_RUE))));
+        d.setNPA(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.DonneurEntry.KEY_NPA)));
+        d.setLieu(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_LIEU))));
+        d.setRegion(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_REGION))));
+        d.setTelephone(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_TELEPHONE))));
+        d.setGroupe(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_GROUPE))));
+        d.setDonsPossibles(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.DonneurEntry.KEY_DON)));
+        d.setDisponibilite(changeIntoDate(cursor.getString(cursor.getColumnIndex(DonDeSangContract.DonneurEntry.KEY_DISPONIBILITE))));
+
+        return d;
     }
 
     public Date changeIntoDate(String s) throws ParseException {

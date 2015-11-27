@@ -3,6 +3,7 @@ package db;
 
 import db.DonDeSangContract.DonneurEntry;
 import db.DonDeSangContract.InterventionEntry;
+import db.DonDeSangContract.SangEntry;
 
 
 import android.content.Context;
@@ -40,7 +41,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(DonneurEntry.CREATE_TABLE_PERSONNE);
         db.execSQL(InterventionEntry.CREATE_TABLE_INTERVENTION);
-        //db.execSQL(SangEntry.CREATE_TABLE_SANG);
+        db.execSQL(SangEntry.CREATE_TABLE_SANG);
     }
 
     @Override
@@ -48,7 +49,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         //drop old tables
         db.execSQL("DROP TABLE IF EXISTS " + DonneurEntry.TABLE_DONNEUR);
         db.execSQL("DROP TABLE IF EXISTS " + InterventionEntry.TABLE_INTERVENTION);
-        //db.execSQL("DROP TABLE IF EXISTS " + SangEntry.TABLE_SANG);
+        db.execSQL("DROP TABLE IF EXISTS " + SangEntry.TABLE_SANG);
 
         //create new tables
         onCreate(db);

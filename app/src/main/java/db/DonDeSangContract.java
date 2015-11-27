@@ -79,7 +79,7 @@ public final class DonDeSangContract {
 
 
 
-   /* //Represents the rows of a table
+    //Represents the rows of a table
     public static abstract class SangEntry implements BaseColumns {
         //Table name
         public static final String TABLE_SANG = "sang";
@@ -107,7 +107,7 @@ public final class DonDeSangContract {
                 + SangEntry.KEY_REGION + " TEXT, "
                 + SangEntry.KEY_STATUT + " TEXT "
                 + ");";
-    }*/
+    }
 
 
 }
