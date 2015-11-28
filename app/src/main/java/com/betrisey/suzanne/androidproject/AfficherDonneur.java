@@ -34,6 +34,7 @@ public class AfficherDonneur extends AppCompatActivity {
     DonneurDataSource da;
     CDonneur d;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +74,7 @@ public class AfficherDonneur extends AppCompatActivity {
         if(d.getSexe().equals("f"))
             genre="féminin";
         else
-        genre="masculin";
+            genre="masculin";
 
         TextView tv = (TextView) findViewById(R.id.textPrenom);
         tv.setText(d.getPrenom() + " " + d.getNom());
@@ -158,6 +159,8 @@ public class AfficherDonneur extends AppCompatActivity {
 
     public void buttonEdit(View view) {
         Intent intent = new Intent(this, ModifierDonneur.class);
+        startActivity(intent);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 

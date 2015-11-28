@@ -1,5 +1,10 @@
 package com.betrisey.suzanne.androidproject;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,35 +26,77 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+import db.adapter.DonneurDataSource;
+import db.object.CDonneur;
 
 public class ModifierDonneur extends AppCompatActivity {
+    int id;
+    CDonneur d;
+    DonneurDataSource da;
+    TextView mDateDisplay;
+    Activity activity;
+    ArrayList<String> donneur;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modifier_donneur);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
+        activity = this;
+
         if (savedInstanceState == null) {
-            ArrayList<String> donneur = new ArrayList<String>();
-            donneur.add("Nancy");
-            donneur.add("Zappellaz");
-            donneur.add("Féminin");
-            donneur.add("12.01.1989");
-            donneur.add("Rue du pont 2");
-            donneur.add("3960");
-            donneur.add("Sierre");
-            donneur.add("Sierre");
-            donneur.add("+41795642538");
-            donneur.add("A+");
-            donneur.add("1");
-            donneur.add("15.06.2015");
+            donneur = new ArrayList<String>();
+
+            // Get the message from the intent
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                id = extras.getInt("id");
+            }
+
+            da = new DonneurDataSource(getApplicationContext());
+            try {
+                d = da.getDonneurById(id);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            donneur.add(d.getPrenom());
+            donneur.add(d.getNom());
+            donneur.add(d.getSexe());
+           try {
+                donneur.add(changeIntoString(d.getNaissance()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            donneur.add(d.getAdresse());
+            donneur.add(String.valueOf(d.getNPA()));
+            donneur.add(d.getLieu());
+            donneur.add(d.getRegion());
+            donneur.add(d.getTelephone());
+            donneur.add(d.getGroupe());
+            donneur.add(String.valueOf(d.getDonsPossibles()));
+            try {
+                donneur.add(changeIntoString(d.getDisponibilite()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
             remplirTableau(donneur);
         } else {
             ArrayList<String> currentData = savedInstanceState.getStringArrayList("liste");
             remplirTableau(currentData);
 
         }
+
 
     }
 
@@ -59,12 +106,14 @@ public class ModifierDonneur extends AppCompatActivity {
         String text= "test";
 
         //Modifier -> rajouter une contante pour la boucle
-        for(int i= 0; i<12;i++){
-            Object obj = findViewById(1000+i);
-            if (obj instanceof RadioButton){
-                text="Féminin";
-            }else if(obj instanceof Spinner){
-                text= ((Spinner) obj).getSelectedItem().toString();
+        for(int i= 0; i<donneur.size();i++) {
+            Object obj = findViewById(1000 + i);
+            if (obj instanceof RadioButton) {
+                text = "Féminin";
+            } else if (obj instanceof Spinner) {
+                text = ((Spinner) obj).getSelectedItem().toString();
+            } else if (obj instanceof TextView){
+                text = ((TextView) obj).getText().toString();
             }else if(obj instanceof EditText){
                 text = ((EditText) obj).getText().toString();
             }
@@ -80,16 +129,16 @@ public class ModifierDonneur extends AppCompatActivity {
 
         ListView vueData;
         ListView vueInfo;
-        //String[] donneur = {"Nancy","Zappellaz","féminin", "12.04.1989", "Rue de la Forge 15", "3966", "Chalais", "Sierre","+41795436584", "A+", "1", "15.06.2016"};
         String[] info = {"Prénom:", "Nom:", "Sexe:", "Naissance:", "Adresse:", "Npa:", "Lieu:", "Région:", "Téléphone:", "Groupe:", "Dons possibles:", "Disponible:"};
 
         //Tableau
         TableLayout table=(TableLayout) findViewById(R.id.tableLayoutDonnees);
         TableRow row;
-        TextView tv1,tv2;
+        TextView tvNaissance, tvDispo, tv1,tv2;
         Spinner spinner;
         String[] regions = { "Sion", "Sierre", "Montana", "Brigue", "Viège", "Monthey", "Martigny"};
-        String[] groupes = {"A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"};
+        String[] groupe = getResources().getStringArray(R.array.groupe_sanguin);
+        //String[] groupes = {"A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"};
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         params.width=0;
@@ -107,23 +156,38 @@ public class ModifierDonneur extends AppCompatActivity {
             //ajout des cellules à la ligne
             row.addView(tv1);
 
-            if(i==2){
+            if(i==2) {
                 RadioGroup radioGroup = new RadioGroup(this);
                 RadioButton fem = new RadioButton(this);
                 fem.setText("Féminin");
                 RadioButton masc = new RadioButton(this);
                 masc.setText("Masculin");
 
-                fem.setId(1000+i);
+                fem.setId(1000 + i);
 
+                radioGroup.setLayoutParams(params);
                 //Rajouter le test pour cocher la bonne sélection par défaut
-
                 radioGroup.addView(fem);
                 radioGroup.addView(masc);
-                radioGroup.setLayoutParams(params);
                 row.addView(radioGroup);
 
-            } else if (i == 7){
+            }else if( i == 3){
+                tvNaissance = new TextView(this);
+                tvNaissance.setId(1000 + i);
+                mDateDisplay = tvNaissance;
+                mDateDisplay.setText(donneur.get(i));
+                mDateDisplay.setOnClickListener(new View.OnClickListener() {
+                    @SuppressLint("NewApi")
+                    public void onClick(View v) {
+                        // showDialog(DATE_DIALOG_ID);
+                        DialogFragment newFragment = new DateDialog();
+                        newFragment.show(getFragmentManager(), "datePicker");
+                    }
+                });
+                mDateDisplay.setLayoutParams(params);
+                row.addView(mDateDisplay);
+
+            }else if (i == 7){
                 spinner = new Spinner(this);
                 ArrayAdapter<Integer> stringArrayAdapter=
                         new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, regions);
@@ -139,9 +203,9 @@ public class ModifierDonneur extends AppCompatActivity {
             }else if(i == 9){
                 spinner = new Spinner(this);
                 ArrayAdapter<Integer> stringArrayAdapter=
-                        new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, groupes);
+                        new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, groupe);
                 spinner.setAdapter(stringArrayAdapter);
-
+                //spinner.setSelection(ArrayAdapter.getPosition(d.getGroupe()));
                 spinner.setId(1000+i);
 
                 //Rajouter le test pour sélectionner le bon groupe par défaut
@@ -149,6 +213,21 @@ public class ModifierDonneur extends AppCompatActivity {
                 spinner.setLayoutParams(params);
                 row.addView(spinner);
 
+            }else if(i == 11) {
+                tvDispo = new TextView(this);
+                tvDispo.setId(1000 + i);
+                mDateDisplay = tvDispo;
+                mDateDisplay.setText(donneur.get(i));
+                mDateDisplay.setOnClickListener(new View.OnClickListener() {
+                    @SuppressLint("NewApi")
+                    public void onClick(View v) {
+                        // showDialog(DATE_DIALOG_ID);
+                        DialogFragment newFragment = new DateDialog();
+                        newFragment.show(getFragmentManager(), "datePicker");
+                    }
+                });
+                mDateDisplay.setLayoutParams(params);
+                row.addView(mDateDisplay);
             }else{
                 tv2 = new EditText(this); // création cellule
                 tv2.setText(donneur.get(i)); // ajout du texte;
@@ -170,6 +249,32 @@ public class ModifierDonneur extends AppCompatActivity {
     public void buttonOk(View view) {
         Intent intent = new Intent(this, AfficherDonneur.class);
         startActivity(intent);
+    }
+
+    @SuppressLint("ValidFragment")
+    public class DateDialog extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+            DatePickerDialog dpd = new DatePickerDialog(activity, this, year, month, day);
+            return dpd;
+        }
+
+        public void onDateSet(android.widget.DatePicker view, int year, int month, int day) {
+            mDateDisplay.setText(String.valueOf(day) + "."
+                    + String.valueOf(month + 1) + "." + String.valueOf(year));
+        }
+    }
+
+    public String changeIntoString(Date d) throws ParseException {
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
+        String s = df.format(d);
+        return s;
     }
 
 }
