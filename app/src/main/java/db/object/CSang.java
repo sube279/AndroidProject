@@ -16,6 +16,10 @@ public class CSang {
     private String statut;
     private int intervention;
 
+    public CSang(){
+
+    }
+
     public CSang(int id, int donneur, Date dateDon, Date peremption, String region, String groupe, String statut, int intervention){
         this.id = id;
         this.donneur = donneur;

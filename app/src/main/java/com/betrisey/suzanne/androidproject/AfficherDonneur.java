@@ -129,7 +129,7 @@ public class AfficherDonneur extends AppCompatActivity {
     }
 
 
-    public void buttonDonDeSang(View view) {
+    public void buttonDonDeSang(View view) throws ParseException {
         Date now = new Date();
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
@@ -141,9 +141,10 @@ public class AfficherDonneur extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        if(d.getDisponibilite().after(now))
+        if(d.getDisponibilite().after(now)&&d.getDonsPossibles()>0)
         {
             Intent intent = new Intent(this, DonDeSang.class);
+            intent.putExtra("id", id);
             startActivity(intent);
         }
         else
@@ -151,9 +152,11 @@ public class AfficherDonneur extends AppCompatActivity {
             ContextThemeWrapper themedContext;
             themedContext = new ContextThemeWrapper( this, android.R.style.Theme_DeviceDefault_Light_Dialog);
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
-            alertDialog.setMessage("Le donneur ne peut pas encore donner son sang.");
+            alertDialog.setMessage("\nLe donneur ne peut pas donner son sang. \n\n" +
+                    "Disponibile dès le " + changeIntoString(d.getDisponibilite()) +"\n");
             alertDialog.show();
         }
+
 
     }
 

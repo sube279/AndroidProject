@@ -18,6 +18,7 @@ import db.SQLiteHelper;
 import db.object.CDonneur;
 
 import db.DonDeSangContract.DonneurEntry;
+import db.object.CIntervention;
 
 /**
  * Created by Suzanne on 25.11.2015.
@@ -88,6 +89,28 @@ public class DonneurDataSource {
         }
 
         return donneurs;
+    }
+
+    /**
+     *  Update a Donneur
+     */
+    public int updateDonneur(CDonneur donneur) throws ParseException {
+        ContentValues values = new ContentValues();
+        values.put(DonneurEntry.KEY_NOM, donneur.getNom());
+        values.put(DonneurEntry.KEY_PRENOM, donneur.getPrenom());
+        values.put(DonneurEntry.KEY_GENRE, donneur.getSexe());
+        values.put(DonneurEntry.KEY_NAISSANCE, changeIntoString(donneur.getNaissance()));
+        values.put(DonneurEntry.KEY_RUE, donneur.getAdresse());
+        values.put(DonneurEntry.KEY_NPA, donneur.getNPA());
+        values.put(DonneurEntry.KEY_LIEU, donneur.getLieu());
+        values.put(DonneurEntry.KEY_REGION, donneur.getRegion());
+        values.put(DonneurEntry.KEY_TELEPHONE, donneur.getTelephone());
+        values.put(DonneurEntry.KEY_GROUPE, donneur.getGroupe());
+        values.put(DonneurEntry.KEY_DON, donneur.getDonsPossibles());
+        values.put(DonneurEntry.KEY_DISPONIBILITE, changeIntoString(donneur.getDisponibilite()));
+
+        return this.db.update(DonneurEntry.TABLE_DONNEUR, values, DonneurEntry.KEY_ID + " = ?",
+                new String[] { String.valueOf(donneur.getId()) });
     }
 
     /**
