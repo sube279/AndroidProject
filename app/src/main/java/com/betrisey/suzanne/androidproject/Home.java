@@ -7,6 +7,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
+
+import db.adapter.DonneurDataSource;
+
 public class Home extends AppCompatActivity {
 
     // Ouvre la fenetre donneur
@@ -37,6 +43,23 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        Date now = new Date();
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        if(day==1 && month==0){
+            DonneurDataSource da = new DonneurDataSource(getApplicationContext());
+            try {
+                da.initializeDons();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+
     }
 
     @Override

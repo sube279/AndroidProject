@@ -92,6 +92,23 @@ public class DonneurDataSource {
     }
 
     /**
+     * Initalize nombre de don
+     */
+    public void initializeDons() throws ParseException {
+        List<CDonneur> donneurs = new ArrayList<CDonneur>();
+        donneurs = getAllDonneur();
+        for(int i=0; i<donneurs.size();i++){
+            if(donneurs.get(i).getSexe().equals("f")){
+                donneurs.get(i).setDonsPossibles(3);
+            }
+            else{
+                donneurs.get(i).setDonsPossibles(4);
+            }
+             updateDonneur(donneurs.get(i));
+        }
+    }
+
+    /**
      *  Update a Donneur
      */
     public int updateDonneur(CDonneur donneur) throws ParseException {

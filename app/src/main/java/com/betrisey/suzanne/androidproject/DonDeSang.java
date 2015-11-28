@@ -73,13 +73,10 @@ public class DonDeSang extends AppCompatActivity {
 
         //spinner
         Spinner spinner = (Spinner) findViewById(R.id.spinnerRegion);
-// Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.region, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
+        String[] groupe = getResources().getStringArray(R.array.region);
+        ArrayAdapter<String> ad = new ArrayAdapter<String>(DonDeSang.this, android.R.layout.simple_spinner_dropdown_item,groupe);
+        spinner.setAdapter(ad);
+        spinner.setSelection(ad.getPosition(d.getRegion()));
     }
 
     public void buttonUtilOui(View view){
@@ -185,12 +182,20 @@ public class DonDeSang extends AppCompatActivity {
 
     public void buttonOk (View view) throws ParseException {
         if(test()==true){
+
             d.setDonsPossibles(d.getDonsPossibles()-1);
 
           GregorianCalendar calendar = new GregorianCalendar();
             Date date = now;
             calendar.setTime(date);
-            calendar.add(Calendar.MONTH, +3);
+            if(malOui)
+            {
+                calendar.add(Calendar.MONTH, +6);
+            }
+            else
+            {
+                calendar.add(Calendar.MONTH, +3);
+            }
             d.setDisponibilite(calendar.getTime());
 
             if(d.getDonsPossibles().equals(0)){
@@ -200,11 +205,7 @@ public class DonDeSang extends AppCompatActivity {
                 if(dateCompare2.after(d.getDisponibilite())){
                     d.setDisponibilite(dateCompare2);
                 }
-                if(d.getSexe().equals("f")){
-                    d.setDonsPossibles(3);
-                }
-                else
-                    d.setDonsPossibles(4);
+
             }
 
             da.updateDonneur(d);
@@ -221,7 +222,16 @@ public class DonDeSang extends AppCompatActivity {
             s.setRegion(spin.getSelectedItem().toString());
 
             s.setGroupe(d.getGroupe());
-            s.setStatut("en stock");
+
+            if(utilOui)
+            {
+                s.setStatut("en stock");
+            }
+            else
+            {
+                s.setStatut("inutilisable");
+            }
+
             s.setIntervention(-1);
 
             sa.createSang(s);

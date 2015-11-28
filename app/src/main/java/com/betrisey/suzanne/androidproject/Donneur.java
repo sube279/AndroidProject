@@ -210,7 +210,7 @@ public class Donneur extends AppCompatActivity {
             Date now = new Date();
             final Calendar c = Calendar.getInstance();
             int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
+            int month = c.get(Calendar.MONTH)+1;
             int day = c.get(Calendar.DAY_OF_MONTH);
             try {
                 now = changeIntoDate(year + "." + month + "." + day);
@@ -219,9 +219,9 @@ public class Donneur extends AppCompatActivity {
             }
             //Test si le donneur est dispo pour l'affichage de l'image
             if(i.getDisponibilite().after(now)){
-                dispo.setImageDrawable(getResources().getDrawable(R.drawable.dispo_true));
-            }else{
                 dispo.setImageDrawable(getResources().getDrawable(R.drawable.dispo_false));
+            }else{
+                dispo.setImageDrawable(getResources().getDrawable(R.drawable.dispo_true));
             }
 
             nom.setText(i.getNom() + " " +i.getPrenom());
