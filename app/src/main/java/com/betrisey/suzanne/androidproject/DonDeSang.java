@@ -2,6 +2,7 @@ package com.betrisey.suzanne.androidproject;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import db.SQLiteHelper;
 import db.adapter.DonneurDataSource;
 import db.adapter.SangDataSource;
 import db.object.CDonneur;
@@ -60,6 +62,7 @@ public class DonDeSang extends AppCompatActivity {
         }
 
         da = new DonneurDataSource(getApplicationContext());
+        sa = new SangDataSource(getApplicationContext());
         try {
             d = da.getDonneurById(id);
             remplirTableau();
@@ -184,24 +187,29 @@ public class DonDeSang extends AppCompatActivity {
         if(test()==true){
             d.setDonsPossibles(d.getDonsPossibles()-1);
 
-           /* GregorianCalendar calendar = new GregorianCalendar();
-            Date date = d.getDisponibilite();
-            Date dateCompare = date;
+          GregorianCalendar calendar = new GregorianCalendar();
+            Date date = now;
             calendar.setTime(date);
-            calendar.add(Calendar.MONTH,+3);
-            d.setDisponibilite(calendar.getTime());*/
+            calendar.add(Calendar.MONTH, +3);
+            d.setDisponibilite(calendar.getTime());
 
-            /*if(d.getDonsPossibles().equals(0)){
+            if(d.getDonsPossibles().equals(0)){
                 GregorianCalendar calendarCompare = new GregorianCalendar();
-                calendarCompare.set(dateCompare.getYear() + 1, 1, 1);
-                if(calendarCompare.after(d.getDisponibilite()))
-                d.setDisponibilite(calendarCompare.getTime());
-            }*/
+                int year = calendarCompare.get(Calendar.YEAR) + 1;
+                Date dateCompare2=changeIntoDate(year + ".1.1");
+                if(dateCompare2.after(d.getDisponibilite())){
+                    d.setDisponibilite(dateCompare2);
+                }
+                if(d.getSexe().equals("f")){
+                    d.setDonsPossibles(3);
+                }
+                else
+                    d.setDonsPossibles(4);
+            }
 
             da.updateDonneur(d);
 
-           /*CSang s = new CSang();
-            s.setDonneur(d.getId());
+            CSang s = new CSang();
             s.setDateDon(now);
 
             GregorianCalendar calendarPochette = new GregorianCalendar();
@@ -214,14 +222,11 @@ public class DonDeSang extends AppCompatActivity {
 
             s.setGroupe(d.getGroupe());
             s.setStatut("en stock");
+            s.setIntervention(-1);
 
             sa.createSang(s);
 
-            Toast toast = new Toast(getApplicationContext());
-            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            toast.setDuration(Toast.LENGTH_LONG);
-            toast.setText("Pochette créée");
-            toast.show();*/
+            Toast.makeText(getApplicationContext(), "Pochette créée", Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(this, Donneur.class);
             startActivity(intent);

@@ -25,6 +25,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import db.adapter.InterventionDataSource;
+import db.adapter.SangDataSource;
+import db.object.CIntervention;
 import db.object.CSang;
 
 public class Sang extends AppCompatActivity {
@@ -51,8 +54,14 @@ public class Sang extends AppCompatActivity {
             // Ignore
         }
 
+        SangDataSource sa = new SangDataSource(getApplicationContext());
+
         //listview
-        liste = new SangAdapter();
+        try {
+            liste = new SangAdapter(this.getApplicationContext());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         ListView lv = (ListView)findViewById(R.id.listView);
         lv.setAdapter(liste);
@@ -62,21 +71,16 @@ public class Sang extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 CSang s = liste.getSang(position);
-                sendSang(s);
+                sendSang(s.getId());
             }
         });
+
+
     }
 
-    public void sendSang(CSang s){
+    public void sendSang(int id){
         Intent intent = new Intent(this, AffichagePochetteSang.class);
-        intent.putExtra("id", s.getId());
-        intent.putExtra("donneur", s.getDonneur());
-        intent.putExtra("dateDon", s.getDateDon());
-        intent.putExtra("peremption", s.getPeremption());
-        intent.putExtra("region", s.getRegion());
-        intent.putExtra("groupe", s.getGroupe());
-        intent.putExtra("statut", s.getStatut());
-        intent.putExtra("dateIntervention", s.getIntervention());
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 
@@ -120,10 +124,18 @@ public class Sang extends AppCompatActivity {
 
     public class SangAdapter extends BaseAdapter {
 
-        List<CSang> liste = getDataForListView();
+        SangDataSource sa;
+        List<CSang> liste;
 
-        public List<CSang> getDataForListView() {
-            List<CSang> listSang = new ArrayList<CSang>();
+        public SangAdapter (Context context) throws ParseException {
+            sa = new SangDataSource(context);
+            liste = getDataForListView();
+        }
+
+
+        public List<CSang> getDataForListView() throws ParseException {
+            List<CSang> listSang;
+            listSang = sa.getAllSangs();
 
 
             return listSang;
@@ -165,21 +177,21 @@ public class Sang extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            if(s.getGroupe().equals("A +"))
+            if(s.getGroupe().equals("A+"))
             groupe.setImageDrawable(getResources().getDrawable(R.drawable.a_plus));
-            if(s.getGroupe().equals("A -"))
+            if(s.getGroupe().equals("A-"))
                 groupe.setImageDrawable(getResources().getDrawable(R.drawable.a_moins));
-            if(s.getGroupe().equals("B +"))
+            if(s.getGroupe().equals("B+"))
                 groupe.setImageDrawable(getResources().getDrawable(R.drawable.b_plus));
-            if(s.getGroupe().equals("B -"))
+            if(s.getGroupe().equals("B-"))
                 groupe.setImageDrawable(getResources().getDrawable(R.drawable.b_moins));
-            if(s.getGroupe().equals("AB +"))
+            if(s.getGroupe().equals("AB+"))
                 groupe.setImageDrawable(getResources().getDrawable(R.drawable.ab_plus));
-            if(s.getGroupe().equals("AB -"))
+            if(s.getGroupe().equals("AB-"))
                 groupe.setImageDrawable(getResources().getDrawable(R.drawable.ab_moins));
-            if(s.getGroupe().equals("O +"))
+            if(s.getGroupe().equals("O+"))
                 groupe.setImageDrawable(getResources().getDrawable(R.drawable.o_plus));
-            if(s.getGroupe().equals("O -"))
+            if(s.getGroupe().equals("O-"))
                 groupe.setImageDrawable(getResources().getDrawable(R.drawable.o_moins));
 
 
@@ -197,6 +209,13 @@ public class Sang extends AppCompatActivity {
         DateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
         String s = df.format(d);
         return s;
+    }
+
+    public Date changeIntoDate(String s) throws ParseException {
+
+        DateFormat format = new SimpleDateFormat("yyyy.MM.dd", Locale.FRENCH);
+        Date date = format.parse(s);
+        return date;
     }
 
 

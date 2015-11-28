@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import db.adapter.DonneurDataSource;
@@ -131,9 +132,9 @@ public class AfficherDonneur extends AppCompatActivity {
 
     public void buttonDonDeSang(View view) throws ParseException {
         Date now = new Date();
-        final Calendar c = Calendar.getInstance();
+        final GregorianCalendar c = new GregorianCalendar();
         int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
+        int month = c.get(Calendar.MONTH)+1;
         int day = c.get(Calendar.DAY_OF_MONTH);
         try {
             now = changeIntoDate(year + "." + month + "." + day);
@@ -141,7 +142,7 @@ public class AfficherDonneur extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        if(d.getDisponibilite().after(now)&&d.getDonsPossibles()>0)
+        if(d.getDisponibilite().before(now) || d.getDonsPossibles().equals(0) || d.getDisponibilite().equals(now))
         {
             Intent intent = new Intent(this, DonDeSang.class);
             intent.putExtra("id", id);

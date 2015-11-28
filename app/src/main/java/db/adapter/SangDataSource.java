@@ -15,6 +15,7 @@ import java.util.Locale;
 
 import db.DonDeSangContract;
 import db.SQLiteHelper;
+import db.object.CIntervention;
 import db.object.CSang;
 
 /**
@@ -48,6 +49,60 @@ public class SangDataSource {
         id = this.db.insert(DonDeSangContract.SangEntry.TABLE_SANG, null, values);
 
         return id;
+    }
+
+    /**
+     * Find one Sang by Id
+     */
+    public CSang getSangById(int id) throws ParseException {
+        String sql = "SELECT * FROM " + DonDeSangContract.SangEntry.TABLE_SANG +
+                " WHERE " + DonDeSangContract.SangEntry.KEY_ID + " = " + id;
+
+        Cursor cursor = this.db.rawQuery(sql, null);
+
+        if(cursor != null){
+            cursor.moveToFirst();
+        }
+
+        CSang s = new CSang();
+        s.setId(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_ID)));
+        s.setDonneur(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_ID_DONNEUR)));
+        s.setDateDon(changeIntoDate(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_DATE_DON))));
+        s.setPeremption(changeIntoDate(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_DATE_PEREMPTION))));
+        s.setRegion(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_REGION)));
+        s.setGroupe(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_GROUPE)));
+        s.setStatut(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_STATUT)));
+        s.setIntervention(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_ID_INTERVENTION)));
+
+        return s;
+    }
+
+    /**
+     * Get all Sangs
+     */
+    public List<CSang> getAllSangs() throws ParseException {
+        List<CSang> sangs = new ArrayList<CSang>();
+        String sql = "SELECT * FROM " + DonDeSangContract.SangEntry.TABLE_SANG + " ORDER BY " + DonDeSangContract.SangEntry.KEY_GROUPE + " ;";
+
+        Cursor cursor = this.db.rawQuery(sql, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                CSang s = new CSang();
+                s.setId(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_ID)));
+                s.setDonneur(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_ID_DONNEUR)));
+                s.setDateDon(changeIntoDate(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_DATE_DON))));
+                s.setPeremption(changeIntoDate(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_DATE_PEREMPTION))));
+                s.setRegion(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_REGION)));
+                s.setGroupe(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_GROUPE)));
+                s.setStatut(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_STATUT)));
+                s.setIntervention(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_ID_INTERVENTION)));
+
+                sangs.add(s);
+            } while(cursor.moveToNext());
+        }
+
+        return sangs;
     }
 
 

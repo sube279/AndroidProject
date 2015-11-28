@@ -12,17 +12,20 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import db.adapter.SangDataSource;
+import db.object.CSang;
 
 public class AffichagePochetteSang extends AppCompatActivity {
 
-    private String id;
-    private String donneur;
-    private String dateDon;
-    private String peremption;
-    private String region;
-    private String groupe;
-    private String statut;
-    private String dateIntervention;
+   CSang sang;
+    SangDataSource sa;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,28 +47,33 @@ public class AffichagePochetteSang extends AppCompatActivity {
             // Ignore
         }
 
+        // Get the message from the intent
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            id = extras.getString("id");
-            donneur = extras.getString ("donneur");
-            dateDon = extras.getString("dateDon");
-            peremption = extras.getString("peremption");
-            region = extras.getString("region");
-            groupe = extras.getString("groupe");
-            statut = extras.getString("statut");
-            dateIntervention = extras.getString("dateIntervention");
+            id = extras.getInt("id");
+        }
+
+        sa = new SangDataSource(getApplicationContext());
+        try {
+            sang = sa.getSangById(id);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
         TextView textView = (TextView)findViewById(R.id.textNum);
-        textView.setText("N° " + id);
-        remplirTableau();
+        textView.setText("N° " + sang.getId());
+        try {
+            remplirTableau();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void remplirTableau(){
+    public void remplirTableau() throws ParseException {
         ListView vueData;
         ListView vueInfo;
-        String[] data = {donneur, dateDon, peremption, region, groupe, statut, dateIntervention};
-        String[] info = {"ID Donneur:", "Date don:", "Péremption:", "Région:", "Groupe:", "Statut:", "Intervention:"};
+        String[] data = {String.valueOf(sang.getDonneur()), changeIntoString(sang.getDateDon()), changeIntoString(sang.getPeremption()), sang.getRegion(), sang.getGroupe(), sang.getStatut()};
+        String[] info = {"ID Donneur:", "Date don:", "Péremption:", "Région:", "Groupe:", "Statut:"};
 
         //Tableau
         TableLayout table=(TableLayout) findViewById(R.id.tableLayout);
@@ -123,5 +131,11 @@ public class AffichagePochetteSang extends AppCompatActivity {
                 return true;
             }
         return (super.onOptionsItemSelected(item));
+    }
+
+    public String changeIntoString(Date d) throws ParseException {
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
+        String s = df.format(d);
+        return s;
     }
 }
