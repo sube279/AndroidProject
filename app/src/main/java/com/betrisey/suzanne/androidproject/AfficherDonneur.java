@@ -1,9 +1,11 @@
 package com.betrisey.suzanne.androidproject;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -19,6 +21,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -29,6 +32,7 @@ public class AfficherDonneur extends AppCompatActivity {
 
     private int id;
     DonneurDataSource da;
+    CDonneur d;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +62,6 @@ public class AfficherDonneur extends AppCompatActivity {
         }
 
         da = new DonneurDataSource(getApplicationContext());
-        CDonneur d = null;
         try {
             d = da.getDonneurById(id);
         } catch (ParseException e) {
@@ -126,8 +129,31 @@ public class AfficherDonneur extends AppCompatActivity {
 
 
     public void buttonDonDeSang(View view) {
-        Intent intent = new Intent(this, DonDeSang.class);
-        startActivity(intent);
+        Date now = new Date();
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        try {
+            now = changeIntoDate(year + "." + month + "." + day);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if(d.getDisponibilite().after(now))
+        {
+            Intent intent = new Intent(this, DonDeSang.class);
+            startActivity(intent);
+        }
+        else
+        {
+            ContextThemeWrapper themedContext;
+            themedContext = new ContextThemeWrapper( this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
+            alertDialog.setMessage("Le donneur ne peut pas encore donner son sang.");
+            alertDialog.show();
+        }
+
     }
 
     public void buttonEdit(View view) {
@@ -139,5 +165,12 @@ public class AfficherDonneur extends AppCompatActivity {
         DateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
         String s = df.format(d);
         return s;
+    }
+
+    public Date changeIntoDate(String s) throws ParseException {
+
+        DateFormat format = new SimpleDateFormat("yyyy.MM.dd", Locale.FRENCH);
+        Date date = format.parse(s);
+        return date;
     }
 }

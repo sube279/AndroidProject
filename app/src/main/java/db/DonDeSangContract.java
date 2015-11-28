@@ -99,13 +99,15 @@ public final class DonDeSangContract {
         public static final String CREATE_TABLE_SANG = "CREATE TABLE "
                 + TABLE_SANG + "("
                 + SangEntry.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "FOREIGN KEY (" + KEY_ID_DONNEUR + ") REFERENCES " + DonneurEntry.TABLE_DONNEUR + " (" + KEY_ID + "), "
-                + "FOREIGN KEY (" + KEY_ID_INTERVENTION + ") REFERENCES " + InterventionEntry.TABLE_INTERVENTION + " (" + KEY_ID + "), "
+                + SangEntry.KEY_ID_DONNEUR + " INTEGER, "
+                + SangEntry.KEY_ID_INTERVENTION + " INTEGER, "
                 + SangEntry.KEY_GROUPE + " TEXT, "
                 + SangEntry.KEY_DATE_DON + " TEXT, "
                 + SangEntry.KEY_DATE_PEREMPTION + " TEXT, "
                 + SangEntry.KEY_REGION + " TEXT, "
-                + SangEntry.KEY_STATUT + " TEXT "
+                + SangEntry.KEY_STATUT + " TEXT, "
+                + "FOREIGN KEY (" + KEY_ID_DONNEUR + ") REFERENCES " + DonneurEntry.TABLE_DONNEUR + " (" + DonneurEntry.KEY_ID + "), "
+                + "FOREIGN KEY (" + KEY_ID_INTERVENTION + ") REFERENCES " + InterventionEntry.TABLE_INTERVENTION + " (" + InterventionEntry.KEY_ID + ") "
                 + ");";
     }
 

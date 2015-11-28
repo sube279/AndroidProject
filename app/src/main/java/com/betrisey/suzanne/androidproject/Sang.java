@@ -17,8 +17,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import db.object.CSang;
 
@@ -71,7 +76,7 @@ public class Sang extends AppCompatActivity {
         intent.putExtra("region", s.getRegion());
         intent.putExtra("groupe", s.getGroupe());
         intent.putExtra("statut", s.getStatut());
-        intent.putExtra("dateIntervention", s.getDateIntervention());
+        intent.putExtra("dateIntervention", s.getIntervention());
         startActivity(intent);
     }
 
@@ -120,43 +125,6 @@ public class Sang extends AppCompatActivity {
         public List<CSang> getDataForListView() {
             List<CSang> listSang = new ArrayList<CSang>();
 
-            CSang s1 = new CSang ("000001", "15634", "30.10.2015", "30.11.2015", "Sion", "AB -", "en stock", null);
-            CSang s2 = new CSang ("000002", "16894", "30.10.2015", "30.11.2015", "Sierre", "A -", "endommagé", null);
-            CSang s3 = new CSang ("000003", "68431", "02.11.2015", "02.12.2015", "Sion", "O +", "en stock", null);
-            CSang s4 = new CSang ("000004", "95168", "02.11.2015", "02.12.2015", "Sion", "B +", "utilisé", "15.11.2015");
-            CSang s5 = new CSang ("000006", "56118", "05.11.2015", "05.12.2015", "Sion", "A +", "endommagé", null);
-            CSang s7 = new CSang ("000007", "64584", "05.11.2015", "05.12.2015", "Sion", "A +", "en stock", null);
-            CSang s8 = new CSang ("000008", "56184", "05.11.2015", "05.12.2015", "Sion", "A +", "en stock", null);
-            CSang s9 = new CSang ("000009", "98415", "05.11.2015", "05.12.2015", "Sion", "AB +", "utilisé", null);
-            CSang s10 = new CSang ("000010", "16415", "06.11.2015", "06.12.2015", "Sierre", "B +", "utilisé", null);
-            CSang s11 = new CSang ("000011", "16418", "06.11.2015", "06.12.2015", "Sierre", "O -", "en stock", null);
-            CSang s12 = new CSang ("000012", "65712", "06.11.2015", "06.12.2015", "Sion", "A +", "en stock", null);
-            CSang s13 = new CSang ("000013", "54286", "06.11.2015", "06.12.2015", "Sion", "A +", "transfert", null);
-            CSang s14 = new CSang ("000014", "55965", "09.11.2015", "09.12.2015", "Sierre", "AB +", "en stock", null);
-            CSang s15 = new CSang ("000015", "98268", "09.11.2015", "09.12.2015", "Sion", "O +", "utilisé", null);
-            CSang s16 = new CSang ("000016", "51353", "09.11.2015", "09.12.2015", "Sion", "A +", "en stock", null);
-            CSang s17 = new CSang ("000017", "78875", "10.11.2015", "10.12.2015", "Sierre", "B +", "en stock", null);
-            CSang s18 = new CSang ("000018", "51325", "10.11.2015", "10.12.2015", "Sion", "A -", "endommagé", null);
-            CSang s19 = new CSang ("000019", "13596", "10.11.2015", "10.12.2015", "Sion", "A +", "en stock", "25.11.2015");
-
-            listSang.add(s1);
-            listSang.add(s2);
-            listSang.add(s3);
-            listSang.add(s4);
-            listSang.add(s5);
-            listSang.add(s7);
-            listSang.add(s8);
-            listSang.add(s9);
-            listSang.add(s10);
-            listSang.add(s11);
-            listSang.add(s12);
-            listSang.add(s13);
-            listSang.add(s14);
-            listSang.add(s15);
-            listSang.add(s16);
-            listSang.add(s17);
-            listSang.add(s18);
-            listSang.add(s19);
 
             return listSang;
 
@@ -191,9 +159,13 @@ public class Sang extends AppCompatActivity {
             CSang s = liste.get(position);
 
             statut.setText(s.getStatut());
-            peremption.setText(s.getPeremption());
+            try {
+                peremption.setText(changeIntoString(s.getPeremption()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
-           if(s.getGroupe().equals("A +"))
+            if(s.getGroupe().equals("A +"))
             groupe.setImageDrawable(getResources().getDrawable(R.drawable.a_plus));
             if(s.getGroupe().equals("A -"))
                 groupe.setImageDrawable(getResources().getDrawable(R.drawable.a_moins));
@@ -220,4 +192,12 @@ public class Sang extends AppCompatActivity {
             return liste.get(position);
         }
     }
+
+    public String changeIntoString(Date d) throws ParseException {
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
+        String s = df.format(d);
+        return s;
+    }
+
+
 }

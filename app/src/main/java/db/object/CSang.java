@@ -7,16 +7,16 @@ import java.util.Date;
  */
 public class CSang {
 
-    private String id;
-    private String donneur;
-    private String dateDon;
-    private String peremption;
+    private int id;
+    private int donneur;
+    private Date dateDon;
+    private Date peremption;
     private String region;
     private String groupe;
     private String statut;
-    private String dateIntervention;
+    private int intervention;
 
-    public CSang(String id, String donneur, String dateDon, String peremption, String region, String groupe, String statut, String dateIntervention){
+    public CSang(int id, int donneur, Date dateDon, Date peremption, String region, String groupe, String statut, int intervention){
         this.id = id;
         this.donneur = donneur;
         this.dateDon = dateDon;
@@ -24,38 +24,38 @@ public class CSang {
         this.region = region;
         this.groupe = groupe;
         this.statut = statut;
-        this.dateIntervention = dateIntervention;
+        this.intervention = intervention;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getDonneur() {
+    public int getDonneur() {
         return donneur;
     }
 
-    public void setDonneur(String id) {
+    public void setDonneur(int donneur) {
         this.donneur = donneur;
     }
 
-    public String getDateDon() {
+    public Date getDateDon() {
         return dateDon;
     }
 
-    public void setDateDon(String dateDon) {
+    public void setDateDon(Date dateDon) {
         this.dateDon = dateDon;
     }
 
-    public String getPeremption() {
+    public Date getPeremption() {
         return peremption;
     }
 
-    public void setPeremption(String peremption) {
+    public void setPeremption(Date peremption) {
         this.peremption = peremption;
     }
 
@@ -83,12 +83,12 @@ public class CSang {
         this.statut = statut;
     }
 
-    public String getDateIntervention() {
-        return dateIntervention;
+    public int getIntervention() {
+        return intervention;
     }
 
-    public void setDateIntervention(String dateIntervention) {
-        this.dateIntervention = dateIntervention;
+    public void setIntervention(int intervention) {
+        this.intervention = intervention;
     }
 
 }

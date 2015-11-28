@@ -31,6 +31,25 @@ public class SangDataSource {
         this.context = context;
     }
 
+    /**
+     * Insert a new pochette
+     */
+    public long createSang(CSang sang) throws ParseException {
+        long id;
+        ContentValues values = new ContentValues();
+        values.put(DonDeSangContract.SangEntry.KEY_ID_DONNEUR, sang.getDonneur());
+        values.put(DonDeSangContract.SangEntry.KEY_DATE_DON, changeIntoString(sang.getDateDon()));
+        values.put(DonDeSangContract.SangEntry.KEY_DATE_PEREMPTION, changeIntoString(sang.getPeremption()));
+        values.put(DonDeSangContract.SangEntry.KEY_REGION, sang.getRegion());
+        values.put(DonDeSangContract.SangEntry.KEY_GROUPE, sang.getGroupe());
+        values.put(DonDeSangContract.SangEntry.KEY_STATUT, sang.getStatut());
+        values.put(DonDeSangContract.SangEntry.KEY_ID_INTERVENTION, sang.getIntervention());
+
+        id = this.db.insert(DonDeSangContract.SangEntry.TABLE_SANG, null, values);
+
+        return id;
+    }
+
 
     public Date changeIntoDate(String s) throws ParseException {
 
