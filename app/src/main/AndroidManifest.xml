@@ -133,7 +133,7 @@
             android:name=".ChoixStatut"
             android:label="@string/title_activity_choix_statut"
             android:parentActivityName=".AffichagePochetteSang"
-            android:theme="@style/OptionsRetour" >
+            android:theme="@style/Options" >
         </activity>
 
         <!-- Transfert -->
@@ -141,7 +141,7 @@
             android:name=".Transfert"
             android:label="@string/title_activity_transfert"
             android:parentActivityName=".AffichagePochetteSang"
-            android:theme="@style/OptionsRetour" >
+            android:theme="@style/Options" >
         </activity>
 
         <!-- Modifier intervention -->

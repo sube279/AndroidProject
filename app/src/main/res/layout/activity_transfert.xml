@@ -68,7 +68,7 @@
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:entries="@array/regions"
+            android:id="@+id/spinnerRegion"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="30dp">
         </Spinner>

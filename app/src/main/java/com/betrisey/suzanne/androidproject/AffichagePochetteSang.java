@@ -131,10 +131,12 @@ public class AffichagePochetteSang extends AppCompatActivity {
 
             case R.id.action_statut:
                 Intent intent2 = new Intent(this, ChoixStatut.class);
+                intent2.putExtra("id", id);
                 startActivity(intent2);
                 return true;
             case R.id.action_transfert:
                 Intent intent = new Intent(this, Transfert.class);
+                intent.putExtra("id", id);
                 startActivity(intent);
                 return true;
             }
