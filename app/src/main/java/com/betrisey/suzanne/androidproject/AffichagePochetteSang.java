@@ -1,6 +1,7 @@
 package com.betrisey.suzanne.androidproject;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -90,11 +91,15 @@ public class AffichagePochetteSang extends AppCompatActivity {
             row.setWeightSum(1f);
 
             tv1 = new TextView(this); // création cellule
-            tv1.setText(info[i]); // ajout du texte
+            tv1.setText(info[i]);
+            tv1.setTextSize(18);
+            tv1.setTextColor(Color.parseColor("#000000"));// ajout du texte
             tv1.setLayoutParams(params);
 
             tv2 = new TextView(this); // création cellule
-            tv2.setText(data[i]); // ajout du texte;
+            tv2.setText(data[i]);
+            tv2.setTextSize(18);
+            tv2.setTextColor(Color.parseColor("#000000"));// ajout du texte;
             tv2.setLayoutParams(params);
 
             //ajout des cellules à la ligne
