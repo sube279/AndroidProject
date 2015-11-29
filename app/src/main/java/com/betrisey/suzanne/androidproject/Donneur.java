@@ -24,6 +24,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +37,7 @@ import db.object.CIntervention;
 public class Donneur extends AppCompatActivity {
 
     DonneurAdapter liste;
+    String region;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +63,13 @@ public class Donneur extends AppCompatActivity {
 
 
         try {
-            afficherParRegion("Sierre");
+            List<String> listRegions = Arrays.asList(getResources().getStringArray(R.array.region));
+
+            for(int i = 0; i < listRegions.size(); i++){
+                region = listRegions.get(i);
+                afficherParRegion(region);
+            }
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -71,38 +79,47 @@ public class Donneur extends AppCompatActivity {
 
     public void afficherParRegion(String region) throws ParseException {
 
+        final ArrayList<CDonneur> listeDonneurs = new ArrayList<CDonneur>();
+
         //listview
         liste = new DonneurAdapter(this.getApplicationContext());
 
-        LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout);
-
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.setMargins(25, 25, 25, 25);
-
-        //Crée texteView Region
-        TextView tv = new TextView(this);
-        tv.setLayoutParams(params);
-        tv.setPadding(15, 0, 0, 0);
-        tv.setTextSize(20);
-        tv.setTextColor(getResources().getColor(R.color.black));
-
-        tv.setTypeface(null, Typeface.BOLD);
-        tv.setText(region);
-
-        ll.addView(tv);
-        ListView lv = new ListView(this);
-        lv.setAdapter(liste);
-
-        ll.addView(lv);
-
-        //Click sur la listView
-        lv.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CDonneur d = liste.getDonneur(position);
-                sendDonneur(d.getId());
+        if(liste.getCount()!=0){
+            for(int i = 0; i<liste.getCount(); i++){
+                listeDonneurs.add(liste.getDonneur(i));
             }
-        });
+
+            LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout);
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(25, 25, 25, 25);
+
+            //Crée texteView Region
+            TextView tv = new TextView(this);
+            tv.setLayoutParams(params);
+            tv.setPadding(15, 0, 0, 0);
+            tv.setTextSize(20);
+            tv.setTextColor(getResources().getColor(R.color.black));
+
+            tv.setTypeface(null, Typeface.BOLD);
+            tv.setText(region);
+
+            ll.addView(tv);
+            ListView lv = new ListView(this);
+            lv.setAdapter(liste);
+
+            ll.addView(lv);
+
+            //Click sur la listView
+            lv.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    CDonneur d = listeDonneurs.get(position);
+                    sendDonneur(d.getId());
+                }
+            });
+        }
+
     }
 
     public void sendDonneur(int id){
@@ -173,7 +190,7 @@ public class Donneur extends AppCompatActivity {
 
         public List<CDonneur> getDataForListView() throws ParseException {
             List<CDonneur> listDonneur;
-            listDonneur = da.getAllDonneur();
+            listDonneur = da.getAllDonneurByRegion(region);
 
             return listDonneur;
 

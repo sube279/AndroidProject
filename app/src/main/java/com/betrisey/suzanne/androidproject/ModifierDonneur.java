@@ -103,13 +103,17 @@ public class ModifierDonneur extends AppCompatActivity {
     public void onSaveInstanceState(Bundle outState){
         ArrayList<String> donnees = new ArrayList<String>();
         TableLayout table = (TableLayout) findViewById(R.id.tableLayout);
-        String text= "test";
+        String text= "";
 
-        //Modifier -> rajouter une contante pour la boucle
+
         for(int i= 0; i<donneur.size();i++) {
             Object obj = findViewById(1000 + i);
             if (obj instanceof RadioButton) {
-                text = "Féminin";
+                if (((RadioButton) obj).getText().equals("f")){
+                    text = "f";
+                }else{
+                    text = "m";
+                }
             } else if (obj instanceof Spinner) {
                 text = ((Spinner) obj).getSelectedItem().toString();
             } else if (obj instanceof TextView){
@@ -122,6 +126,45 @@ public class ModifierDonneur extends AppCompatActivity {
 
         outState.putStringArrayList("liste", donnees);
         super.onSaveInstanceState(outState);
+    }
+
+    public void updateData() throws ParseException {
+        ArrayList<String> donnees = new ArrayList<String>();
+        String text= "";
+
+        for(int i= 0; i<donneur.size();i++) {
+            Object obj = findViewById(1000 + i);
+            if (obj instanceof RadioButton) {
+                if (((RadioButton) obj).getText().equals("f")){
+                    text = "f";
+                }else{
+                    text = "m";
+                }
+            } else if (obj instanceof Spinner) {
+                text = ((Spinner) obj).getSelectedItem().toString();
+            } else if (obj instanceof TextView){
+                text = ((TextView) obj).getText().toString();
+            }else if(obj instanceof EditText){
+                text = ((EditText) obj).getText().toString();
+            }
+            donnees.add(text);
+        }
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+        d.setNom(donnees.get(0));
+        d.setPrenom(donnees.get(1));
+        d.setSexe(donnees.get(2));
+        d.setNaissance(formatter.parse(donnees.get(3)));
+        d.setAdresse(donnees.get(4));
+        d.setNPA(Integer.parseInt(donnees.get(5)));
+        d.setLieu(donnees.get(6));
+        d.setRegion(donnees.get(7));
+        d.setTelephone(donnees.get(8));
+        d.setGroupe(donnees.get(9));
+        d.setDonsPossibles(Integer.parseInt(donnees.get(10)));
+        d.setDisponibilite(formatter.parse(donnees.get(11)));
+
+        da.updateDonneur(d);
     }
 
 
@@ -163,6 +206,11 @@ public class ModifierDonneur extends AppCompatActivity {
                 RadioButton masc = new RadioButton(this);
                 masc.setText("Masculin");
 
+                if(donneur.get(i).equals("f")){
+                    fem.setChecked(true);
+                }else{
+                    masc.setChecked(true);
+                }
                 fem.setId(1000 + i);
 
                 radioGroup.setLayoutParams(params);
@@ -246,9 +294,11 @@ public class ModifierDonneur extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void buttonOk(View view) {
+    public void buttonOk(View view) throws ParseException {
         Intent intent = new Intent(this, AfficherDonneur.class);
+        intent.putExtra("id", id);
         startActivity(intent);
+        updateData();
     }
 
     @SuppressLint("ValidFragment")

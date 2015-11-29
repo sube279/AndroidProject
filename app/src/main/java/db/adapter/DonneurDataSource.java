@@ -91,6 +91,37 @@ public class DonneurDataSource {
         return donneurs;
     }
 
+    public List<CDonneur> getAllDonneurByRegion(String region) throws ParseException {
+        List<CDonneur> donneurs = new ArrayList<CDonneur>();
+        String sql = "SELECT * FROM " + DonDeSangContract.DonneurEntry.TABLE_DONNEUR + " WHERE " + DonneurEntry.KEY_REGION + " = '" + region + "'" + " ORDER BY " + DonDeSangContract.DonneurEntry.KEY_NOM  + " ;";
+
+        Cursor cursor = this.db.rawQuery(sql, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                CDonneur d = new CDonneur();
+                d.setId(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.DonneurEntry.KEY_ID)));
+                d.setNom(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_NOM))));
+                d.setPrenom(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_PRENOM))));
+                d.setSexe(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_GENRE))));
+                d.setNaissance(changeIntoDate(cursor.getString(cursor.getColumnIndex(DonDeSangContract.DonneurEntry.KEY_NAISSANCE))));
+                d.setAdresse(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_RUE))));
+                d.setNPA(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.DonneurEntry.KEY_NPA)));
+                d.setLieu(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_LIEU))));
+                d.setRegion(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_REGION))));
+                d.setTelephone(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_TELEPHONE))));
+                d.setGroupe(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_GROUPE))));
+                d.setDonsPossibles(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.DonneurEntry.KEY_DON)));
+                d.setDisponibilite(changeIntoDate(cursor.getString(cursor.getColumnIndex(DonDeSangContract.DonneurEntry.KEY_DISPONIBILITE))));
+
+                donneurs.add(d);
+            } while(cursor.moveToNext());
+        }
+
+        return donneurs;
+    }
+
+
     /**
      * Initalize nombre de don
      */
