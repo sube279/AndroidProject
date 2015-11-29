@@ -105,6 +105,18 @@ public class SangDataSource {
         return sangs;
     }
 
+    /**
+     *  Update a Sang
+     */
+    public int updateSang(CSang sang) throws ParseException {
+        ContentValues values = new ContentValues();
+        values.put(DonDeSangContract.SangEntry.KEY_REGION, sang.getRegion());
+        values.put(DonDeSangContract.SangEntry.KEY_STATUT, sang.getStatut());
+
+        return this.db.update(DonDeSangContract.SangEntry.TABLE_SANG, values, DonDeSangContract.SangEntry.KEY_ID + " = ?",
+                new String[] { String.valueOf(sang.getId()) });
+    }
+
 
     public Date changeIntoDate(String s) throws ParseException {
 

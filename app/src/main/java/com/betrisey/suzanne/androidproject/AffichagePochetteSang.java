@@ -1,11 +1,14 @@
 package com.betrisey.suzanne.androidproject;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.ListView;
 import android.widget.TableLayout;
@@ -128,14 +131,39 @@ public class AffichagePochetteSang extends AppCompatActivity {
 
             case R.id.action_statut:
                 Intent intent2 = new Intent(this, ChoixStatut.class);
+                intent2.putExtra("id", id);
                 startActivity(intent2);
                 return true;
             case R.id.action_transfert:
                 Intent intent = new Intent(this, Transfert.class);
+                intent.putExtra("id", id);
                 startActivity(intent);
                 return true;
             }
         return (super.onOptionsItemSelected(item));
+    }
+
+    public void buttonDonneur (View view){
+        Intent intent = new Intent(this, AfficherDonneur.class);
+        intent.putExtra("id", sang.getDonneur());
+        startActivity(intent);
+    }
+
+    public void buttonIntervention (View view){
+
+        if(sang.getIntervention()<0)
+        {
+            ContextThemeWrapper themedContext;
+            themedContext = new ContextThemeWrapper( this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
+            alertDialog.setMessage("Aucune intervention utilise cette pochette");
+            alertDialog.show();
+        }
+        else{
+            Intent intent = new Intent(this, AfficherIntervention.class);
+            intent.putExtra("id", sang.getIntervention());
+            startActivity(intent);
+        }
     }
 
     public String changeIntoString(Date d) throws ParseException {
