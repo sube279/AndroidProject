@@ -63,6 +63,7 @@ public class Donneur extends AppCompatActivity {
 
 
         try {
+            //Récupère la liste des régions dans les ressources: spinners.xml
             List<String> listRegions = Arrays.asList(getResources().getStringArray(R.array.region));
 
             for(int i = 0; i < listRegions.size(); i++){
@@ -84,7 +85,9 @@ public class Donneur extends AppCompatActivity {
         //listview
         liste = new DonneurAdapter(this.getApplicationContext());
 
+        //Ne doit pas afficher s'il n'y a pas de donneur pour une région
         if(liste.getCount()!=0){
+            //Pour récupérer tous les donneurs de chaque région
             for(int i = 0; i<liste.getCount(); i++){
                 listeDonneurs.add(liste.getDonneur(i));
             }
