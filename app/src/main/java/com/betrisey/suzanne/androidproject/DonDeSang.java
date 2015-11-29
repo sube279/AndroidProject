@@ -212,6 +212,7 @@ public class DonDeSang extends AppCompatActivity {
 
             CSang s = new CSang();
             s.setDateDon(now);
+            s.setDonneur(d.getId());
 
             GregorianCalendar calendarPochette = new GregorianCalendar();
             calendarPochette.setTime(now);
