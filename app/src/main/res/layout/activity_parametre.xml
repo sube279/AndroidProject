@@ -28,7 +28,8 @@
             android:id="@+id/spinnerRegions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="37dp">
+            android:layout_marginLeft="37dp"
+            android:entries="@array/region">
         </Spinner>
 
     </LinearLayout>
