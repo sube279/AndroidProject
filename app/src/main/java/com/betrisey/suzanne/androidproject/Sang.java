@@ -100,15 +100,15 @@ public class Sang extends AppCompatActivity {
 
             case R.id.action_filtre_groupe_sanguin:
                 TextView text = (TextView) findViewById(R.id.textView_filtre);
-                text.setText("Filtre: groupe sanguin");
+                text.setText(getResources().getString(R.string.filtreGroupe));
                 return true;
             case R.id.action_filtre_statut:
                 TextView text2 = (TextView) findViewById(R.id.textView_filtre);
-                text2.setText("Filtre: statut");
+                text2.setText(getResources().getString(R.string.filtreStatut));
                 return true;
             case R.id.action_filtre_date:
                 TextView text3 = (TextView) findViewById(R.id.textView_filtre);
-                text3.setText("Filtre: date de péremption");
+                text3.setText(getResources().getString(R.string.filtreDate));
                 return true;
             case R.id.action_parametre:
                 Intent intent = new Intent(this, Parametre.class);

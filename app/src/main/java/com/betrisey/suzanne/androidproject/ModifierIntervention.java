@@ -106,8 +106,8 @@ public class ModifierIntervention extends AppCompatActivity {
         else
         {
             AlertDialog alertDialog = new AlertDialog.Builder(ModifierIntervention.this).create();
-            alertDialog.setTitle("Erreur");
-            alertDialog.setMessage("La quantité de pochette doit être un nombre.");
+            alertDialog.setTitle(getResources().getString(R.string.alerteErreur));
+            alertDialog.setMessage(getResources().getString(R.string.alerteQuPochette));
 
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                     new DialogInterface.OnClickListener() {

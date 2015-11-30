@@ -64,7 +64,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date:"
+            android:text="@string/date"
             android:id="@+id/textView"
             android:textSize="18dp"
             android:layout_marginTop="25dp"
@@ -84,7 +84,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quantité:"
+            android:text="@string/quantite"
             android:id="@+id/textView2"
             android:layout_below="@+id/textView"
             android:layout_alignLeft="@+id/textView"
@@ -105,7 +105,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Groupe:"
+            android:text="@string/groupe"
             android:id="@+id/textView3"
             android:layout_below="@+id/textView2"
             android:layout_alignLeft="@+id/textView2"
@@ -126,7 +126,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Description:"
+            android:text="@string/description"
             android:id="@+id/textView4"
             android:layout_below="@+id/textView3"
             android:layout_alignLeft="@+id/textView"

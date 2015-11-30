@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:text=" Don de sang "
+            android:text="@string/donSang"
             android:clickable="true"
             android:layout_gravity="left|center_vertical"
             android:layout_marginLeft="10dp"
@@ -80,41 +80,6 @@
             </ScrollView>
 
     </RelativeLayout>
-
-
-    <!--
-    <LinearLayout
-        android:id="@+id/layoutInfo"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@+id/textNom">
-
-
-        <ListView
-            android:id="@+id/listInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></ListView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutDonnees"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignRight="@+id/layoutInfo">
-
-    </LinearLayout>
-
-    <ListView
-        android:id="@+id/listDonneur"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/layoutInfo"
-        android:layout_toEndOf="@+id/layoutInfo"
-        android:layout_alignTop="@+id/layoutInfo"></ListView>-->
 
 
 </RelativeLayout>

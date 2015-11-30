@@ -77,7 +77,7 @@ public class AffichagePochetteSang extends AppCompatActivity {
         ListView vueData;
         ListView vueInfo;
         String[] data = {String.valueOf(sang.getDonneur()), changeIntoString(sang.getDateDon()), changeIntoString(sang.getPeremption()), sang.getRegion(), sang.getGroupe(), sang.getStatut()};
-        String[] info = {"ID Donneur:", "Date don:", "Péremption:", "Région:", "Groupe:", "Statut:"};
+        String[] info = getResources().getStringArray(R.array.infoPochette);
 
         //Tableau
         TableLayout table=(TableLayout) findViewById(R.id.tableLayout);
@@ -156,7 +156,7 @@ public class AffichagePochetteSang extends AppCompatActivity {
             ContextThemeWrapper themedContext;
             themedContext = new ContextThemeWrapper( this, android.R.style.Theme_DeviceDefault_Light_Dialog);
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
-            alertDialog.setMessage("Aucune intervention utilise cette pochette");
+            alertDialog.setMessage(R.string.alerteIntervention);
             alertDialog.show();
         }
         else{

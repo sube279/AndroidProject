@@ -145,11 +145,11 @@ public class SupprimerIntervention extends AppCompatActivity {
                         }
                         if(counter>1){
                             TextView tv = (TextView)findViewById(R.id.textView_Selection);
-                            tv.setText(String.valueOf(counter)+" sélectionnés");
+                            tv.setText(String.valueOf(counter)+" " + getResources().getString(R.string.selectionnes));
                         }
                         else{
                             TextView tv = (TextView)findViewById(R.id.textView_Selection);
-                            tv.setText(String.valueOf(counter)+" sélectionné");
+                            tv.setText(String.valueOf(counter)+"  " + getResources().getString(R.string.selectionnes));
                         }
                     }
                 });

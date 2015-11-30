@@ -101,7 +101,7 @@ public class AjouterIntervention extends AppCompatActivity {
             ContextThemeWrapper themedContext;
             themedContext = new ContextThemeWrapper( this, android.R.style.Theme_DeviceDefault_Light_Dialog);
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
-            alertDialog.setMessage("La quantité de pochette doit être un nombre.");
+            alertDialog.setMessage(getResources().getString(R.string.alerteQuPochette));
             alertDialog.show();
         }
 
@@ -119,7 +119,7 @@ public class AjouterIntervention extends AppCompatActivity {
             ContextThemeWrapper themedContext;
             themedContext = new ContextThemeWrapper( this, android.R.style.Theme_DeviceDefault_Light_Dialog);
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
-            alertDialog.setMessage("Aucune date n'a été saisie");
+            alertDialog.setMessage(getResources().getString(R.string.alerteDate));
             alertDialog.show();
             return null;
         }

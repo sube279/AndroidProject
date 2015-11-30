@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text=" Annuler "
+            android:text="@string/annuler"
             android:id="@+id/textView_Delete"
             android:layout_gravity="left|center_vertical"
             android:textColor="@color/white"
@@ -60,7 +60,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date:"
+            android:text="@string/date"
             android:id="@+id/textView"
             android:textSize="18dp"
             android:textColor="@color/black"
@@ -107,7 +107,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Groupe:"
+            android:text="@string/groupe"
             android:id="@+id/textView3"
             android:layout_alignLeft="@+id/textView2"
             android:layout_alignTop="@+id/spinnerGroupe"
@@ -129,7 +129,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Description:"
+            android:text="@string/description"
             android:id="@+id/textView4"
             android:textSize="18dp"
             android:textColor="@color/black"

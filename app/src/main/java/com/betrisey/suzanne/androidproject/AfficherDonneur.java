@@ -73,9 +73,9 @@ public class AfficherDonneur extends AppCompatActivity {
         String genre;
 
         if(d.getSexe().equals("f"))
-            genre="féminin";
+            genre= getResources().getString(R.string.feminin);
         else
-            genre="masculin";
+            genre= getResources().getString(R.string.masculin);
 
         TextView tv = (TextView) findViewById(R.id.textPrenom);
         tv.setText(d.getPrenom() + " " + d.getNom());
@@ -88,7 +88,7 @@ public class AfficherDonneur extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        String[] info = {"Sexe:", "Naissance:", "Adresse:", "Npa:", "Lieu:", "Région:", "Téléphone:", "Groupe:", "Dons possibles:", "Disponible:"};
+        String[] info = getResources().getStringArray(R.array.infoDonneur);
 
         //Tableau
         TableLayout table=(TableLayout) findViewById(R.id.tableLayout);
@@ -153,8 +153,8 @@ public class AfficherDonneur extends AppCompatActivity {
             ContextThemeWrapper themedContext;
             themedContext = new ContextThemeWrapper( this, android.R.style.Theme_DeviceDefault_Light_Dialog);
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
-            alertDialog.setMessage("\nLe donneur ne peut pas donner son sang. \n\n" +
-                    "Disponibile dès le " + changeIntoString(d.getDisponibilite()) +"\n");
+            alertDialog.setMessage("\n"+ getResources().getString(R.string.alerteSang1) + "\n\n" +
+                    getResources().getString(R.string.alerteSang2) +  " " +changeIntoString(d.getDisponibilite()) +"\n");
             alertDialog.show();
         }
 

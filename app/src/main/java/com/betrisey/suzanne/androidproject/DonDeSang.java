@@ -141,7 +141,7 @@ public class DonDeSang extends AppCompatActivity {
         }
 
         String[] donneur = {String.valueOf(d.getId()), d.getPrenom() + " "+d.getNom(), changeIntoString(d.getNaissance()), d.getGroupe(), changeIntoString(now)};
-        String[] info = {"Numéro:", "Donneur:", "", "Groupe:", "Date don:"};
+        String[] info = getResources().getStringArray(R.array.infoDon);
 
         TableLayout table=(TableLayout) findViewById(R.id.tableLayout);
         TableRow row;
@@ -237,7 +237,7 @@ public class DonDeSang extends AppCompatActivity {
 
             sa.createSang(s);
 
-            Toast.makeText(getApplicationContext(), "Pochette créée", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.pochette_cree), Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(this, Donneur.class);
             startActivity(intent);
@@ -247,7 +247,7 @@ public class DonDeSang extends AppCompatActivity {
             ContextThemeWrapper themedContext;
             themedContext = new ContextThemeWrapper( this, android.R.style.Theme_DeviceDefault_Light_Dialog);
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
-            alertDialog.setMessage("Merci de saisir si la pochette est utilisable et si le donneur a fait un malaise.");
+            alertDialog.setMessage(getResources().getString(R.string.alertePochette));
             alertDialog.show();
         }
     }
