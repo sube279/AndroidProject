@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import java.lang.reflect.Field;
 import java.text.ParseException;
@@ -49,6 +51,24 @@ public class ChoixStatut extends AppCompatActivity {
             e.printStackTrace();
         }
 
+            switch (sang.getStatut()) {
+
+            case "en stock":
+                RadioButton radioBtnStock = (RadioButton) findViewById(R.id.radioBtnStock);
+                radioBtnStock.setChecked(true);
+            case "transfert":
+                RadioButton radioBtnTransfert = (RadioButton) findViewById(R.id.radioBtnTransfert);
+                radioBtnTransfert.setChecked(true);
+            case "inutilisable":
+                RadioButton radioBtnUtilisable = (RadioButton) findViewById(R.id.radioBtnUtilisable);
+                radioBtnUtilisable.setChecked(true);
+            case "commandé":
+                RadioButton radioBtnCommande = (RadioButton) findViewById(R.id.radioBtnCommande);
+                radioBtnCommande.setChecked(true);
+            case "utilisé":
+                RadioButton radioBtnUtilise = (RadioButton) findViewById(R.id.radioBtnUtilise);
+                radioBtnUtilise.setChecked(true);
+        }
 
     }
 
@@ -58,9 +78,31 @@ public class ChoixStatut extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void buttonOk(View view) {
+    public void buttonOk(View view) throws ParseException {
+
+        RadioButton radioBtnStock = (RadioButton) findViewById(R.id.radioBtnStock);
+        RadioButton radioBtnTransfert = (RadioButton) findViewById(R.id.radioBtnTransfert);
+        RadioButton radioBtnUtilisable = (RadioButton) findViewById(R.id.radioBtnUtilisable);
+        RadioButton radioBtnCommande = (RadioButton) findViewById(R.id.radioBtnCommande);
+        RadioButton radioBtnUtilise = (RadioButton) findViewById(R.id.radioBtnUtilise);
+
+        if(radioBtnUtilise.isChecked()){
+            sang.setStatut("utilisé");
+        }else if(radioBtnStock.isChecked()){
+            sang.setStatut("en stock");
+        }else if(radioBtnTransfert.isChecked()){
+            sang.setStatut("transfert");
+        }else if(radioBtnCommande.isChecked()){
+            sang.setStatut("commandé");
+        }else if(radioBtnUtilisable.isChecked()){
+            sang.setStatut("inutilisable");
+        }
+
+        sa.updateSang(sang);
+
         Intent intent = new Intent(this, AffichagePochetteSang.class);
         intent.putExtra("id", id);
         startActivity(intent);
+
     }
 }
