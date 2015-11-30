@@ -52,22 +52,22 @@ public class ModifierDonneur extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         activity = this;
+        donneur = new ArrayList<String>();
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            id = extras.getInt("id");
+        }
+
+        da = new DonneurDataSource(getApplicationContext());
+        try {
+            d = da.getDonneurById(id);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         if (savedInstanceState == null) {
-            donneur = new ArrayList<String>();
-
             // Get the message from the intent
-            Bundle extras = getIntent().getExtras();
-            if (extras != null) {
-                id = extras.getInt("id");
-            }
-
-            da = new DonneurDataSource(getApplicationContext());
-            try {
-                d = da.getDonneurById(id);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
 
             donneur.add(d.getPrenom());
             donneur.add(d.getNom());
@@ -90,46 +90,43 @@ public class ModifierDonneur extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
             remplirTableau(donneur);
         } else {
-            ArrayList<String> currentData = savedInstanceState.getStringArrayList("liste");
-            remplirTableau(currentData);
 
+            ArrayList<String> currentData = savedInstanceState.getStringArrayList("liste");
+            donneur = currentData;
+            remplirTableau(donneur);
         }
 
 
     }
 
     public void onSaveInstanceState(Bundle outState){
-        ArrayList<String> donnees = new ArrayList<String>();
-        TableLayout table = (TableLayout) findViewById(R.id.tableLayout);
-        String text= "";
 
-
+        //Récupération des données -> rotation écran
         for(int i= 0; i<donneur.size();i++) {
             Object obj = findViewById(1000 + i);
             if (obj instanceof RadioButton) {
                 if (((RadioButton) obj).isChecked() == true){
-                    text = "f";
+                  donneur.set(i, "f");
                 }
                 else{
-                    text = "m";
+                    donneur.set(i, "m");
                 }
             } else if (obj instanceof Spinner) {
-                text = ((Spinner) obj).getSelectedItem().toString();
+                donneur.set(i, ((Spinner) obj).getSelectedItem().toString());
             } else if (obj instanceof TextView){
-                text = ((TextView) obj).getText().toString();
+                donneur.set(i, ((TextView) obj).getText().toString());
             }else if(obj instanceof EditText){
-                text = ((EditText) obj).getText().toString();
+                donneur.set(i, ((EditText) obj).getText().toString());
             }
-            donnees.add(text);
-        }
 
-        outState.putStringArrayList("liste", donnees);
+        }
+        outState.putStringArrayList("liste", donneur);
         super.onSaveInstanceState(outState);
     }
 
+    //UpdateDonneur
     public void updateData() throws ParseException {
         ArrayList<String> donnees = new ArrayList<String>();
         String text= "";
@@ -211,12 +208,11 @@ public class ModifierDonneur extends AppCompatActivity {
                 if(donneur.get(i).equals("f")){
                     radioGroup.clearCheck();
                     fem.setChecked(true);
-                    masc.setChecked(false);
                 }else{
                     radioGroup.clearCheck();
                     masc.setChecked(true);
-                    fem.setChecked(false);
                 }
+
                 fem.setId(1000 + i);
 
                 radioGroup.setLayoutParams(params);
@@ -248,10 +244,15 @@ public class ModifierDonneur extends AppCompatActivity {
                         new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, regions);
                 spinner.setAdapter(stringArrayAdapter);
 
+                //Récupère la bonne région par défaut
+                for(int ind = 0; ind<stringArrayAdapter.getCount(); ind++) {
+                    if(donneur.get(i).trim().equals(stringArrayAdapter.getItem(ind))){
+                        spinner.setSelection(ind);
+                        break;
+                    }
+                }
 
                 spinner.setId(1000+i);
-
-                //Rajouter le test pour sélectionner la bonne région par défaut
 
                 spinner.setLayoutParams(params);
                 row.addView(spinner);
@@ -260,10 +261,15 @@ public class ModifierDonneur extends AppCompatActivity {
                 ArrayAdapter<Integer> stringArrayAdapter=
                         new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, groupe);
                 spinner.setAdapter(stringArrayAdapter);
-                //spinner.setSelection(ArrayAdapter.getPosition(d.getGroupe()));
                 spinner.setId(1000+i);
 
-                //Rajouter le test pour sélectionner le bon groupe par défaut
+                //Récupère le bon groupe paer défaut
+                for(int ind = 0; ind<stringArrayAdapter.getCount(); ind++) {
+                    if(donneur.get(i).trim().equals(stringArrayAdapter.getItem(ind))){
+                        spinner.setSelection(ind);
+                        break;
+                    }
+                }
 
                 spinner.setLayoutParams(params);
                 row.addView(spinner);
@@ -298,6 +304,7 @@ public class ModifierDonneur extends AppCompatActivity {
 
     public void buttonAnnuler(View view) {
         Intent intent = new Intent(this, AfficherDonneur.class);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 
