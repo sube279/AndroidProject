@@ -53,21 +53,26 @@ public class ChoixStatut extends AppCompatActivity {
 
             switch (sang.getStatut()) {
 
-            case "en stock":
+            case ("en stock"):
                 RadioButton radioBtnStock = (RadioButton) findViewById(R.id.radioBtnStock);
                 radioBtnStock.setChecked(true);
-            case "transfert":
+                break;
+            case ("transfert"):
                 RadioButton radioBtnTransfert = (RadioButton) findViewById(R.id.radioBtnTransfert);
                 radioBtnTransfert.setChecked(true);
-            case "inutilisable":
+                break;
+            case ("inutilisable"):
                 RadioButton radioBtnUtilisable = (RadioButton) findViewById(R.id.radioBtnUtilisable);
                 radioBtnUtilisable.setChecked(true);
-            case "commandé":
+                break;
+            case ("commandé"):
                 RadioButton radioBtnCommande = (RadioButton) findViewById(R.id.radioBtnCommande);
                 radioBtnCommande.setChecked(true);
-            case "utilisé":
+                break;
+            case ("utilisé"):
                 RadioButton radioBtnUtilise = (RadioButton) findViewById(R.id.radioBtnUtilise);
                 radioBtnUtilise.setChecked(true);
+                break;
         }
 
     }
