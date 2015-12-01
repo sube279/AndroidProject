@@ -153,19 +153,28 @@ public class ModifierDonneur extends AppCompatActivity {
         }
 
         npa = donnees.get(5);
-        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-        d.setNom(donnees.get(0));
-        d.setPrenom(donnees.get(1));
-        d.setSexe(donnees.get(2));
-        d.setNaissance(formatter.parse(donnees.get(3)));
-        d.setAdresse(donnees.get(4));
-        d.setNPA(Integer.parseInt(donnees.get(5)));
-        d.setLieu(donnees.get(6));
-        d.setRegion(donnees.get(7));
-        d.setTelephone(donnees.get(8));
-        d.setGroupe(donnees.get(9));
-        d.setDonsPossibles(Integer.parseInt(donnees.get(10)));
-        d.setDisponibilite(formatter.parse(donnees.get(11)));
+        //teste la valeur de npa
+        if(testNPA()){
+            SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+            d.setNom(donnees.get(0));
+            d.setPrenom(donnees.get(1));
+            d.setSexe(donnees.get(2));
+            d.setNaissance(formatter.parse(donnees.get(3)));
+            d.setAdresse(donnees.get(4));
+            d.setNPA(Integer.parseInt(donnees.get(5)));
+            d.setLieu(donnees.get(6));
+            d.setRegion(donnees.get(7));
+            d.setTelephone(donnees.get(8));
+            d.setGroupe(donnees.get(9));
+            d.setDonsPossibles(Integer.parseInt(donnees.get(10)));
+            d.setDisponibilite(formatter.parse(donnees.get(11)));
+        }else {
+            ContextThemeWrapper themedContext;
+            themedContext = new ContextThemeWrapper(this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
+            alertDialog.setMessage(getResources().getString(R.string.alerteNPA));
+            alertDialog.show();
+        }
 
     }
 
@@ -321,20 +330,25 @@ public class ModifierDonneur extends AppCompatActivity {
         //Récupère les données des champs dans CDonneur
         saveData();
 
+        //Ne pas pour suivre (retour à l'affiche du donneur) si npa contient des lettres ou s'il est null
+        if(testNPA()==false){
+            return;
+        }
+
         if (d.getNom().equals("") == false && d.getPrenom().equals("") == false && d.getNaissance()!=null && d.getDisponibilite()!=null && d.getLieu().equals("") == false && d.getAdresse().equals("") == false
                 && d.getTelephone().equals("") == false){
-            if (testNPA()){
-                Intent intent = new Intent(this, AfficherDonneur.class);
-                intent.putExtra("id", id);
-                startActivity(intent);
-                updateData();
-            } else {
-                ContextThemeWrapper themedContext;
-                themedContext = new ContextThemeWrapper(this, android.R.style.Theme_DeviceDefault_Light_Dialog);
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
-                alertDialog.setMessage(getResources().getString(R.string.alerteChamps));
-                alertDialog.show();
-            }
+
+            Intent intent = new Intent(this, AfficherDonneur.class);
+            intent.putExtra("id", id);
+            startActivity(intent);
+            updateData();
+
+            ContextThemeWrapper themedContext;
+            themedContext = new ContextThemeWrapper(this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
+            alertDialog.setMessage(getResources().getString(R.string.alerteNPA));
+            alertDialog.show();
+
 
         } else {
             ContextThemeWrapper themedContext;
