@@ -1,11 +1,12 @@
 package db.object;
 
+import java.util.Comparator;
 import java.util.Date;
 
 /**
  * Created by Chacha on 27.10.2015.
  */
-public class CDonneur {
+public class CDonneur{
 
     private int id;
     private String nom;
@@ -145,4 +146,5 @@ public class CDonneur {
     public void setDisponibilite(Date disponibilite) {
         this.disponibilite = disponibilite;
     }
+
 }

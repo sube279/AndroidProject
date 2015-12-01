@@ -26,6 +26,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -38,16 +41,24 @@ public class Donneur extends AppCompatActivity {
 
     DonneurAdapter liste;
     String region;
+    String filtre = "nom";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donneur);
 
-               //ajouter icone a la barre d'action
+        //ajouter icone a la barre d'action
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        // récupère le filtre passé dans l'intent (choix fait par le menu)
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            filtre = extras.getString("filtre");
+        }
 
+        //afficher le bon titre de filtre
+        setFiltreTitle();
 
         //pour le menu (marche pas sur toutes les versions d'android sinon)
         try {
@@ -61,6 +72,11 @@ public class Donneur extends AppCompatActivity {
             // Ignore
         }
 
+        afficher();
+
+    }
+
+    public void afficher(){
 
         try {
             //Récupère la liste des régions dans les ressources: spinners.xml
@@ -74,9 +90,26 @@ public class Donneur extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
     }
 
+    private void setFiltreTitle(){
+        TextView text = (TextView) findViewById(R.id.textView_filtre);
+
+        switch(filtre){
+            case("naissance"):
+                text.setText("Filtre: naissance");
+                break;
+            case("dispo"):
+                text.setText("Filtre: disponibilité");
+                break;
+            case("nom"):
+                text.setText("Filtre: nom");
+                break;
+            case("prénom"):
+                text.setText("Filtre: prénom");
+                break;
+        }
+    }
 
     public void afficherParRegion(String region) throws ParseException {
 
@@ -152,20 +185,28 @@ public class Donneur extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.action_filtre_disponibilite:
-                TextView text1 = (TextView) findViewById(R.id.textView_filtre);
-                text1.setText("Filtre: disponibilité");
+                filtre = "dispo";
+                intent = new Intent(this, Donneur.class);
+                intent.putExtra("filtre", filtre);
+                startActivity(intent);
                 return true;
             case R.id.action_filtre_nom:
-                TextView text2 = (TextView) findViewById(R.id.textView_filtre);
-                text2.setText("Filtre: nom");
+                filtre="nom";
+                intent = new Intent(this, Donneur.class);
+                intent.putExtra("filtre", filtre);
+                startActivity(intent);
                 return true;
             case R.id.action_filtre_prenom:
-                TextView text3 = (TextView) findViewById(R.id.textView_filtre);
-                text3.setText("Filtre: prénom");
+                filtre = "prénom";
+                intent = new Intent(this, Donneur.class);
+                intent.putExtra("filtre", filtre);
+                startActivity(intent);
                 return true;
             case R.id.action_filtre_naissance:
-                TextView text4 = (TextView) findViewById(R.id.textView_filtre);
-                text4.setText("Filtre: naissance");
+                filtre = "naissance";
+                intent = new Intent(this, Donneur.class);
+                intent.putExtra("filtre", filtre);
+                startActivity(intent);
                 return true;
             case R.id.action_parametre:
                 Intent intent2 = new Intent(this, Parametre.class);
@@ -175,7 +216,6 @@ public class Donneur extends AppCompatActivity {
 
 
     }
-
 
     public class DonneurAdapter extends BaseAdapter {
 
@@ -189,10 +229,25 @@ public class Donneur extends AppCompatActivity {
 
         public List<CDonneur> getDataForListView() throws ParseException {
             List<CDonneur> listDonneur;
-            listDonneur = da.getAllDonneurByRegion(region);
+            listDonneur = da.getAllDonneurByNom(region);
 
+            //Tri en fonction du filtre
+            switch (filtre){
+                case("naissance"):
+                    listDonneur = da.getAllDonneurByNaissance(region);
+                    break;
+                case("dispo"):
+                    listDonneur = da.getAllDonneurByDispo(region);
+                    break;
+                case("nom"):
+                    listDonneur = da.getAllDonneurByNom(region);
+                    break;
+                case("prénom"):
+                    listDonneur = da.getAllDonneurByPrenom(region);
+                    break;
+
+            }
             return listDonneur;
-
         }
 
         @Override
@@ -216,7 +271,6 @@ public class Donneur extends AppCompatActivity {
                 LayoutInflater inflater = (LayoutInflater) Donneur.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = inflater.inflate(R.layout.liste_donneur, parent,false);
             }
-
             ImageView dispo = (ImageView) convertView.findViewById(R.id.imageViewDispo);
             TextView nom = (TextView)convertView.findViewById(R.id.textViewNom);
             TextView naissance = (TextView)convertView.findViewById(R.id.textViewNaissance);
