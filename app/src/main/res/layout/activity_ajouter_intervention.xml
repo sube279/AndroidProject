@@ -83,6 +83,30 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/region"
+            android:id="@+id/textView25"
+            android:layout_alignBottom="@+id/spinnerRegion"
+            android:layout_alignTop="@+id/spinnerRegion"
+            android:gravity="center_vertical"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:layout_alignLeft="@+id/textView"
+            android:layout_alignRight="@+id/textView4"
+            android:layout_alignEnd="@+id/textView4" />
+
+        <Spinner
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerRegion"
+            android:layout_below="@+id/textViewDate"
+            android:textColor="@color/greyLight"
+            android:textSize="18dp"
+            android:layout_alignLeft="@+id/textViewDescription"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/quantite"
             android:id="@+id/textView2"
             android:layout_alignBottom="@+id/textViewQuantite"
@@ -102,7 +126,7 @@
             android:textSize="18dp"
             android:layout_alignLeft="@+id/textViewDate"
             android:layout_alignRight="@+id/spinnerGroupe"
-            android:layout_below="@+id/textViewDate"
+            android:layout_below="@+id/spinnerRegion"
             android:layout_marginTop="15dp" />
 
         <TextView

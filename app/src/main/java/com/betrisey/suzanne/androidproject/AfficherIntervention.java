@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
@@ -12,15 +13,20 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import db.adapter.InterventionDataSource;
+import db.adapter.SangDataSource;
 import db.object.CIntervention;
+import db.object.CSang;
 
 public class AfficherIntervention extends AppCompatActivity {
 
     private int id;
     InterventionDataSource ia;
+    SangDataSource sa;
+    List<CSang> listSang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,12 +76,30 @@ public class AfficherIntervention extends AppCompatActivity {
         tw.setText(i.getGroupe());
         tw = (TextView) findViewById(R.id.textViewDescription);
         tw.setText(i.getDescription());
+        tw = (TextView) findViewById(R.id.textViewRegion);
+        tw.setText(i.getRegion());
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.pochettes);
+        sa = new SangDataSource(this);
+        try {
+            listSang = sa.getAllSangsByIntervention(i.getId());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        for(int j = 0; j<listSang.size(); j++){
+            TextView text = new TextView(getApplicationContext());
+            text.setText(getResources().getString(R.string.nrpochette) + String.valueOf(listSang.get(j).getId()));
+            text.setTextSize(18);
+            text.setTextColor(getResources().getColor(R.color.black));
+            layout.addView(text);
+        }
 
 
 
     }
 
-    public void buttonDelete(View view) {
+    public void buttonDelete(View view) throws ParseException {
         Intent intent = new Intent(this, Intervention.class);
         ia.deleteIntervention(id);
         startActivity(intent);
