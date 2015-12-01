@@ -1,9 +1,10 @@
 package com.betrisey.suzanne.androidproject;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -11,7 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class Parametre extends AppCompatActivity {
@@ -47,6 +50,20 @@ public class Parametre extends AppCompatActivity {
         {
             radioButton = (RadioButton) findViewById(R.id.radioFrancais);
             radioButton.setChecked(true);
+        }
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplication());
+        String region = preferences.getString("region", "Brig");
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerRegions);
+        String[] regions = getResources().getStringArray(R.array.region);
+
+        //Récupère la bonne région par défaut
+        for(int i = 0; i<regions.length; i++) {
+            if (region.equals(regions[i].toString())) {
+                spinner.setSelection(i);
+                break;
+            }
         }
     }
 
@@ -86,6 +103,14 @@ public class Parametre extends AppCompatActivity {
         {
             setLocale("de");
         }
+
+        //Enregistre la préférence pour la région
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerRegions);
+        String region = spinner.getSelectedItem().toString();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplication());
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("region", region);
+        editor.commit();
 
         activity.finish();
 

@@ -2,7 +2,11 @@ package com.betrisey.suzanne.androidproject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.preference.Preference;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,6 +36,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.prefs.Preferences;
 
 import db.adapter.DonneurDataSource;
 import db.object.CDonneur;
@@ -76,11 +81,50 @@ public class Donneur extends AppCompatActivity {
 
     }
 
+    private class PreferenceChangeListener implements SharedPreferences.OnSharedPreferenceChangeListener{
+
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            restartActivity();
+        }
+
+    }
+
+    private void restartActivity(){
+        Intent intent = new Intent(this, Donneur.class);
+        intent.putExtra("filtre", filtre);
+        startActivity(intent);
+    }
+
+
+    private int compareRegion(String regionPref){
+        List<String> listRegions = Arrays.asList(getResources().getStringArray(R.array.region));
+
+        for(int i = 0; i<listRegions.size(); i ++) {
+
+            if (listRegions.get(i).equals(regionPref)) {
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
+
     public void afficher(){
+
+        //Récupérer région dans les préférences
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplication());
+        String regionPref = preferences.getString("region", "Brig");
+        PreferenceChangeListener mPreferenceListener = new PreferenceChangeListener();
+        preferences.registerOnSharedPreferenceChangeListener(mPreferenceListener);
+
 
         try {
             //Récupère la liste des régions dans les ressources: spinners.xml
             List<String> listRegions = Arrays.asList(getResources().getStringArray(R.array.region));
+
+            Collections.swap(listRegions, 0,  compareRegion(regionPref));
 
             for(int i = 0; i < listRegions.size(); i++){
                 region = listRegions.get(i);
@@ -89,7 +133,7 @@ public class Donneur extends AppCompatActivity {
 
         } catch (ParseException e) {
             e.printStackTrace();
-        }
+            }
     }
 
     private void setFiltreTitle(){

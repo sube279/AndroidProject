@@ -48,8 +48,10 @@ public class ModifierDonneur extends AppCompatActivity {
     Activity activity;
     ArrayList<String> donneur;
     String npa;
+    int IntCheckButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modifier_donneur);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -103,6 +105,7 @@ public class ModifierDonneur extends AppCompatActivity {
 
 
     }
+
 
     public void onSaveInstanceState(Bundle outState){
         //Récupération des données -> rotation écran
@@ -222,6 +225,7 @@ public class ModifierDonneur extends AppCompatActivity {
                 RadioButton masc = new RadioButton(this);
                 masc.setText(getString(R.string.masculin));
 
+
                 if(donneur.get(i).equals("f")){
                     radioGroup.clearCheck();
                     fem.setChecked(true);
@@ -231,6 +235,7 @@ public class ModifierDonneur extends AppCompatActivity {
                 }
 
                 fem.setId(1000 + i);
+                masc.setId(3000 + 1);
 
                 radioGroup.setLayoutParams(params);
                 //Rajouter le test pour cocher la bonne sélection par défaut
@@ -335,6 +340,7 @@ public class ModifierDonneur extends AppCompatActivity {
             return;
         }
 
+        //Pas de champs vide
         if (d.getNom().equals("") == false && d.getPrenom().equals("") == false && d.getNaissance()!=null && d.getDisponibilite()!=null && d.getLieu().equals("") == false && d.getAdresse().equals("") == false
                 && d.getTelephone().equals("") == false){
 
@@ -342,13 +348,6 @@ public class ModifierDonneur extends AppCompatActivity {
             intent.putExtra("id", id);
             startActivity(intent);
             updateData();
-
-            ContextThemeWrapper themedContext;
-            themedContext = new ContextThemeWrapper(this, android.R.style.Theme_DeviceDefault_Light_Dialog);
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
-            alertDialog.setMessage(getResources().getString(R.string.alerteNPA));
-            alertDialog.show();
-
 
         } else {
             ContextThemeWrapper themedContext;

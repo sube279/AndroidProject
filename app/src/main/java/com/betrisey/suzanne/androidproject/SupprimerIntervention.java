@@ -45,7 +45,7 @@ public class SupprimerIntervention extends AppCompatActivity {
         try {
             ViewConfiguration config = ViewConfiguration.get(this);
             Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
-            if(menuKeyField != null) {
+            if (menuKeyField != null) {
                 menuKeyField.setAccessible(true);
                 menuKeyField.setBoolean(config, false);
             }
@@ -60,11 +60,21 @@ public class SupprimerIntervention extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ListView lv = (ListView)findViewById(R.id.listView);
+        ListView lv = (ListView) findViewById(R.id.listView);
         lv.setAdapter(liste);
 
-        }
+    }
 
+    /*public void onSaveInstanceState(Bundle outState) {
+        ArrayList<CIntervention> tests = new ArrayList<CIntervention>();
+        CIntervention intervention;
+        for(int i = 0; i < size; i++) {
+            intervention = (CIntervention) liste.getItem(i);
+            tests.add(intervention);
+        }
+        outState.putSerializable("tests", tests);
+        super.onSaveInstanceState(outState);
+    }*/
 
     public void buttonDelete(View view) throws ParseException {
         Intent intent = new Intent(this, Intervention.class);
@@ -125,6 +135,7 @@ public class SupprimerIntervention extends AppCompatActivity {
 
                 // On récupère notre checkBox
                 final CheckBox cb = (CheckBox) convertView.findViewById (R.id.CheckBoxSelected);
+
                 // On lui affecte un tag comportant la position de l'item afin de
                 // pouvoir le récupérer au clic de la checkbox
                 cb.setTag(position);
