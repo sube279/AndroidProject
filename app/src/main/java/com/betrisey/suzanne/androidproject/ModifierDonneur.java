@@ -2,6 +2,7 @@ package com.betrisey.suzanne.androidproject;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -45,6 +47,7 @@ public class ModifierDonneur extends AppCompatActivity {
     TextView mDateDisplay2;
     Activity activity;
     ArrayList<String> donneur;
+    String npa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,13 +105,12 @@ public class ModifierDonneur extends AppCompatActivity {
     }
 
     public void onSaveInstanceState(Bundle outState){
-
         //Récupération des données -> rotation écran
         for(int i= 0; i<donneur.size();i++) {
             Object obj = findViewById(1000 + i);
             if (obj instanceof RadioButton) {
                 if (((RadioButton) obj).isChecked() == true){
-                  donneur.set(i, "f");
+                    donneur.set(i, "f");
                 }
                 else{
                     donneur.set(i, "m");
@@ -122,12 +124,12 @@ public class ModifierDonneur extends AppCompatActivity {
             }
 
         }
+
         outState.putStringArrayList("liste", donneur);
         super.onSaveInstanceState(outState);
     }
 
-    //UpdateDonneur
-    public void updateData() throws ParseException {
+    private void saveData() throws ParseException {
         ArrayList<String> donnees = new ArrayList<String>();
         String text= "";
 
@@ -150,6 +152,7 @@ public class ModifierDonneur extends AppCompatActivity {
             donnees.add(text);
         }
 
+        npa = donnees.get(5);
         SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
         d.setNom(donnees.get(0));
         d.setPrenom(donnees.get(1));
@@ -164,6 +167,11 @@ public class ModifierDonneur extends AppCompatActivity {
         d.setDonsPossibles(Integer.parseInt(donnees.get(10)));
         d.setDisponibilite(formatter.parse(donnees.get(11)));
 
+    }
+
+    //UpdateDonneur
+    public void updateData() throws ParseException {
+        saveData();
         da.updateDonneur(d);
     }
 
@@ -309,10 +317,60 @@ public class ModifierDonneur extends AppCompatActivity {
     }
 
     public void buttonOk(View view) throws ParseException {
-        Intent intent = new Intent(this, AfficherDonneur.class);
-        intent.putExtra("id", id);
-        startActivity(intent);
-        updateData();
+
+        //Récupère les données des champs dans CDonneur
+        saveData();
+
+        if (d.getNom().equals("") == false && d.getPrenom().equals("") == false && d.getNaissance()!=null && d.getDisponibilite()!=null && d.getLieu().equals("") == false && d.getAdresse().equals("") == false
+                && d.getTelephone().equals("") == false){
+            if (testNPA()){
+                Intent intent = new Intent(this, AfficherDonneur.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
+                updateData();
+            } else {
+                ContextThemeWrapper themedContext;
+                themedContext = new ContextThemeWrapper(this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
+                alertDialog.setMessage(getResources().getString(R.string.alerteChamps));
+                alertDialog.show();
+            }
+
+        } else {
+            ContextThemeWrapper themedContext;
+            themedContext = new ContextThemeWrapper(this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
+            alertDialog.setMessage(getResources().getString(R.string.alerteChamps));
+            alertDialog.show();
+        }
+    }
+
+    public Date changeIntoDate(String s) {
+        DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
+        Date date = null;
+        try {
+            date = format.parse(s);
+            return date;
+        } catch (ParseException e) {
+            ContextThemeWrapper themedContext;
+            themedContext = new ContextThemeWrapper(this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
+            alertDialog.setMessage(getResources().getString(R.string.alerteDate));
+            alertDialog.show();
+            return null;
+        }
+
+    }
+
+    public boolean testNPA(){
+        try {
+            Integer.parseInt(npa);
+        } catch(NumberFormatException e) {
+            return false;
+        } catch(NullPointerException e) {
+            return false;
+        }
+        return true;
     }
 
     @SuppressLint("ValidFragment")

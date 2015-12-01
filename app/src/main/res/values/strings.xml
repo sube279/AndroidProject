@@ -91,6 +91,8 @@
     <string name="telephone">Téléphone:</string>
     <string name="groupe">Groupe:</string>
     <string name="alerteNom">Le nom et le prénom du donneur sont requis.</string>
+    <string name="alerteChamps">Tous les champs doivent être renseignés.</string>
+    <string name="alerteNPA">Veuillez remplir le champs NPA. Les lettres ne sont pas autorisées.</string>
 
     <!-- Fenêtre parametre-->
     <string name="langue">Langue:</string>

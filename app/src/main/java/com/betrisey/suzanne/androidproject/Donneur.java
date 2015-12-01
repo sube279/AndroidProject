@@ -106,7 +106,7 @@ public class Donneur extends AppCompatActivity {
                 text.setText(getResources().getString(R.string.filtreNom));
                 break;
             case("prénom"):
-                text.setText(getResources().getString(R.string.filtrePrenom));
+                text.setText("Filtre: prénom");
                 break;
         }
     }

@@ -128,43 +128,63 @@ public class NouveauDonneur extends AppCompatActivity {
             d.setSexe("m");
             d.setDonsPossibles(4);
         }
+        TextView tv = (TextView) findViewById(R.id.textViewDate);
+        d.setNaissance(changeIntoDate(tv.getText().toString()));
+        tv = (TextView) findViewById(R.id.textViewDateDispo);
+        d.setDisponibilite(changeIntoDate(tv.getText().toString()));
 
         et = (EditText) findViewById(R.id.editTelephone);
         d.setTelephone(et.getText().toString());
 
-        if (d.getNom().equals("") == false && d.getPrenom().equals("") == false) {
+        et = (EditText) findViewById(R.id.editAdresse);
+        d.setAdresse(et.getText().toString());
+        et = (EditText) findViewById(R.id.editAdresse);
+        d.setAdresse(et.getText().toString());
+        et = (EditText) findViewById(R.id.editLieu);
+        d.setLieu(et.getText().toString());
 
-            TextView tv = (TextView) findViewById(R.id.textViewDate);
-            d.setNaissance(changeIntoDate(tv.getText().toString()));
-            tv = (TextView) findViewById(R.id.textViewDateDispo);
-            d.setDisponibilite(changeIntoDate(tv.getText().toString()));
+        if (d.getNom().equals("") == false && d.getPrenom().equals("") == false && d.getNaissance()!=null && d.getDisponibilite()!=null && d.getLieu().equals("") == false && d.getAdresse().equals("") == false
+                && d.getTelephone().equals("") == false){
 
+            if(testNPA()){
+                et = (EditText) findViewById(R.id.ediNpa);
+                d.setNPA(Integer.parseInt(et.getText().toString()));
+                Spinner spin = (Spinner) findViewById(R.id.spinnerRegion);
+                d.setRegion(spin.getSelectedItem().toString());
+                Spinner spin2 = (Spinner) findViewById(R.id.spinnerGroupes);
+                d.setGroupe(spin2.getSelectedItem().toString());
 
-            TextView etfacultatif = (EditText) findViewById(R.id.editAdresse);
-            d.setAdresse(etfacultatif.getText().toString());
-            etfacultatif = (EditText) findViewById(R.id.ediNpa);
-            d.setNPA(Integer.parseInt(etfacultatif.getText().toString()));
-            etfacultatif = (EditText) findViewById(R.id.editAdresse);
-            d.setAdresse(etfacultatif.getText().toString());
-            etfacultatif = (EditText) findViewById(R.id.editLieu);
-            d.setLieu(etfacultatif.getText().toString());
-            Spinner spin = (Spinner) findViewById(R.id.spinnerRegion);
-            d.setRegion(spin.getSelectedItem().toString());
-            Spinner spin2 = (Spinner) findViewById(R.id.spinnerGroupes);
-            d.setGroupe(spin2.getSelectedItem().toString());
+                da.createDonneur(d);
 
+                Intent intent = new Intent(this, Donneur.class);
+                startActivity(intent);
+            }else{
+                ContextThemeWrapper themedContext;
+                themedContext = new ContextThemeWrapper( this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
+                alertDialog.setMessage(getResources().getString(R.string.alerteNPA));
+                alertDialog.show();
+            }
 
-            da.createDonneur(d);
-
-            Intent intent = new Intent(this, Donneur.class);
-            startActivity(intent);
         } else {
             ContextThemeWrapper themedContext;
             themedContext = new ContextThemeWrapper(this, android.R.style.Theme_DeviceDefault_Light_Dialog);
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(themedContext);
-            alertDialog.setMessage(getResources().getString(R.string.alerteNom));
+            alertDialog.setMessage(getResources().getString(R.string.alerteChamps));
             alertDialog.show();
         }
+    }
+
+    public boolean testNPA(){
+        try {
+            EditText text = (EditText) findViewById (R.id.ediNpa);
+            Integer.parseInt(text.getText().toString());
+        } catch(NumberFormatException e) {
+            return false;
+        } catch(NullPointerException e) {
+            return false;
+        }
+        return true;
     }
 
     public Date changeIntoDate(String s) {
