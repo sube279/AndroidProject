@@ -30,6 +30,9 @@
     <string name="action_filtre_prenom">Filtrer par prénom</string>
     <string name="action_filtre_naissance">Filtrer par naissance</string>
     <string name="action_parametre">Paramètres</string>
+    <string name="filtreNaissance">Filtre: naissance</string>
+    <string name="filtreDispo">Filtre: disponibilité</string>
+    <string name="filtrePrenom">Filtre: prénom</string>
 
     <!-- Fenetre modifier donneur -->
     <string-array name="infoModifDonneur">
@@ -63,6 +66,8 @@
 
     <!-- Fenetre intervention -->
     <string name="selectionnes">selectionnés</string>
+    <string name="pochette">Pochettes commandées:</string>
+    <string name="nrpochette">ID: </string>
 
     <!-- Fenetre modifier intervention -->
     <string name="alerteErreur">Erreur</string>
@@ -88,6 +93,8 @@
     <string name="telephone">Téléphone:</string>
     <string name="groupe">Groupe:</string>
     <string name="alerteNom">Le nom et le prénom du donneur sont requis.</string>
+    <string name="alerteChamps">Tous les champs doivent être renseignés.</string>
+    <string name="alerteNPA">Veuillez remplir le champs NPA. Les lettres ne sont pas autorisées.</string>
 
     <!-- Fenêtre parametre-->
     <string name="langue">Langue:</string>
