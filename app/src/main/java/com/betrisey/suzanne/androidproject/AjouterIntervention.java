@@ -23,16 +23,20 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import db.adapter.InterventionDataSource;
+import db.adapter.SangDataSource;
 import db.object.CIntervention;
+import db.object.CSang;
 
 import static android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT;
 
 public class AjouterIntervention extends AppCompatActivity {
 
     InterventionDataSource ia;
+    SangDataSource sa;
     TextView mDateDisplay;
     Activity activity;
 
@@ -46,6 +50,7 @@ public class AjouterIntervention extends AppCompatActivity {
 
 
        ia = new InterventionDataSource(this);
+       sa = new SangDataSource(this);
 
        //spinner
        Spinner spinner = (Spinner) findViewById(R.id.spinnerGroupe);
@@ -56,6 +61,16 @@ public class AjouterIntervention extends AppCompatActivity {
        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
        spinner.setAdapter(adapter);
+
+       //spinner
+       Spinner spinner2 = (Spinner) findViewById(R.id.spinnerRegion);
+// Create an ArrayAdapter using the string array and a default spinner layout
+       ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
+               R.array.region, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+       adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+       spinner2.setAdapter(adapter2);
 
        mDateDisplay = (TextView) findViewById(R.id.textViewDate);
        mDateDisplay.setOnClickListener(new View.OnClickListener() {
@@ -88,15 +103,44 @@ public class AjouterIntervention extends AppCompatActivity {
                 et = (EditText) findViewById (R.id.textViewQuantite);
                 i.setQuantite(Integer.parseInt(et.getText().toString()));
                 Spinner spin = (Spinner) findViewById (R.id.spinnerGroupe);
-                i.setGroupe((String) spin.getSelectedItem().toString());
+                i.setGroupe(spin.getSelectedItem().toString());
+                spin = (Spinner) findViewById (R.id.spinnerRegion);
+                i.setRegion(spin.getSelectedItem().toString());;
 
-                ia.createIntervention(i);
+                long id = ia.createIntervention(i);
+                int quantite = i.getQuantite();
+
+                List<CSang> listeS = sa.getAllSangs();
+
+                for(int j = 0; j<listeS.size(); j++)
+                {
+                    if(quantite>0 && i.getGroupe().equals(listeS.get(j).getGroupe()) && i.getRegion().equals(listeS.get(j).getRegion()) && listeS.get(j).getStatut().equals("en stock")){
+                        listeS.get(j).setIntervention((int) id);
+                        listeS.get(j).setStatut("commandé");
+                        sa.updateSang(listeS.get(j));
+                        quantite= quantite-1;
+                    }
+                }
+
+                if(quantite>0)
+                {
+                    for(int j = 0; j<listeS.size(); j++)
+                    {
+                        if(quantite>0 && i.getGroupe().equals(listeS.get(j).getGroupe()) && listeS.get(j).getStatut().equals("en stock")){
+                            listeS.get(j).setIntervention((int) id);
+                            listeS.get(j).setStatut("transfert");
+                            listeS.get(j).setRegion(i.getRegion());
+                            sa.updateSang(listeS.get(j));
+                            quantite= quantite-1;
+                        }
+                    }
+                }
+
 
                 Intent intent = new Intent(this, Intervention.class);
                 startActivity(intent);
             }
-        }
-        else
+        } else
         {
             ContextThemeWrapper themedContext;
             themedContext = new ContextThemeWrapper( this, android.R.style.Theme_DeviceDefault_Light_Dialog);

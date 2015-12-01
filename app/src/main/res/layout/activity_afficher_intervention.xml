@@ -84,9 +84,29 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/region"
+            android:id="@+id/textView21"
+            android:layout_below="@+id/textView"
+            android:layout_alignLeft="@+id/textView"
+            android:layout_alignStart="@+id/textView"
+            android:textSize="18dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewRegion"
+            android:layout_alignTop="@+id/textView21"
+            android:layout_alignLeft="@+id/textViewDate"
+            android:textColor="@color/grey"
+            android:textSize="18dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/quantite"
             android:id="@+id/textView2"
-            android:layout_below="@+id/textView"
+            android:layout_below="@+id/textView21"
             android:layout_alignLeft="@+id/textView"
             android:layout_alignStart="@+id/textView"
             android:layout_marginTop="25dp"
@@ -147,6 +167,26 @@
             android:textSize="18dp"
             android:maxWidth="180dp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pochette"
+            android:id="@+id/textView5"
+            android:layout_below="@+id/textView4"
+            android:layout_alignLeft="@+id/textView"
+            android:layout_alignStart="@+id/textView"
+            android:layout_marginTop="25dp"
+            android:textSize="18dp"
+            android:textColor="@color/black"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/pochettes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/textView5"
+            android:layout_alignLeft="@+id/textView5"
+            android:layout_alignStart="@+id/textView5"></LinearLayout>
 
 
     </RelativeLayout>

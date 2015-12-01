@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Don de sang</string>
+    <string name="app_name">Blutspende</string>
 
     <!-- Nom parametre -->
     <string name="action_search">Recherche</string>
@@ -30,24 +30,21 @@
     <string name="action_filtre_prenom">Filtrer par prénom</string>
     <string name="action_filtre_naissance">Filtrer par naissance</string>
     <string name="action_parametre">Paramètres</string>
-    <string name="filtreNaissance">Filtre: naissance</string>
-    <string name="filtreDispo">Filtre: disponibilité</string>
-    <string name="filtrePrenom">Filtre: prénom</string>
 
     <!-- Fenetre modifier donneur -->
     <string-array name="infoModifDonneur">
-        <item>Prénom:</item>
-        <item>Nom:</item>
+        <item>Vorname:</item>
+        <item>Name:</item>
         <item>Genre:</item>
-        <item>Naissance:</item>
+        <item>Geburt:</item>
         <item>Adresse:</item>
-        <item>Npa:</item>
-        <item>Lieu:</item>
+        <item>PLZ:</item>
+        <item>Ort:</item>
         <item>Région:</item>
-        <item>Téléphone:</item>
-        <item>Groupe:</item>
-        <item>Dons possibles:</item>
-        <item>Disponible:</item>
+        <item>Telefon:</item>
+        <item>Gruppe:</item>
+        <item>Anzahl mögl.Spende:</item>
+        <item>Verfügbar:</item>
     </string-array>
 
     <!-- Fenetre banque du sang -->
@@ -66,8 +63,6 @@
 
     <!-- Fenetre intervention -->
     <string name="selectionnes">selectionnés</string>
-    <string name="pochette">Pochettes commandées:</string>
-    <string name="nrpochette">ID: </string>
 
     <!-- Fenetre modifier intervention -->
     <string name="alerteErreur">Erreur</string>
@@ -93,8 +88,6 @@
     <string name="telephone">Téléphone:</string>
     <string name="groupe">Groupe:</string>
     <string name="alerteNom">Le nom et le prénom du donneur sont requis.</string>
-    <string name="alerteChamps">Tous les champs doivent être renseignés.</string>
-    <string name="alerteNPA">Veuillez remplir le champs NPA. Les lettres ne sont pas autorisées.</string>
 
     <!-- Fenêtre parametre-->
     <string name="langue">Langue:</string>
@@ -167,4 +160,4 @@
     <string name="aucunSelectionne">0 sélectionné</string>
 
     <string name="alerteIntervention">Aucune intervention utilise cette pochette</string>
-   </resources>
+</resources>

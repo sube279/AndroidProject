@@ -22,6 +22,7 @@ public class CIntervention extends Activity {
     private String description;
     private int quantite;
     private String groupe;
+    private String region;
     boolean selected;
 
 
@@ -30,11 +31,12 @@ public class CIntervention extends Activity {
 
     }
 
-    public CIntervention(Date date, String description, int quantite, String groupe, boolean selected) {
+    public CIntervention(Date date, String description, int quantite, String groupe, String region, boolean selected) {
         this.date = date;
         this.description = description;
         this.quantite = quantite;
         this.groupe = groupe;
+        this.region = region;
         this.selected = selected;
 
     }
@@ -76,6 +78,10 @@ public class CIntervention extends Activity {
     public int getQuantite() {
         return quantite;
     }
+
+    public String getRegion() { return region; }
+
+    public void setRegion(String region) { this.region = region; }
 
     public String getGroupe() {
         return groupe;

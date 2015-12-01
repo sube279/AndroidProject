@@ -65,6 +65,7 @@ public final class DonDeSangContract {
             public static final String KEY_DATE = "date";
             public static final String KEY_DESCRIPTION = "description";
             public static final String KEY_GROUPE = "groupe";
+            public static final String KEY_REGION = "region";
 
             //Table person create statement
             public static final String CREATE_TABLE_INTERVENTION = "CREATE TABLE "
@@ -73,7 +74,8 @@ public final class DonDeSangContract {
                     + InterventionEntry.KEY_QUANTITE + " INTEGER, "
                     + InterventionEntry.KEY_DATE + " TEXT, "
                     + InterventionEntry.KEY_DESCRIPTION + " TEXT, "
-                    + InterventionEntry.KEY_GROUPE + " TEXT "
+                    + InterventionEntry.KEY_GROUPE + " TEXT, "
+                    + InterventionEntry.KEY_REGION + " TEXT "
                     + ");";
         }
 

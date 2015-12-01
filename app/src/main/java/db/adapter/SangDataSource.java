@@ -132,6 +132,31 @@ public class SangDataSource {
         return sangs;
     }
 
+    public List<CSang> getAllSangsByIntervention(int intervention) throws ParseException {
+        List<CSang> sangs = new ArrayList<CSang>();
+        String sql = "SELECT * FROM " + DonDeSangContract.SangEntry.TABLE_SANG + " WHERE " + DonDeSangContract.SangEntry.KEY_ID_INTERVENTION + " = '" + intervention + "'" + " ORDER BY " + DonDeSangContract.SangEntry.KEY_GROUPE + " ;";
+
+        Cursor cursor = this.db.rawQuery(sql, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                CSang s = new CSang();
+                s.setId(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_ID)));
+                s.setDonneur(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_ID_DONNEUR)));
+                s.setDateDon(changeIntoDate(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_DATE_DON))));
+                s.setPeremption(changeIntoDate(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_DATE_PEREMPTION))));
+                s.setRegion(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_REGION)));
+                s.setGroupe(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_GROUPE)));
+                s.setStatut(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_STATUT)));
+                s.setIntervention(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_ID_INTERVENTION)));
+
+                sangs.add(s);
+            } while(cursor.moveToNext());
+        }
+
+        return sangs;
+    }
+
     public List<CSang> getAllSangsByStatut(String region) throws ParseException {
         List<CSang> sangs = new ArrayList<CSang>();
         String sql = "SELECT * FROM " + DonDeSangContract.SangEntry.TABLE_SANG + " WHERE " + DonDeSangContract.SangEntry.KEY_REGION + " = '" + region + "'" + " ORDER BY lower(" + DonDeSangContract.SangEntry.KEY_STATUT + ");";
@@ -189,6 +214,7 @@ public class SangDataSource {
         ContentValues values = new ContentValues();
         values.put(DonDeSangContract.SangEntry.KEY_REGION, sang.getRegion());
         values.put(DonDeSangContract.SangEntry.KEY_STATUT, sang.getStatut());
+        values.put(DonDeSangContract.SangEntry.KEY_ID_INTERVENTION, sang.getIntervention());
 
         return this.db.update(DonDeSangContract.SangEntry.TABLE_SANG, values, DonDeSangContract.SangEntry.KEY_ID + " = ?",
                 new String[] { String.valueOf(sang.getId()) });

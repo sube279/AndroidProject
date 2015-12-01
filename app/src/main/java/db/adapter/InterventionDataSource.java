@@ -16,6 +16,7 @@ import java.util.Locale;
 import db.SQLiteHelper;
 import db.DonDeSangContract.InterventionEntry;
 import db.object.CIntervention;
+import db.object.CSang;
 
 /**
  * Created by Suzanne on 07.11.2015.
@@ -24,11 +25,14 @@ public class InterventionDataSource {
 
     private SQLiteDatabase db;
     private Context context;
+    private SangDataSource sa;
+
 
     public InterventionDataSource(Context context){
         SQLiteHelper sqliteHelper = SQLiteHelper.getInstance(context);
         db = sqliteHelper.getWritableDatabase();
         this.context = context;
+        sa = new SangDataSource(context);
     }
 
     /**
@@ -41,6 +45,8 @@ public class InterventionDataSource {
         values.put(InterventionEntry.KEY_DATE, changeIntoString(intervention.getDate()));
         values.put(InterventionEntry.KEY_DESCRIPTION, intervention.getDescription());
         values.put(InterventionEntry.KEY_GROUPE, intervention.getGroupe());
+        values.put(InterventionEntry.KEY_REGION, intervention.getRegion());
+
 
         id = this.db.insert(InterventionEntry.TABLE_INTERVENTION, null, values);
 
@@ -56,6 +62,7 @@ public class InterventionDataSource {
         values.put(InterventionEntry.KEY_DATE, changeIntoString(intervention.getDate()));
         values.put(InterventionEntry.KEY_DESCRIPTION, intervention.getDescription());
         values.put(InterventionEntry.KEY_GROUPE, intervention.getGroupe());
+        values.put(InterventionEntry.KEY_REGION, intervention.getRegion());
 
         return this.db.update(InterventionEntry.TABLE_INTERVENTION, values, InterventionEntry.KEY_ID + " = ?",
                 new String[] { String.valueOf(intervention.getId()) });
@@ -79,6 +86,7 @@ public class InterventionDataSource {
                 i.setDescription(cursor.getString(cursor.getColumnIndex(InterventionEntry.KEY_DESCRIPTION)));
                 i.setGroupe(cursor.getString(cursor.getColumnIndex(InterventionEntry.KEY_GROUPE)));
                 i.setQuantite(cursor.getInt(cursor.getColumnIndex(InterventionEntry.KEY_QUANTITE)));
+                i.setRegion(cursor.getString(cursor.getColumnIndex(InterventionEntry.KEY_REGION)));
 
                 interventions.add(i);
             } while(cursor.moveToNext());
@@ -106,6 +114,7 @@ public class InterventionDataSource {
         i.setDescription(cursor.getString(cursor.getColumnIndex(InterventionEntry.KEY_DESCRIPTION)));
         i.setQuantite(cursor.getInt(cursor.getColumnIndex(InterventionEntry.KEY_QUANTITE)));
         i.setGroupe(cursor.getString(cursor.getColumnIndex(InterventionEntry.KEY_GROUPE)));
+        i.setRegion(cursor.getString(cursor.getColumnIndex(InterventionEntry.KEY_REGION)));
 
         return i;
     }
@@ -114,7 +123,14 @@ public class InterventionDataSource {
      * Delete a Intervention - this will also delete all records
      * for the intervention
      */
-    public void deleteIntervention(long id){
+    public void deleteIntervention(long id) throws ParseException {
+
+        List<CSang> liste = sa.getAllSangsByIntervention((int)id);
+
+        for(int i = 0; i<liste.size(); i++){
+            liste.get(i).setIntervention(-1);
+            sa.updateSang(liste.get(i));
+        }
 
         //delete the intervention
         this.db.delete(InterventionEntry.TABLE_INTERVENTION, InterventionEntry.KEY_ID + " = ?",

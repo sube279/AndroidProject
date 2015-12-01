@@ -66,7 +66,7 @@ public class SupprimerIntervention extends AppCompatActivity {
         }
 
 
-    public void buttonDelete(View view) {
+    public void buttonDelete(View view) throws ParseException {
         Intent intent = new Intent(this, Intervention.class);
         InterventionDataSource ia = new InterventionDataSource(getApplicationContext());
         for(int j = 0; j < size; j++){
