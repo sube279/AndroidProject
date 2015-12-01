@@ -97,16 +97,16 @@ public class Donneur extends AppCompatActivity {
 
         switch(filtre){
             case("naissance"):
-                text.setText("Filtre: naissance");
+                text.setText(getResources().getString(R.string.filtreNaissance));
                 break;
             case("dispo"):
-                text.setText("Filtre: disponibilité");
+                text.setText(getResources().getString(R.string.filtreDispo));
                 break;
             case("nom"):
-                text.setText("Filtre: nom");
+                text.setText(getResources().getString(R.string.filtreNom));
                 break;
             case("prénom"):
-                text.setText("Filtre: prénom");
+                text.setText(getResources().getString(R.string.filtrePrenom));
                 break;
         }
     }

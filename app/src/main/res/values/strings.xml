@@ -30,6 +30,9 @@
     <string name="action_filtre_prenom">Filtrer par prénom</string>
     <string name="action_filtre_naissance">Filtrer par naissance</string>
     <string name="action_parametre">Paramètres</string>
+    <string name="filtreNaissance">Filtre: naissance</string>
+    <string name="filtreDispo">Filtre: disponibilité</string>
+    <string name="filtrePrenom">Filtre: prénom</string>
 
     <!-- Fenetre modifier donneur -->
     <string-array name="infoModifDonneur">

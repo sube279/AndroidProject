@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.betrisey.suzanne.androidproject.Sang;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -83,6 +85,81 @@ public class SangDataSource {
     public List<CSang> getAllSangs() throws ParseException {
         List<CSang> sangs = new ArrayList<CSang>();
         String sql = "SELECT * FROM " + DonDeSangContract.SangEntry.TABLE_SANG + " ORDER BY " + DonDeSangContract.SangEntry.KEY_GROUPE + " ;";
+
+        Cursor cursor = this.db.rawQuery(sql, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                CSang s = new CSang();
+                s.setId(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_ID)));
+                s.setDonneur(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_ID_DONNEUR)));
+                s.setDateDon(changeIntoDate(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_DATE_DON))));
+                s.setPeremption(changeIntoDate(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_DATE_PEREMPTION))));
+                s.setRegion(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_REGION)));
+                s.setGroupe(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_GROUPE)));
+                s.setStatut(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_STATUT)));
+                s.setIntervention(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_ID_INTERVENTION)));
+
+                sangs.add(s);
+            } while(cursor.moveToNext());
+        }
+
+        return sangs;
+    }
+
+    public List<CSang> getAllSangsByGroupe(String region) throws ParseException {
+        List<CSang> sangs = new ArrayList<CSang>();
+        String sql = "SELECT * FROM " + DonDeSangContract.SangEntry.TABLE_SANG + " WHERE " + DonDeSangContract.SangEntry.KEY_REGION + " = '" + region + "'" + " ORDER BY " + DonDeSangContract.SangEntry.KEY_GROUPE + " ;";
+
+        Cursor cursor = this.db.rawQuery(sql, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                CSang s = new CSang();
+                s.setId(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_ID)));
+                s.setDonneur(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_ID_DONNEUR)));
+                s.setDateDon(changeIntoDate(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_DATE_DON))));
+                s.setPeremption(changeIntoDate(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_DATE_PEREMPTION))));
+                s.setRegion(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_REGION)));
+                s.setGroupe(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_GROUPE)));
+                s.setStatut(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_STATUT)));
+                s.setIntervention(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_ID_INTERVENTION)));
+
+                sangs.add(s);
+            } while(cursor.moveToNext());
+        }
+
+        return sangs;
+    }
+
+    public List<CSang> getAllSangsByStatut(String region) throws ParseException {
+        List<CSang> sangs = new ArrayList<CSang>();
+        String sql = "SELECT * FROM " + DonDeSangContract.SangEntry.TABLE_SANG + " WHERE " + DonDeSangContract.SangEntry.KEY_REGION + " = '" + region + "'" + " ORDER BY lower(" + DonDeSangContract.SangEntry.KEY_STATUT + ");";
+
+        Cursor cursor = this.db.rawQuery(sql, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                CSang s = new CSang();
+                s.setId(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_ID)));
+                s.setDonneur(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_ID_DONNEUR)));
+                s.setDateDon(changeIntoDate(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_DATE_DON))));
+                s.setPeremption(changeIntoDate(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_DATE_PEREMPTION))));
+                s.setRegion(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_REGION)));
+                s.setGroupe(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_GROUPE)));
+                s.setStatut(cursor.getString(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_STATUT)));
+                s.setIntervention(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.SangEntry.KEY_ID_INTERVENTION)));
+
+                sangs.add(s);
+            } while(cursor.moveToNext());
+        }
+
+        return sangs;
+    }
+
+    public List<CSang> getAllSangsByDate(String region) throws ParseException {
+        List<CSang> sangs = new ArrayList<CSang>();
+        String sql = "SELECT * FROM " + DonDeSangContract.SangEntry.TABLE_SANG + " WHERE " + DonDeSangContract.SangEntry.KEY_REGION + " = '" + region + "'" + " ORDER BY " + DonDeSangContract.SangEntry.KEY_DATE_PEREMPTION+ " ;";
 
         Cursor cursor = this.db.rawQuery(sql, null);
 

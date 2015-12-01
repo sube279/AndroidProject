@@ -2,6 +2,7 @@ package com.betrisey.suzanne.androidproject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,6 +23,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -33,6 +36,8 @@ import db.object.CSang;
 public class Sang extends AppCompatActivity {
 
     SangAdapter liste;
+    String region;
+    String filtre = "groupe";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,15 @@ public class Sang extends AppCompatActivity {
 
         //ajouter icone a la barre d'action
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        // récupère le filtre passé dans l'intent (choix fait par le menu)
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            filtre = extras.getString("filtre");
+        }
+
+        //afficher le bon titre de filtre
+        setFiltreTitle();
 
         //pour le menu (marche pas sur toutes les versions d'android sinon)
         try {
@@ -54,28 +68,84 @@ public class Sang extends AppCompatActivity {
             // Ignore
         }
 
-        SangDataSource sa = new SangDataSource(getApplicationContext());
+        afficher();
 
-        //listview
+    }
+
+    private void setFiltreTitle(){
+        TextView text = (TextView) findViewById(R.id.textView_filtre);
+
+        switch(filtre){
+            case("groupe"):
+                text.setText(getResources().getString(R.string.filtreGroupe));
+                break;
+            case("statut"):
+                text.setText(getResources().getString(R.string.filtreStatut));
+                break;
+            case("date"):
+                text.setText(getResources().getString(R.string.filtreDate));
+                break;
+        }
+    }
+
+    public void afficher(){
+
         try {
-            liste = new SangAdapter(this.getApplicationContext());
+            //Récupère la liste des régions dans les ressources: spinners.xml
+            List<String> listRegions = Arrays.asList(getResources().getStringArray(R.array.region));
+
+            for(int i = 0; i < listRegions.size(); i++){
+                region = listRegions.get(i);
+                afficherParRegion(region);
+            }
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
 
-        ListView lv = (ListView)findViewById(R.id.listView);
-        lv.setAdapter(liste);
+    public void afficherParRegion(String region) throws ParseException {
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CSang s = liste.getSang(position);
-                sendSang(s.getId());
+        final ArrayList<CSang> listeSang = new ArrayList<CSang>();
+
+        //listview
+        liste = new SangAdapter(this.getApplicationContext());
+
+        //Ne pas afficher si une région n'a pas de pochette
+        if(liste.getCount()!=0) {
+            //Pour récupérer toutes les pochettes de chaque région
+            for (int i = 0; i < liste.getCount(); i++) {
+                listeSang.add(liste.getSang(i));
             }
-        });
 
+            LinearLayout ll = (LinearLayout) findViewById(R.id.linearLayout);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(25, 25, 25, 25);
 
+            TextView tv = new TextView(this);
+
+            tv.setLayoutParams(params);
+            tv.setPadding(15, 0, 0, 0);
+            tv.setTextSize(20);
+            tv.setTextColor(getResources().getColor(R.color.black));
+            tv.setTypeface(null, Typeface.BOLD);
+            tv.setText(region);
+            ll.addView(tv);
+
+            ListView lv = new ListView(this);
+            lv.setAdapter(liste);
+            ll.addView(lv);
+
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    CSang s = listeSang.get(position);
+                    sendSang(s.getId());
+                }
+            });
+        }
     }
 
     public void sendSang(int id){
@@ -99,19 +169,25 @@ public class Sang extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.action_filtre_groupe_sanguin:
-                TextView text = (TextView) findViewById(R.id.textView_filtre);
-                text.setText(getResources().getString(R.string.filtreGroupe));
+                Intent intent = new Intent(this, Sang.class);
+                filtre = "groupe";
+                intent.putExtra("filtre", filtre);
+                startActivity(intent);
                 return true;
             case R.id.action_filtre_statut:
-                TextView text2 = (TextView) findViewById(R.id.textView_filtre);
-                text2.setText(getResources().getString(R.string.filtreStatut));
+                intent = new Intent(this, Sang.class);
+                filtre = "statut";
+                intent.putExtra("filtre", filtre);
+                startActivity(intent);
                 return true;
             case R.id.action_filtre_date:
-                TextView text3 = (TextView) findViewById(R.id.textView_filtre);
-                text3.setText(getResources().getString(R.string.filtreDate));
+                intent = new Intent(this, Sang.class);
+                filtre = "date";
+                intent.putExtra("filtre", filtre);
+                startActivity(intent);
                 return true;
             case R.id.action_parametre:
-                Intent intent = new Intent(this, Parametre.class);
+                intent = new Intent(this, Parametre.class);
                 startActivity(intent);
         }
         return (super.onOptionsItemSelected(item));
@@ -135,8 +211,19 @@ public class Sang extends AppCompatActivity {
 
         public List<CSang> getDataForListView() throws ParseException {
             List<CSang> listSang;
-            listSang = sa.getAllSangs();
+            listSang = sa.getAllSangsByGroupe(region);
 
+            switch(filtre){
+                case("groupe"):
+                    listSang = sa.getAllSangsByGroupe(region);
+                    break;
+                case("statut"):
+                    listSang = sa.getAllSangsByStatut(region);
+                    break;
+                case("date"):
+                    listSang = sa.getAllSangsByDate(region);
+                    break;
+            }
 
             return listSang;
 
