@@ -257,7 +257,25 @@ public class Sang extends AppCompatActivity {
 
             CSang s = liste.get(position);
 
-            statut.setText(s.getStatut());
+            switch(s.getStatut())
+            {
+                case "utilisé":
+                    statut.setText(getResources().getString(R.string.utilise));
+                    break;
+                case "en stock":
+                    statut.setText(getResources().getString(R.string.enStock));
+                    break;
+                case "transfert":
+                    statut.setText(getResources().getString(R.string.transfert));
+                    break;
+                case "commandé":
+                    statut.setText(getResources().getString(R.string.commande));
+                    break;
+                case "inutilisable":
+                    statut.setText(getResources().getString(R.string.inutilisable));
+                    break;
+            }
+
             try {
                 peremption.setText(changeIntoString(s.getPeremption()));
             } catch (ParseException e) {

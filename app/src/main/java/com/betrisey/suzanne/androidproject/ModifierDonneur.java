@@ -126,6 +126,8 @@ public class ModifierDonneur extends AppCompatActivity {
                 donneur.set(i, ((EditText) obj).getText().toString());
             }
 
+
+
         }
 
         outState.putStringArrayList("liste", donneur);

@@ -110,28 +110,37 @@ public class AjouterIntervention extends AppCompatActivity {
                 long id = ia.createIntervention(i);
                 int quantite = i.getQuantite();
 
-                List<CSang> listeS = sa.getAllSangs();
+                Date now = new Date();
+                final Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH)+1;
+                int day = c.get(Calendar.DAY_OF_MONTH);
 
-                for(int j = 0; j<listeS.size(); j++)
-                {
-                    if(quantite>0 && i.getGroupe().equals(listeS.get(j).getGroupe()) && i.getRegion().equals(listeS.get(j).getRegion()) && listeS.get(j).getStatut().equals("en stock")){
-                        listeS.get(j).setIntervention((int) id);
-                        listeS.get(j).setStatut("commandé");
-                        sa.updateSang(listeS.get(j));
-                        quantite= quantite-1;
-                    }
-                }
+                now = changeIntoDate(day + "." + month + "." + year);
 
-                if(quantite>0)
+
+                if(i.getDate().equals(now) || i.getDate().after(now))
                 {
-                    for(int j = 0; j<listeS.size(); j++)
-                    {
-                        if(quantite>0 && i.getGroupe().equals(listeS.get(j).getGroupe()) && listeS.get(j).getStatut().equals("en stock")){
+                    List<CSang> listeS = sa.getAllSangs();
+
+                    for (int j = 0; j < listeS.size(); j++) {
+                        if (listeS.get(j).getPeremption().after(i.getDate()) && quantite > 0 && i.getGroupe().equals(listeS.get(j).getGroupe()) && i.getRegion().equals(listeS.get(j).getRegion()) && listeS.get(j).getStatut().equals("en stock")) {
                             listeS.get(j).setIntervention((int) id);
-                            listeS.get(j).setStatut("transfert");
-                            listeS.get(j).setRegion(i.getRegion());
+                            listeS.get(j).setStatut("commandé");
                             sa.updateSang(listeS.get(j));
-                            quantite= quantite-1;
+                            quantite = quantite - 1;
+                        }
+                    }
+
+                    if (quantite > 0) {
+                        for (int j = 0; j < listeS.size(); j++) {
+                            if (listeS.get(j).getPeremption().after(i.getDate()) && quantite > 0 && i.getGroupe().equals(listeS.get(j).getGroupe()) && listeS.get(j).getStatut().equals("en stock")) {
+                                listeS.get(j).setIntervention((int) id);
+                                listeS.get(j).setStatut("transfert");
+                                listeS.get(j).setRegion(i.getRegion());
+                                sa.updateSang(listeS.get(j));
+                                quantite = quantite - 1;
+                            }
                         }
                     }
                 }
@@ -139,7 +148,9 @@ public class AjouterIntervention extends AppCompatActivity {
 
                 Intent intent = new Intent(this, Intervention.class);
                 startActivity(intent);
-            }
+
+                }
+
         } else
         {
             ContextThemeWrapper themedContext;

@@ -7,13 +7,27 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import db.adapter.DonneurDataSource;
+import db.adapter.InterventionDataSource;
+import db.adapter.SangDataSource;
+import db.object.CIntervention;
+import db.object.CSang;
 
 public class Home extends AppCompatActivity {
+
+    List<CSang> listSang;
+    List<CIntervention> listIntervention;
+    SangDataSource sa;
+    InterventionDataSource ia;
+    Date now;
 
     // Ouvre la fenetre donneur
     public void openDonneur(View view) {
@@ -59,6 +73,46 @@ public class Home extends AppCompatActivity {
             }
         }
 
+        sa = new SangDataSource(this);
+        ia = new InterventionDataSource(this);
+
+        try {
+            listSang = sa.getAllSangs();
+            listIntervention = ia.getAllInterventions();
+            now = changeIntoDate(year + "." + month + "." + day);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        for(int k=0;k<listIntervention.size(); k++)
+        {
+            if(listIntervention.get(k).getDate().before(now)){
+                try {
+                    List<CSang> sangs = sa.getAllSangsByIntervention(listIntervention.get(k).getId());
+                    for(int j=0; j<sangs.size(); j++)
+                    {
+                        sangs.get(j).setStatut("utilisé");
+                        sa.updateSang(sangs.get(j));
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        for(int i=0;i<listSang.size(); i++)
+        {
+            if(listSang.get(i).getPeremption().before(now)){
+                try {
+                    listSang.get(i).setStatut("inutilisable");
+                    sa.updateSang(listSang.get(i));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
 
     }
 
@@ -82,5 +136,12 @@ public class Home extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public Date changeIntoDate(String s) throws ParseException {
+
+        DateFormat format = new SimpleDateFormat("yyyy.MM.dd", Locale.FRENCH);
+        Date date = format.parse(s);
+        return date;
     }
 }

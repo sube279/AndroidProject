@@ -139,7 +139,7 @@
         <item>Grupper:</item>
         <item>Spendedatum:</item>
     </string-array>
-    <string name="pochette_cree">Blutbeutel erstellt</string>
+    <string name="pochette_cree">Blutbeutel herstellt</string>
     <string name="alertePochette">Bitte gebt an ob der Blutbeutel brauchbar ist und ob der Spender ohnmächtig wurde.</string>
 
     <!-- Fenêtre AffichagePochette -->

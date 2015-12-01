@@ -1,6 +1,11 @@
 package com.betrisey.suzanne.androidproject;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -15,16 +20,25 @@ import android.widget.TextView;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import db.adapter.InterventionDataSource;
+import db.adapter.SangDataSource;
 import db.object.CIntervention;
+import db.object.CSang;
 
 public class ModifierIntervention extends AppCompatActivity {
     private int id;
     public CIntervention i;
     public InterventionDataSource ia;
+    public SangDataSource sa;
+    public List<CSang> ListeS;
+    TextView mDateDisplay1;
+    Activity activity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +52,8 @@ public class ModifierIntervention extends AppCompatActivity {
             id = extras.getInt("id");
         }
 
+        activity = this;
+
         //spinner
         Spinner spinner = (Spinner) findViewById(R.id.spinnerGroupe);
 // Create an ArrayAdapter using the string array and a default spinner layout
@@ -50,6 +66,7 @@ public class ModifierIntervention extends AppCompatActivity {
 
 
         ia = new InterventionDataSource(getApplicationContext());
+        sa = new SangDataSource(this);
         try {
             i = ia.getInterventiononById(id);
         } catch (ParseException e) {
@@ -57,13 +74,8 @@ public class ModifierIntervention extends AppCompatActivity {
         }
 
         // Create the text view
-        EditText tw = (EditText) findViewById(R.id.textViewDate);
-        try {
-            tw.setText(changeIntoString(i.getDate()));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        tw = (EditText) findViewById(R.id.textViewQuantite);
+
+        EditText tw = (EditText) findViewById(R.id.textViewQuantite);
         tw.setText(String.valueOf(i.getQuantite()));
         final Spinner spin = (Spinner) findViewById (R.id.spinnerGroupe);
         String[] groupe = getResources().getStringArray(R.array.groupe_sanguin);
@@ -74,6 +86,23 @@ public class ModifierIntervention extends AppCompatActivity {
         tw = (EditText) findViewById(R.id.textViewDescription);
         tw.setText(i.getDescription());
 
+        mDateDisplay1 = (TextView) findViewById(R.id.textViewDate);
+
+        try {
+            mDateDisplay1.setText(changeIntoString(i.getDate()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        mDateDisplay1.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NewApi")
+            public void onClick(View v) {
+                // showDialog(DATE_DIALOG_ID);
+                Bundle b = new Bundle();
+                DialogFragment newFragment = new DateDialog();
+                newFragment.show(getFragmentManager(), "datePicker");
+            }
+        });
 
 
     }
@@ -88,9 +117,17 @@ public class ModifierIntervention extends AppCompatActivity {
 
         if(testQuantite() == true)
         {
-        EditText et = (EditText) findViewById (R.id.textViewDate);
-        i.setDate(changeIntoDate(et.getText().toString()));
-        et = (EditText) findViewById (R.id.textViewDescription);
+            List<CSang> liste = sa.getAllSangsByIntervention((int)id);
+
+            for(int i = 0; i<liste.size(); i++){
+                liste.get(i).setIntervention(-1);
+                liste.get(i).setStatut("en stock");
+                sa.updateSang(liste.get(i));
+            }
+
+        TextView tw = (TextView) findViewById (R.id.textViewDate);
+        i.setDate(changeIntoDate(tw.getText().toString()));
+        EditText et = (EditText) findViewById (R.id.textViewDescription);
         i.setDescription(et.getText().toString());
         et = (EditText) findViewById (R.id.textViewQuantite);
         i.setQuantite(Integer.parseInt(et.getText().toString()));
@@ -98,6 +135,43 @@ public class ModifierIntervention extends AppCompatActivity {
         i.setGroupe(spin.getSelectedItem().toString());
 
         ia.updateIntervention(i);
+
+            int quantite = i.getQuantite();
+
+            Date now;
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH)+1;
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            now = changeIntoDate(day + "." + month + "." + year);
+
+
+            if(i.getDate().equals(now) || i.getDate().after(now))
+            {
+                List<CSang> listeS = sa.getAllSangs();
+
+                for (int k = 0; k < listeS.size(); k++) {
+                    if (listeS.get(k).getPeremption().after(i.getDate()) && quantite > 0 && i.getGroupe().equals(listeS.get(k).getGroupe()) && i.getRegion().equals(listeS.get(k).getRegion()) && listeS.get(k).getStatut().equals("en stock")) {
+                        listeS.get(k).setIntervention(i.getId());
+                        listeS.get(k).setStatut("commandé");
+                        sa.updateSang(listeS.get(k));
+                        quantite = quantite - 1;
+                    }
+                }
+
+                if (quantite > 0) {
+                    for (int j = 0; j < listeS.size(); j++) {
+                        if (listeS.get(j).getPeremption().after(i.getDate()) && quantite > 0 && i.getGroupe().equals(listeS.get(j).getGroupe()) && listeS.get(j).getStatut().equals("en stock")) {
+                            listeS.get(j).setIntervention(i.getId());
+                            listeS.get(j).setStatut("transfert");
+                            listeS.get(j).setRegion(i.getRegion());
+                            sa.updateSang(listeS.get(j));
+                            quantite = quantite - 1;
+                        }
+                    }
+                }
+            }
 
         Intent intent = new Intent(this, AfficherIntervention.class);
         intent.putExtra("id", id);
@@ -141,5 +215,28 @@ public class ModifierIntervention extends AppCompatActivity {
         DateFormat df = new SimpleDateFormat("dd.MM.yyyy", Locale.FRENCH);
         String s = df.format(d);
         return s;
+    }
+
+    @SuppressLint({"NewApi", "ValidFragment"})
+    public class DateDialog extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+            DatePickerDialog dpd = new DatePickerDialog(activity, this, year, month, day);
+            return dpd;
+        }
+
+        @Override
+        public void onDateSet(android.widget.DatePicker view, int year, int month, int day) {
+            mDateDisplay1.setText(String.valueOf(day) + "."
+                    + String.valueOf(month + 1) + "." + String.valueOf(year));
+        }
+
+
     }
 }

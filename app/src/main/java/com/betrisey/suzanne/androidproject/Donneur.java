@@ -20,6 +20,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -171,7 +172,8 @@ public class Donneur extends AppCompatActivity {
 
             LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout);
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             params.setMargins(25, 25, 25, 25);
 
             //Crée texteView Region
@@ -186,9 +188,11 @@ public class Donneur extends AppCompatActivity {
 
             ll.addView(tv);
             ListView lv = new ListView(this);
+            lv.setVerticalScrollBarEnabled(false);
             lv.setAdapter(liste);
 
             ll.addView(lv);
+
 
             //Click sur la listView
             lv.setOnItemClickListener(new OnItemClickListener() {

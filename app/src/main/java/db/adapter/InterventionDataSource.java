@@ -129,6 +129,7 @@ public class InterventionDataSource {
 
         for(int i = 0; i<liste.size(); i++){
             liste.get(i).setIntervention(-1);
+            liste.get(i).setStatut("en stock");
             sa.updateSang(liste.get(i));
         }
 
