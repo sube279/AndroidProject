@@ -31,7 +31,8 @@ public class CIntervention extends Activity {
 
     }
 
-    public CIntervention(Date date, String description, int quantite, String groupe, String region, boolean selected) {
+    public CIntervention(int id, Date date, String description, int quantite, String groupe, String region, boolean selected) {
+        this.id = id;
         this.date = date;
         this.description = description;
         this.quantite = quantite;

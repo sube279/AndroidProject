@@ -36,7 +36,6 @@ import db.object.CSang;
 public class Sang extends AppCompatActivity {
 
     SangAdapter liste;
-    String region;
     String filtre = "groupe";
 
     @Override
@@ -68,7 +67,24 @@ public class Sang extends AppCompatActivity {
             // Ignore
         }
 
-        afficher();
+        //listview
+        try {
+            liste = new SangAdapter(this.getApplicationContext());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        ListView lv = (ListView)findViewById(R.id.listView);
+        lv.setAdapter(liste);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                CSang s = liste.getSang(position);
+                sendSang(s.getId());
+            }
+        });
 
     }
 
@@ -88,65 +104,7 @@ public class Sang extends AppCompatActivity {
         }
     }
 
-    public void afficher(){
 
-        try {
-            //Récupère la liste des régions dans les ressources: spinners.xml
-            List<String> listRegions = Arrays.asList(getResources().getStringArray(R.array.region));
-
-            for(int i = 0; i < listRegions.size(); i++){
-                region = listRegions.get(i);
-                afficherParRegion(region);
-            }
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void afficherParRegion(String region) throws ParseException {
-
-
-        final ArrayList<CSang> listeSang = new ArrayList<CSang>();
-
-        //listview
-        liste = new SangAdapter(this.getApplicationContext());
-
-        //Ne pas afficher si une région n'a pas de pochette
-        if(liste.getCount()!=0) {
-            //Pour récupérer toutes les pochettes de chaque région
-            for (int i = 0; i < liste.getCount(); i++) {
-                listeSang.add(liste.getSang(i));
-            }
-
-            LinearLayout ll = (LinearLayout) findViewById(R.id.linearLayout);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(25, 25, 25, 25);
-
-            TextView tv = new TextView(this);
-
-            tv.setLayoutParams(params);
-            tv.setPadding(15, 0, 0, 0);
-            tv.setTextSize(20);
-            tv.setTextColor(getResources().getColor(R.color.black));
-            tv.setTypeface(null, Typeface.BOLD);
-            tv.setText(region);
-            ll.addView(tv);
-
-            ListView lv = new ListView(this);
-            lv.setAdapter(liste);
-            ll.addView(lv);
-
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    CSang s = listeSang.get(position);
-                    sendSang(s.getId());
-                }
-            });
-        }
-    }
 
     public void sendSang(int id){
         Intent intent = new Intent(this, AffichagePochetteSang.class);
@@ -193,10 +151,7 @@ public class Sang extends AppCompatActivity {
         return (super.onOptionsItemSelected(item));
     }
 
-    public void buttonAfficher(View view) {
-        Intent intent = new Intent(this, AffichagePochetteSang.class);
-        startActivity(intent);
-    }
+
 
     public class SangAdapter extends BaseAdapter {
 
@@ -211,17 +166,17 @@ public class Sang extends AppCompatActivity {
 
         public List<CSang> getDataForListView() throws ParseException {
             List<CSang> listSang;
-            listSang = sa.getAllSangsByGroupe(region);
+            listSang = sa.getAllSangsByGroupe();
 
             switch(filtre){
                 case("groupe"):
-                    listSang = sa.getAllSangsByGroupe(region);
+                    listSang = sa.getAllSangsByGroupe();
                     break;
                 case("statut"):
-                    listSang = sa.getAllSangsByStatut(region);
+                    listSang = sa.getAllSangsByStatut();
                     break;
                 case("date"):
-                    listSang = sa.getAllSangsByDate(region);
+                    listSang = sa.getAllSangsByDate();
                     break;
             }
 

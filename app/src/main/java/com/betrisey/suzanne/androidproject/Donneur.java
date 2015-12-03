@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -48,6 +50,7 @@ public class Donneur extends AppCompatActivity {
     DonneurAdapter liste;
     String region;
     String filtre = "nom";
+    int quantite=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -190,7 +193,6 @@ public class Donneur extends AppCompatActivity {
             ListView lv = new ListView(this);
             lv.setVerticalScrollBarEnabled(false);
             lv.setAdapter(liste);
-
             ll.addView(lv);
 
 
@@ -205,6 +207,7 @@ public class Donneur extends AppCompatActivity {
         }
 
     }
+
 
     public void sendDonneur(int id){
         Intent intent = new Intent(this, AfficherDonneur.class);
@@ -265,6 +268,8 @@ public class Donneur extends AppCompatActivity {
 
     }
 
+
+
     public class DonneurAdapter extends BaseAdapter {
 
         DonneurDataSource da;
@@ -295,6 +300,8 @@ public class Donneur extends AppCompatActivity {
                     break;
 
             }
+
+            quantite = listDonneur.size();
             return listDonneur;
         }
 

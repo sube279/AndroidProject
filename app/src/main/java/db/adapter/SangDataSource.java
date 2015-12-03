@@ -107,9 +107,9 @@ public class SangDataSource {
         return sangs;
     }
 
-    public List<CSang> getAllSangsByGroupe(String region) throws ParseException {
+    public List<CSang> getAllSangsByGroupe() throws ParseException {
         List<CSang> sangs = new ArrayList<CSang>();
-        String sql = "SELECT * FROM " + DonDeSangContract.SangEntry.TABLE_SANG + " WHERE " + DonDeSangContract.SangEntry.KEY_REGION + " = '" + region + "'" + " ORDER BY " + DonDeSangContract.SangEntry.KEY_GROUPE + " ;";
+        String sql = "SELECT * FROM " + DonDeSangContract.SangEntry.TABLE_SANG + " ORDER BY " + DonDeSangContract.SangEntry.KEY_GROUPE + " ;";
 
         Cursor cursor = this.db.rawQuery(sql, null);
 
@@ -157,9 +157,9 @@ public class SangDataSource {
         return sangs;
     }
 
-    public List<CSang> getAllSangsByStatut(String region) throws ParseException {
+    public List<CSang> getAllSangsByStatut() throws ParseException {
         List<CSang> sangs = new ArrayList<CSang>();
-        String sql = "SELECT * FROM " + DonDeSangContract.SangEntry.TABLE_SANG + " WHERE " + DonDeSangContract.SangEntry.KEY_REGION + " = '" + region + "'" + " ORDER BY lower(" + DonDeSangContract.SangEntry.KEY_STATUT + ");";
+        String sql = "SELECT * FROM " + DonDeSangContract.SangEntry.TABLE_SANG +  " ORDER BY lower(" + DonDeSangContract.SangEntry.KEY_STATUT + ");";
 
         Cursor cursor = this.db.rawQuery(sql, null);
 
@@ -182,9 +182,9 @@ public class SangDataSource {
         return sangs;
     }
 
-    public List<CSang> getAllSangsByDate(String region) throws ParseException {
+    public List<CSang> getAllSangsByDate() throws ParseException {
         List<CSang> sangs = new ArrayList<CSang>();
-        String sql = "SELECT * FROM " + DonDeSangContract.SangEntry.TABLE_SANG + " WHERE " + DonDeSangContract.SangEntry.KEY_REGION + " = '" + region + "'" + " ORDER BY " + DonDeSangContract.SangEntry.KEY_DATE_PEREMPTION+ " ;";
+        String sql = "SELECT * FROM " + DonDeSangContract.SangEntry.TABLE_SANG + " ORDER BY " + DonDeSangContract.SangEntry.KEY_DATE_PEREMPTION+ " ;";
 
         Cursor cursor = this.db.rawQuery(sql, null);
 
