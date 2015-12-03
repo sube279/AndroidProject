@@ -142,7 +142,7 @@ public class AfficherDonneur extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        if(d.getDisponibilite().before(now) || d.getDonsPossibles().equals(0) || d.getDisponibilite().equals(now))
+        if(d.getDisponibilite().before(now) || d.getDonsPossibles()>0 || d.getDisponibilite().equals(now))
         {
             Intent intent = new Intent(this, DonDeSang.class);
             intent.putExtra("id", id);
