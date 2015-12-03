@@ -79,6 +79,7 @@ public class AffichagePochetteSang extends AppCompatActivity {
 
         String statut = "";
 
+
         switch(sang.getStatut())
         {
             case "utilisé":
