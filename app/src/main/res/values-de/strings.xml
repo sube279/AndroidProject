@@ -126,7 +126,7 @@
     <string name="enStock">gelagert</string>
     <string name="inutilisable">unbrauchbar</string>
     <string name="commande">bestellt</string>
-    <string name="transfert">im Transfer</string>
+    <string name="transfert">in Transfer</string>
     <string name="utilise">verbraucht</string>
 
     <!-- Fenêtre don de sang -->

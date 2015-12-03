@@ -76,7 +76,29 @@ public class AffichagePochetteSang extends AppCompatActivity {
     public void remplirTableau() throws ParseException {
         ListView vueData;
         ListView vueInfo;
-        String[] data = {String.valueOf(sang.getDonneur()), changeIntoString(sang.getDateDon()), changeIntoString(sang.getPeremption()), sang.getRegion(), sang.getGroupe(), sang.getStatut()};
+
+        String statut = "";
+
+        switch(sang.getStatut())
+        {
+            case "utilisé":
+                statut =getResources().getString(R.string.utilise);
+                break;
+            case "en stock":
+                statut = getResources().getString(R.string.enStock);
+                break;
+            case "transfert":
+                statut = getResources().getString(R.string.transfert);
+                break;
+            case "commandé":
+                statut = getResources().getString(R.string.commande);
+                break;
+            case "inutilisable":
+                statut = getResources().getString(R.string.inutilisable);
+                break;
+        }
+
+        String[] data = {String.valueOf(sang.getDonneur()), changeIntoString(sang.getDateDon()), changeIntoString(sang.getPeremption()), sang.getRegion(), sang.getGroupe(), statut};
         String[] info = getResources().getStringArray(R.array.infoPochette);
 
         //Tableau
