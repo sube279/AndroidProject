@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -173,8 +174,7 @@ public class Donneur extends AppCompatActivity {
                 listeDonneurs.add(liste.getDonneur(i));
             }
 
-            LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout);
-
+           LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             params.setMargins(25, 25, 25, 25);
@@ -191,8 +191,11 @@ public class Donneur extends AppCompatActivity {
 
             ll.addView(tv);
             ListView lv = new ListView(this);
-            lv.setVerticalScrollBarEnabled(false);
+            lv.setVerticalScrollBarEnabled(true);
             lv.setAdapter(liste);
+            if (lv.getCount()>1) {
+                lv.setFastScrollAlwaysVisible(true);
+            }
             ll.addView(lv);
 
 
