@@ -93,7 +93,8 @@ public class DonneurDataSource {
 
     public List<CDonneur> getAllDonneurByNom(String region) throws ParseException {
         List<CDonneur> donneurs = new ArrayList<CDonneur>();
-        String sql = "SELECT * FROM " + DonDeSangContract.DonneurEntry.TABLE_DONNEUR + " WHERE " + DonneurEntry.KEY_REGION + " = '" + region + "'" + " ORDER BY lower(" + DonneurEntry.KEY_NOM  + ");";
+        String sql = "SELECT * FROM " + DonDeSangContract.DonneurEntry.TABLE_DONNEUR +
+                " WHERE " + DonneurEntry.KEY_REGION + " = '" + region + "'" + " ORDER BY lower(" + DonneurEntry.KEY_NOM  + ");";
 
         Cursor cursor = this.db.rawQuery(sql, null);
 

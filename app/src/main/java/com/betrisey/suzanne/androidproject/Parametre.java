@@ -1,6 +1,7 @@
 package com.betrisey.suzanne.androidproject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -8,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -87,6 +89,11 @@ public class Parametre extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void sync (View view){
+
+        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
     }
 
     public void buttonOk (View view){

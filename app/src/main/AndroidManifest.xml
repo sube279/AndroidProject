@@ -7,6 +7,11 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="14" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -145,10 +150,11 @@
         </activity>
 
         <!-- Modifier intervention -->
-        <activity android:name=".ModifierIntervention"
+        <activity
+            android:name=".ModifierIntervention"
             android:label="@string/title_activity_modifier_intervention"
             android:parentActivityName=".AfficherIntervention"
-            android:theme="@style/Options">
+            android:theme="@style/Options" >
         </activity>
     </application>
 
