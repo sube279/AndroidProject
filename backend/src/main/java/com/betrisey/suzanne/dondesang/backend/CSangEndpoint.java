@@ -3,6 +3,7 @@ package com.betrisey.suzanne.dondesang.backend;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.logging.Logger;
 
@@ -44,10 +45,15 @@ public class CSangEndpoint {
      * @param cSang The object to be added.
      * @return The object to be added.
      */
-    @ApiMethod(name = "insertCSang")
+    @ApiMethod(name = "insertCSang", httpMethod = ApiMethod.HttpMethod.POST)
     public CSang insertCSang(CSang cSang) {
         // TODO: Implement this function
-        logger.info("Calling insertCSang method");
-        return cSang;
+        //save the sang in the database
+        ofy().save().entity(cSang).now();
+        logger.info("Sang with id " + cSang.getId() + " added.");
+        return ofy().load().entity(cSang).now();
     }
+
+
+
 }

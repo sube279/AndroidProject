@@ -9,14 +9,17 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import db.SQLiteHelper;
 import db.DonDeSangContract.InterventionEntry;
-import db.object.CIntervention;
-import db.object.CSang;
+
+import com.betrisey.suzanne.dondesang.backend.cInterventionApi.model.CIntervention;
+import com.betrisey.suzanne.dondesang.backend.cSangApi.model.CSang;
+import com.google.api.client.util.DateTime;
 
 /**
  * Created by Suzanne on 07.11.2015.
@@ -146,7 +149,7 @@ public class InterventionDataSource {
         return date;
     }
 
-    public String changeIntoString(Date d) throws ParseException {
+    public String changeIntoString(DateTime d) throws ParseException {
 
         DateFormat format = new SimpleDateFormat("yyyy.MM.dd", Locale.FRENCH);
         String str = format.format(d);

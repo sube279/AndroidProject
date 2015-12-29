@@ -8,11 +8,12 @@ import android.view.ViewConfiguration;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.betrisey.suzanne.dondesang.backend.cSangApi.model.CSang;
+
 import java.lang.reflect.Field;
 import java.text.ParseException;
 
 import db.adapter.SangDataSource;
-import db.object.CSang;
 
 public class Transfert extends AppCompatActivity {
 

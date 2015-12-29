@@ -8,6 +8,9 @@ import android.view.ViewConfiguration;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.betrisey.suzanne.dondesang.backend.cInterventionApi.model.CIntervention;
+import com.betrisey.suzanne.dondesang.backend.cSangApi.model.CSang;
+
 import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -18,8 +21,6 @@ import java.util.Locale;
 
 import db.adapter.InterventionDataSource;
 import db.adapter.SangDataSource;
-import db.object.CIntervention;
-import db.object.CSang;
 
 public class AfficherIntervention extends AppCompatActivity {
 

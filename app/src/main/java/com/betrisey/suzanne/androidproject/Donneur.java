@@ -27,6 +27,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.betrisey.suzanne.dondesang.backend.cDonneurApi.model.CDonneur;
+
 import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -43,8 +45,6 @@ import java.util.Locale;
 import java.util.prefs.Preferences;
 
 import db.adapter.DonneurDataSource;
-import db.object.CDonneur;
-import db.object.CIntervention;
 
 public class Donneur extends AppCompatActivity {
 

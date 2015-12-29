@@ -8,11 +8,12 @@ import android.view.ViewConfiguration;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.betrisey.suzanne.dondesang.backend.cSangApi.model.CSang;
+
 import java.lang.reflect.Field;
 import java.text.ParseException;
 
 import db.adapter.SangDataSource;
-import db.object.CSang;
 
 public class ChoixStatut extends AppCompatActivity {
 

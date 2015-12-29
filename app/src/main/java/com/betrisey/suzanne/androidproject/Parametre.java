@@ -16,13 +16,20 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
+import com.betrisey.suzanne.dondesang.backend.cSangApi.model.CSang;
+
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+
+import db.adapter.SangDataSource;
 
 public class Parametre extends AppCompatActivity {
 
     Activity activity;
     Locale myLocale;
+    List<CSang> listInsertSang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,15 @@ public class Parametre extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         activity = this;
+
+        // a enlever
+        SangDataSource sa = new SangDataSource(this);
+        try {
+            listInsertSang = sa.getAllSangs();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
         Resources res = getResources();
         Configuration conf = res.getConfiguration();
@@ -93,7 +109,7 @@ public class Parametre extends AppCompatActivity {
 
     public void sync (View view){
 
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
+        new EndpointsAsyncTask().execute();
     }
 
     public void buttonOk (View view){

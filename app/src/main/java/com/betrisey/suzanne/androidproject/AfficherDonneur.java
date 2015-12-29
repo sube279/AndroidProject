@@ -16,6 +16,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.betrisey.suzanne.dondesang.backend.cDonneurApi.model.CDonneur;
+
 import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -27,7 +29,6 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import db.adapter.DonneurDataSource;
-import db.object.CDonneur;
 
 public class AfficherDonneur extends AppCompatActivity {
 
@@ -84,7 +85,7 @@ public class AfficherDonneur extends AppCompatActivity {
         ListView vueInfo;
         String[] donneur = new String[0];
         try {
-            donneur = new String[]{genre, changeIntoString(d.getNaissance()), d.getAdresse(), String.valueOf(d.getNPA()), d.getLieu(), d.getRegion(),d.getTelephone(), d.getGroupe(), String.valueOf(d.getDonsPossibles()), changeIntoString(d.getDisponibilite())};
+            donneur = new String[]{genre, changeIntoString(d.getNaissance()), d.getAdresse(), String.valueOf(d.getNpa()), d.getLieu(), d.getRegion(),d.getTelephone(), d.getGroupe(), String.valueOf(d.getDonsPossibles()), changeIntoString(d.getDisponibilite())};
         } catch (ParseException e) {
             e.printStackTrace();
         }

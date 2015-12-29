@@ -18,6 +18,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.betrisey.suzanne.dondesang.backend.cInterventionApi.model.CIntervention;
+import com.betrisey.suzanne.dondesang.backend.cSangApi.model.CSang;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,8 +31,6 @@ import java.util.Locale;
 
 import db.adapter.InterventionDataSource;
 import db.adapter.SangDataSource;
-import db.object.CIntervention;
-import db.object.CSang;
 
 import static android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT;
 

@@ -15,10 +15,9 @@ import java.util.Locale;
 
 import db.DonDeSangContract;
 import db.SQLiteHelper;
-import db.object.CDonneur;
 
 import db.DonDeSangContract.DonneurEntry;
-import db.object.CIntervention;
+import com.betrisey.suzanne.dondesang.backend.cDonneurApi.model.CDonneur;
 
 /**
  * Created by Suzanne on 25.11.2015.
@@ -240,7 +239,7 @@ public class DonneurDataSource {
         values.put(DonneurEntry.KEY_GENRE, donneur.getSexe());
         values.put(DonneurEntry.KEY_NAISSANCE, changeIntoString(donneur.getNaissance()));
         values.put(DonneurEntry.KEY_RUE, donneur.getAdresse());
-        values.put(DonneurEntry.KEY_NPA, donneur.getNPA());
+        values.put(DonneurEntry.KEY_NPA, donneur.getNpa());
         values.put(DonneurEntry.KEY_LIEU, donneur.getLieu());
         values.put(DonneurEntry.KEY_REGION, donneur.getRegion());
         values.put(DonneurEntry.KEY_TELEPHONE, donneur.getTelephone());
@@ -272,7 +271,7 @@ public class DonneurDataSource {
         d.setSexe(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_GENRE))));
         d.setNaissance(changeIntoDate(cursor.getString(cursor.getColumnIndex(DonDeSangContract.DonneurEntry.KEY_NAISSANCE))));
         d.setAdresse(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_RUE))));
-        d.setNPA(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.DonneurEntry.KEY_NPA)));
+        d.setNpa(cursor.getInt(cursor.getColumnIndex(DonDeSangContract.DonneurEntry.KEY_NPA)));
         d.setLieu(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_LIEU))));
         d.setRegion(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_REGION))));
         d.setTelephone(cursor.getString(cursor.getColumnIndex((DonDeSangContract.DonneurEntry.KEY_TELEPHONE))));

@@ -15,6 +15,8 @@ import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.betrisey.suzanne.dondesang.backend.cInterventionApi.model.CIntervention;
+
 import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -25,7 +27,6 @@ import java.util.List;
 import java.util.Locale;
 
 import db.adapter.InterventionDataSource;
-import db.object.CIntervention;
 
 public class SupprimerIntervention extends AppCompatActivity {
 
@@ -81,7 +82,7 @@ public class SupprimerIntervention extends AppCompatActivity {
         InterventionDataSource ia = new InterventionDataSource(getApplicationContext());
         for(int j = 0; j < size; j++){
             CIntervention intervention = (CIntervention)liste.getItem(j);
-            if(intervention.isSelected()){
+            if(intervention.getSelected()){
                 ia.deleteIntervention(intervention.getId());
             }
         }

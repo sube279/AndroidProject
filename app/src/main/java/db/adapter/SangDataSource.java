@@ -17,8 +17,7 @@ import java.util.Locale;
 
 import db.DonDeSangContract;
 import db.SQLiteHelper;
-import db.object.CIntervention;
-import db.object.CSang;
+import com.betrisey.suzanne.dondesang.backend.cSangApi.model.CSang;
 
 /**
  * Created by Suzanne on 25.11.2015.

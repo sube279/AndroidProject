@@ -20,6 +20,9 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.betrisey.suzanne.dondesang.backend.cDonneurApi.model.CDonneur;
+import com.betrisey.suzanne.dondesang.backend.cSangApi.model.CSang;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,8 +34,6 @@ import java.util.Locale;
 import db.SQLiteHelper;
 import db.adapter.DonneurDataSource;
 import db.adapter.SangDataSource;
-import db.object.CDonneur;
-import db.object.CSang;
 
 public class DonDeSang extends AppCompatActivity {
     private boolean utilOui;

@@ -2,7 +2,9 @@ package com.betrisey.suzanne.dondesang.backend;
 
 import com.googlecode.objectify.annotation.Id;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +25,8 @@ public class CIntervention {
         private String groupe;
         private String region;
         boolean selected;
+
+    private List<CSang> sangs = new ArrayList<CSang>();
 
         public boolean isSelected() {
             return selected;
@@ -74,6 +78,12 @@ public class CIntervention {
             return id;
         }
 
+    public List<CSang> getSangs() {
+        return sangs;
+    }
 
+    public void setPhones(List<CSang> sangs) {
+        this.sangs = sangs;
+    }
 
 }

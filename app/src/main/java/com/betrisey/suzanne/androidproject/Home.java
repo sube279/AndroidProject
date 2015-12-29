@@ -7,6 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.betrisey.suzanne.dondesang.backend.cInterventionApi.model.CIntervention;
+import com.betrisey.suzanne.dondesang.backend.cSangApi.model.CSang;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,9 +21,6 @@ import java.util.Locale;
 import db.adapter.DonneurDataSource;
 import db.adapter.InterventionDataSource;
 import db.adapter.SangDataSource;
-import db.object.CDonneur;
-import db.object.CIntervention;
-import db.object.CSang;
 
 public class Home extends AppCompatActivity {
 

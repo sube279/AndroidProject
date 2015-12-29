@@ -25,6 +25,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.betrisey.suzanne.dondesang.backend.cDonneurApi.model.CDonneur;
+
 import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
@@ -37,7 +39,6 @@ import java.util.Date;
 import java.util.Locale;
 
 import db.adapter.DonneurDataSource;
-import db.object.CDonneur;
 
 public class ModifierDonneur extends AppCompatActivity {
     int id;
